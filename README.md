@@ -61,12 +61,24 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-2-5 sentences describing what the system does
+MyCocoPlanner is a digital planner that aims to help you manage your life and express your own individuality creatively.
+
+Just like paper planners, MyCocoPlanner helps you to keep track of your weekly tasks, habits, budget, to-dos, shopping list, and other aspects of your life (e.g. books or things you are passionate about). The benefit of using planners is that they make us more self-aware, and increase our productivity which gives us a feeling of fulfillment that leads to a happier life. 
+
+You don’t want to use pen and paper? Want an environmentally friendly software? This planner could be the thing you’re looking for!
+
 
 ### Pages
 
-* Home: 1-3 sentences describing what the page displays and what a user can do
-* Shopping cart: ...
+* Register/Sign-up page: The start page starts with a register or login box where users can login or create an account. After the user has successfully created an account with an email, the system will redirect the user to the homepage. 
+* Homepage:   The homepage allows the user to create planners and displays the list of planners the user has created. The user can choose a planner from the list and the system will redirect the user to the planner page. 
+* Planner page: The planner has three different sections. Weekly planning, My favourites and Calendar.
+* Weekly planning: The weekly planner page has different types of list, for example,weekly planning, habit tracker, menu where the user can edit, save and keep track of their weekly tasks, food habits, budgets, shopping items etc. The user can also write personalised notes on the page. 
+* Calendar
+* My favourites: The user can note their favourite books, movies or games here along with review, ratings and opinions. 
+* Profile page: This is the account page where the user’s personal data such as username, email, profile photo, and etc. are saved, and the user can edit or change their username or profile picture. 
+* Settings page: The settings page will allow the user to customize the planner and change the theme, font and color, language, date/time format of MyCocoPlanner.
+
 
 ### Entity-Relationship (ER) Diagram
 
