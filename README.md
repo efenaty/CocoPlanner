@@ -61,7 +61,12 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-2-5 sentences describing what the system does
+MyCocoPlanner is a digital planner that aims to help you manage your life and express your own individuality creatively.
+
+Just like paper planners, MyCocoPlanner helps you to keep track of your weekly tasks, habits, budget, to-dos, shopping list, and other aspects of your life (e.g. books or things you are passionate about). The benefit of using planners is that they make us more self-aware, and increase our productivity which gives us a feeling of fulfillment that leads to a happier life. 
+
+You don’t want to use pen and paper? Want an environmentally friendly software? This planner could be the thing you’re looking for!
+
 
 ### Pages
 
