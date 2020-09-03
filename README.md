@@ -82,7 +82,7 @@ You don’t want to use pen and paper? Want an environmentally friendly software
 
 ### Entity-Relationship (ER) Diagram
 
-![ER Diagram](./images/ER_Diagram.png)
+![ER Diagram](./images/ER_Diagram.jpg)
 
 ## Teaser (MS3)
 
