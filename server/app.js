@@ -5,6 +5,7 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+const { isDate } = require('util');
 
 
 // Variables
@@ -40,6 +41,7 @@ var userSchema = new Schema({
     username : { type: String },
     password : { type: String },
     email : { type: String },
+    birthDate: { type : String }
    });
 
 var User = mongoose.model('users', userSchema);
@@ -51,7 +53,7 @@ app.get('/api', function(req, res) {
 
 
 //create a new user 
-app.post('/api', function(req, res, next) {
+app.post('/sign_up', function(req, res, next) {
     var user = new User(req.body);
     user.save(function(err) {
     if (err) { return next(err); }
