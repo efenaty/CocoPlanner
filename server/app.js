@@ -6,9 +6,12 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+//We should add our DB URL here.I added a local DB for test.
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/myProject';
 var port = process.env.PORT || 3000;
+
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
@@ -30,10 +33,32 @@ app.use(morgan('dev'));
 app.options('*', cors());
 app.use(cors());
 
-// Import routes
+//Define mangoose schema 
+var Schema = mongoose.Schema;
+
+var userSchema = new Schema({
+    username : { type: String },
+    password : { type: String },
+    email : { type: String },
+   });
+
+var User = mongoose.model('users', userSchema);
+
+   // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
+
+
+//create a new user 
+app.post('/api', function(req, res, next) {
+    var user = new User(req.body);
+    user.save(function(err) {
+    if (err) { return next(err); }
+    res.status(201).json(user);
+    });
+    });
+    
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
