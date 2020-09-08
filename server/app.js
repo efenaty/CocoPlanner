@@ -10,7 +10,7 @@ const { isDate } = require('util');
 
 // Variables
 //We should add our DB URL here.I added a local DB for test.
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/myProject';
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://group_18:group18isthebest@cluster0.lns4b.mongodb.net/My_coco_planner?retryWrites=true&w=majority';
 var port = process.env.PORT || 3000;
 
 
@@ -40,8 +40,7 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema({
     username : { type: String },
     password : { type: String },
-    email : { type: String },
-    birthDate: { type : String }
+    email : { type: String }
    });
 
 var User = mongoose.model('users', userSchema);
