@@ -38,20 +38,44 @@ var Schema = mongoose.Schema;
 
 //Define userSchema
 var userSchema = new Schema({
-    username : { type : String },
-    password : { type : String },
-    email : { type : String },
+    username : { type : String , required : true , minlength : 8 },
+    password : { type : String , required : true , minlength : 8 },
+    email : { type : String , required : true },
     birthDate : { type : Date }
    });
 
 //Define plannerSchema
 var plannerSchema = new Schema({
-    name : { type : String },
+    name : { type : String , required : true },
     user : { type : Schema.Types.ObjectId , ref:'User'}
+})
+
+//Define favoriteListSchema
+var favoriteListSchema = new Schema({
+    name : { type : String , required : true },
+    item : {
+        name : { type : String , required : true },
+        review : { type : String },
+        rating : { type : String }},
+    
+    user : { type : Schema.Types.ObjectId , ref : 'User'}    
+});
+
+//Define ListSchema 
+var listSchema = new Schema({
+    type : { type : String , required : true },
+    task : {
+      name : { type : String , required : true },
+      startDate : { type : Date },
+      endDate : { type : Date }
+            },
+    planner : { type : Schema.Types.ObjectId , ref : 'Planner'} 
 })
 
 var User = mongoose.model('users', userSchema);
 var Planner = mongoose.model('planner',plannerSchema);
+var FavoriteList = mongoose.model('favoriteLists',favoriteListSchema);
+var list = mongoose.model('list',listSchema);
 
    // Import routes
 app.get('/api', function(req, res) {
@@ -74,6 +98,23 @@ app.post('/planner',function(req,res,next){
     planner.save(function(err){
         if(err){ return next(err);}
         res.status(201).json(planner);
+    });
+});
+
+app.post('/planner/list',function(req,res,next){
+    var list = new List(req.body);
+    list.save(function(err){
+        if(err){ return next(err);}
+        res.status(201).json(list);
+    });
+});
+
+
+app.post('/favlist',function(req,res,next){
+    var favoriteList = new FavoriteList(req.body);
+    favoriteList.save(function(err){
+        if(err){ return next(err);}
+        res.status(201).json(favoriteList);
     });
 });
     
