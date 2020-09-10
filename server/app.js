@@ -63,10 +63,10 @@ var favoriteListSchema = new Schema({
 
 //Define ListSchema 
 var listSchema = new Schema({
-    type : { type : String , required : true },
+    type : { type : String , required : true , enum : [ 'To-do list' , 'Shopping List' , 'Budget List' ]},
     task : {
       name : { type : String , required : true },
-      startDate : { type : Date },
+      startDate : { type : Date , default : Date.now },
       endDate : { type : Date }
             },
     planner : { type : Schema.Types.ObjectId , ref : 'Planner'} 
@@ -83,17 +83,52 @@ app.get('/api', function(req, res) {
 });
 
 
-//create a new user 
-app.post('/sign_up', function(req, res, next) {
+//Create a new user or sign up
+app.post('/users', function(req, res, next) {
     var user = new User(req.body);
     user.save(function(err) {
-    if (err) { return next(err); }
+    if (err) {
+         return next(err);
+         }
     res.status(201).json(user);
     });
     });
 
-//create a new planner 
-app.post('/planner',function(req,res,next){
+//Update user's information
+app.patch("users/:id" , function(req,res,next) {
+    var id = req.params.id;
+    User.findById(id,function(err , user ) {
+        if (err) {
+             return next(err);
+             }
+        if(user === null) {
+            return res.status(400).json({"message":"Unfortunately The user was not found"});
+        }
+    user.username = ( user.username || req.body.username);
+    user.password = ( user.password || req.body.password);
+    user.email = ( user.email || req.body.email);
+    user.birthDate = ( user.birthDate || req.body.birthDate);
+    res.json(user);
+    })
+})
+
+//Delete a specific user 
+app.delete('users/:id',function(req,res,next) {
+    var id = req.params.id;
+    User.findByIdAndDelete({_id : id }),function(err,user) {
+        if (err) {
+            return next(err);
+        }
+        if (user === null) {
+            return res.status(400).json({"message":"Unfortunately the user was not found"});
+        }
+        res.json.user;    
+    }
+})
+
+
+//Create a new planner 
+app.post('/planners',function(req,res,next){
     var planner = new Planner(req.body);
     planner.save(function(err){
         if(err){ return next(err);}
@@ -101,16 +136,50 @@ app.post('/planner',function(req,res,next){
     });
 });
 
-app.post('/planner/list',function(req,res,next){
+//Update the planner's information 
+app.patch('/planners/:id',function(req,res,next){
+    var id = req.params.id;
+    Planner.findById(id,function(err , user ) {
+        if (err) {
+             return next(err);
+             }
+        if(planner === null) {
+            return res.status(400).json({"message":"Unfortunately The planner was not found"});
+        }
+        planner.name = req.body.name;
+    })
+    res.json(planner);
+})
+
+//Delete a planner 
+app.delete('planner/:id',function(req,res,next) {
+    var id = req.params.id;
+    Planner.findByIdAndDelete({_id : id}),function(err,planner){
+        if (err){
+            return next(err);
+        }
+        if(planner === null) {
+            return res.status(400).json({"message":"Unfortunately the planner was not found"});
+        }
+        res.json.planner
+    }
+
+})
+
+//Create a list 
+app.post('/planners/lists',function(req,res,next){
     var list = new List(req.body);
     list.save(function(err){
-        if(err){ return next(err);}
+        if(err){
+             return next(err);
+            }
         res.status(201).json(list);
     });
 });
 
 
-app.post('/favlist',function(req,res,next){
+//Create a favorite list 
+app.post('/favlists',function(req,res,next){
     var favoriteList = new FavoriteList(req.body);
     favoriteList.save(function(err){
         if(err){ return next(err);}
