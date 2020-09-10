@@ -9,7 +9,6 @@ const { isDate } = require('util');
 
 
 // Variables
-//We should add our DB URL here.I added a local DB for test.
 var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://group_18:group18isthebest@cluster0.lns4b.mongodb.net/My_coco_planner?retryWrites=true&w=majority';
 var port = process.env.PORT || 3000;
 
@@ -37,13 +36,22 @@ app.use(cors());
 //Define mangoose schema 
 var Schema = mongoose.Schema;
 
+//Define userSchema
 var userSchema = new Schema({
-    username : { type: String },
-    password : { type: String },
-    email : { type: String }
+    username : { type : String },
+    password : { type : String },
+    email : { type : String },
+    birthDate : { type : Date }
    });
 
+//Define plannerSchema
+var plannerSchema = new Schema({
+    name : { type : String },
+    user : { type : Schema.Types.ObjectId , ref:'User'}
+})
+
 var User = mongoose.model('users', userSchema);
+var Planner = mongoose.model('planner',plannerSchema);
 
    // Import routes
 app.get('/api', function(req, res) {
@@ -59,6 +67,15 @@ app.post('/sign_up', function(req, res, next) {
     res.status(201).json(user);
     });
     });
+
+//create a new planner 
+app.post('/planner',function(req,res,next){
+    var planner = new Planner(req.body);
+    planner.save(function(err){
+        if(err){ return next(err);}
+        res.status(201).json(planner);
+    });
+});
     
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
