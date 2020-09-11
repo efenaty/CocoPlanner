@@ -42,50 +42,39 @@ var Schema = mongoose.Schema;
 //Define userSchema
 var userSchema = new Schema({
     username : { type : String , required : true , unique : true },
-    password : { type : String , required : true , minlength : 8 },
+    password : { type : String , required : true , unique : true , minlength : 8 },
     email : { type : String , required : true },
     birthDate : { type : Date }
    });
 
-//Define plannerSchema
-var plannerSchema = new Schema({
-    name : { type : String , required : true },
-    user : { type : Schema.Types.ObjectId , ref:'User'}
-})
-
-//Define favoriteListSchema
-var favoriteListSchema = new Schema({
-    name : { type : String , required : true },
-    item : {
-        name : { type : String , required : true },
-        review : { type : String },
-        rating : { type : String }},
-    
-    user : { type : Schema.Types.ObjectId , ref : 'User'}    
-});
-
 //Define ListSchema 
 var listSchema = new Schema({
     type : { type : String , required : true , enum : [ 'To-do list' , 'Shopping List' , 'Budget List' ]},
-    
-    planner : { type : Schema.Types.ObjectId , ref : 'Planner'} 
+    favotite_list : { type : Boolean },
+    user : { type : Schema.Types.ObjectId , ref : 'User'} 
 });
 
+//Define itemLSchema
+var itemSchema = new Schema({
+        name : { type : String , required : true },
+        review : { type : String ,required : true },
+        rating : { type : String , required : true},
+        list : { type : Schema.Types.ObjectId , ref : 'List'}
+    
+    });
+       
 //Define taskSchema 
 var taskSchema = new Schema({
-    task : {
-        name : { type : String , required : true },
-        startDate : { type : Date , default : Date.now },
-        endDate : { type : Date }
-              },
+    name : { type : String , required : true },
+    startDate : { type : Date , default : Date.now },
+    endDate : { type : Date },
     list : { type : Schema.Types.ObjectId , ref : 'List'}
 });
 
 var User = mongoose.model('users', userSchema);
-var Planner = mongoose.model('planner',plannerSchema);
-var FavoriteList = mongoose.model('favoriteLists',favoriteListSchema);
 var List = mongoose.model('list',listSchema);
 var Task = mongoose.model('task',taskSchema);
+var Item = mongoose.model('item',itemSchema);
 
    // Import routes
 app.get('/api', function(req, res) {
@@ -136,49 +125,8 @@ app.delete('users/:id',function(req,res,next) {
     }
 })
 
-
-//Create a new planner 
-app.post('/planners',function(req,res,next){
-    var planner = new Planner(req.body);
-    planner.save(function(err){
-        if(err){ return next(err);}
-        res.status(201).json(planner);
-    });
-});
-
-//Update the planner's information 
-app.patch('/planners/:id',function(req,res,next){
-    var id = req.params.id;
-    Planner.findById(id,function(err , user ) {
-        if (err) {
-             return next(err);
-             }
-        if(planner === null) {
-            return res.status(400).json({"message":"Unfortunately The planner was not found"});
-        }
-        planner.name = req.body.name;
-    })
-    res.json(planner);
-})
-
-//Delete a planner 
-app.delete('planner/:id',function(req,res,next) {
-    var id = req.params.id;
-    Planner.findByIdAndDelete({_id : id}),function(err,planner){
-        if (err){
-            return next(err);
-        }
-        if(planner === null) {
-            return res.status(400).json({"message":"Unfortunately the planner was not found"});
-        }
-        res.json.planner
-    }
-
-})
-
-
 //Create a list 
-app.post('/planners/lists',function(req,res,next){
+app.post('/lists',function(req,res,next){
     var list = new List(req.body);
     list.save(function(err){
         if(err){
@@ -188,16 +136,22 @@ app.post('/planners/lists',function(req,res,next){
     });
 });
 
+//Delete a list 
+app.delete('lists/:id',function(req,res,next) {
+    var id = req.params.id;
+    User.findByIdAndDelete({_id : id }),function(err,user) {
+        if (err) {
+            return next(err);
+        }
+        if (user === null) {
+            return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+        res.json.list;    
+    }
+})
 
-//Create a favorite list 
-app.post('/favlists',function(req,res,next){
-    var favoriteList = new FavoriteList(req.body);
-    favoriteList.save(function(err){
-        if(err){ return next(err);}
-        res.status(201).json(favoriteList);
-    });
-});
-    
+
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
