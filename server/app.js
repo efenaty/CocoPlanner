@@ -7,6 +7,9 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 const { isDate } = require('util');
 
+//Re write from the github for an error 
+mongoose.set('useCreateIndex', true)
+
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://group_18:group18isthebest@cluster0.lns4b.mongodb.net/My_coco_planner?retryWrites=true&w=majority';
