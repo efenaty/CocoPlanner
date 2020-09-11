@@ -64,18 +64,25 @@ var favoriteListSchema = new Schema({
 //Define ListSchema 
 var listSchema = new Schema({
     type : { type : String , required : true , enum : [ 'To-do list' , 'Shopping List' , 'Budget List' ]},
-    task : {
-      name : { type : String , required : true },
-      startDate : { type : Date , default : Date.now },
-      endDate : { type : Date }
-            },
+    
     planner : { type : Schema.Types.ObjectId , ref : 'Planner'} 
-})
+});
+
+//Define taskSchema 
+var taskSchema = new Schema({
+    task : {
+        name : { type : String , required : true },
+        startDate : { type : Date , default : Date.now },
+        endDate : { type : Date }
+              },
+    list : { type : Schema.Types.ObjectId , ref : 'List'}
+});
 
 var User = mongoose.model('users', userSchema);
 var Planner = mongoose.model('planner',plannerSchema);
 var FavoriteList = mongoose.model('favoriteLists',favoriteListSchema);
-var list = mongoose.model('list',listSchema);
+var List = mongoose.model('list',listSchema);
+var Task = mongoose.model('task',taskSchema);
 
    // Import routes
 app.get('/api', function(req, res) {
@@ -120,7 +127,7 @@ app.delete('users/:id',function(req,res,next) {
             return next(err);
         }
         if (user === null) {
-            return res.status(400).json({"message":"Unfortunately the user was not found"});
+            return res.status(404).json({"message":"Unfortunately the user was not found"});
         }
         res.json.user;    
     }
@@ -165,6 +172,7 @@ app.delete('planner/:id',function(req,res,next) {
     }
 
 })
+
 
 //Create a list 
 app.post('/planners/lists',function(req,res,next){
