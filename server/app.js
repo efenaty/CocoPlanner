@@ -150,6 +150,27 @@ app.delete('lists/:id',function(req,res,next) {
     }
 })
 
+//Create a task 
+app.post('/lists/tasks',function(req,res,next){
+    var task = new Task(req.body);
+    task.save(function(err){
+        if(err){
+             return next(err);
+            }
+        res.status(201).json(task);
+    });
+});
+
+//Create an item  
+app.post('/lists/items',function(req,res,next){
+    var itam = new Itam(req.body);
+    item.save(function(err){
+        if(err){
+             return next(err);
+            }
+        res.status(201).json(item);
+    });
+});
 
 
 
