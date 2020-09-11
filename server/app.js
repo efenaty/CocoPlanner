@@ -7,6 +7,11 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 const { isDate } = require('util');
 
+var usersController = require('./controllers/users');
+var listsController = require('./controllers/lists');
+var tasksController = require('./controllers/tasks');
+var itemsController = require('./controllers/items');
+
 //Re write from the github for an error 
 mongoose.set('useCreateIndex', true)
 
@@ -37,141 +42,21 @@ app.options('*', cors());
 app.use(cors());
 
 //Define mangoose schema 
-var Schema = mongoose.Schema;
-
-//Define userSchema
-var userSchema = new Schema({
-    username : { type : String , required : true , unique : true },
-    password : { type : String , required : true , unique : true , minlength : 8 },
-    email : { type : String , required : true },
-    birthDate : { type : Date }
-   });
-
-//Define ListSchema 
-var listSchema = new Schema({
-    type : { type : String , required : true , enum : [ 'To-do list' , 'Shopping List' , 'Budget List' ]},
-    favotite_list : { type : Boolean },
-    user : { type : Schema.Types.ObjectId , ref : 'User'} 
-});
-
-//Define itemLSchema
-var itemSchema = new Schema({
-        name : { type : String , required : true },
-        review : { type : String ,required : true },
-        rating : { type : String , required : true},
-        list : { type : Schema.Types.ObjectId , ref : 'List'}
-    
-    });
-       
-//Define taskSchema 
-var taskSchema = new Schema({
-    name : { type : String , required : true },
-    startDate : { type : Date , default : Date.now },
-    endDate : { type : Date },
-    list : { type : Schema.Types.ObjectId , ref : 'List'}
-});
-
-var User = mongoose.model('users', userSchema);
-var List = mongoose.model('list',listSchema);
-var Task = mongoose.model('task',taskSchema);
-var Item = mongoose.model('item',itemSchema);
+// var Schema = mongoose.Schema;
+// var User = mongoose.model('users', userSchema);
+// var List = mongoose.model('list',listSchema);
+// var Task = mongoose.model('task',taskSchema);
+// var Item = mongoose.model('item',itemSchema);
 
    // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
 
-
-//Create a new user or sign up
-app.post('/users', function(req, res, next) {
-    var user = new User(req.body);
-    user.save(function(err) {
-    if (err) {
-         return next(err);
-         }
-    res.status(201).json(user);
-    });
-    });
-
-//Update user's information
-app.patch("users/:id" , function(req,res,next) {
-    var id = req.params.id;
-    User.findById(id,function(err , user ) {
-        if (err) {
-             return next(err);
-             }
-        if(user === null) {
-            return res.status(400).json({"message":"Unfortunately The user was not found"});
-        }
-    user.username = ( user.username || req.body.username);
-    user.password = ( user.password || req.body.password);
-    user.email = ( user.email || req.body.email);
-    user.birthDate = ( user.birthDate || req.body.birthDate);
-    res.json(user);
-    })
-})
-
-//Delete a specific user 
-app.delete('users/:id',function(req,res,next) {
-    var id = req.params.id;
-    User.findByIdAndDelete({_id : id }),function(err,user) {
-        if (err) {
-            return next(err);
-        }
-        if (user === null) {
-            return res.status(404).json({"message":"Unfortunately the user was not found"});
-        }
-        res.json.user;    
-    }
-})
-
-//Create a list 
-app.post('/lists',function(req,res,next){
-    var list = new List(req.body);
-    list.save(function(err){
-        if(err){
-             return next(err);
-            }
-        res.status(201).json(list);
-    });
-});
-
-//Delete a list 
-app.delete('lists/:id',function(req,res,next) {
-    var id = req.params.id;
-    User.findByIdAndDelete({_id : id }),function(err,user) {
-        if (err) {
-            return next(err);
-        }
-        if (user === null) {
-            return res.status(404).json({"message":"Unfortunately the list was not found"});
-        }
-        res.json.list;    
-    }
-})
-
-//Create a task 
-app.post('/lists/tasks',function(req,res,next){
-    var task = new Task(req.body);
-    task.save(function(err){
-        if(err){
-             return next(err);
-            }
-        res.status(201).json(task);
-    });
-});
-
-//Create an item  
-app.post('/lists/items',function(req,res,next){
-    var itam = new Itam(req.body);
-    item.save(function(err){
-        if(err){
-             return next(err);
-            }
-        res.status(201).json(item);
-    });
-});
-
+app.use(usersController);
+app.use(listsController);
+app.use(tasksController);
+app.use(itemsController);
 
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
