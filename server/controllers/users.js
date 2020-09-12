@@ -30,9 +30,9 @@ router.post('/users', function(req, res, next) {
             if(user === null) {
                 return res.status(400).json({"message":"Unfortunately The user was not found"});
             }
-        });
+        })
         
-    });
+    })
 
     //Get all users (for testing)
     router.get('/users', function(req, res, next) {
