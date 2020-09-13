@@ -14,7 +14,8 @@ router.post('/users', function(req, res, next) {
          }
     res.status(201).json(user);
     });
-    });
+});
+
 
     
 
