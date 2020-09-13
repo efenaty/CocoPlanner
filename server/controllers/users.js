@@ -16,23 +16,7 @@ router.post('/users', function(req, res, next) {
     });
     });
 
-    //User Login
-    router.post('/login', function (req, res, next){
-        var email = req.body.email
-        var password = req.body.password
-        User.findOne({email: password}, function (err, user){
-            if (err) {
-                return next(err);
-            }
-            if(user){
-                res.status(201).json({"message" : "Login successful"})
-            }
-            if(user === null) {
-                return res.status(400).json({"message":"Unfortunately The user was not found"});
-            }
-        })
-        
-    })
+    
 
     //Get all users (for testing)
     router.get('/users', function(req, res, next) {
