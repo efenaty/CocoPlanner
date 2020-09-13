@@ -71,9 +71,9 @@ You don’t want to use pen and paper? Want an environmentally friendly software
 
 ### Pages
 
-* Register/Sign-up page: The start page starts with a register or login box where users can login or create an account. After the user has successfully created an account with an email, the system will redirect the user to the homepage. 
-* Homepage: The homepage allows the user to create to-do lists or my-favorites lists, or  display the existing lists the user has already created. 
-* Profile settings: This is the account page where the user’s personal data such as username, email, password, etc. are saved, and the user can edit or change their account details via this page. 
+* **Register/Sign-up page:** The start page starts with a register or login box where users can login or create an account. After the user has successfully created an account with an email, the system will redirect the user to the homepage. 
+* **Homepage:** The homepage allows the user to create to-do lists or my-favorites lists, or  display the existing lists the user has already created. 
+* **Profile settings:** This is the account page where the user’s personal data such as username, email, password, etc. are saved, and the user can edit or change their account details via this page. 
 
 
 ### Entity-Relationship (ER) Diagram
