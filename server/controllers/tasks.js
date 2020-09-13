@@ -3,7 +3,6 @@ var router = express.Router();
 
 var Task = require('../models/task');
 
-
 //Create a task 
 router.post('/lists/tasks',function(req,res,next){
     var task = new Task(req.body);
@@ -27,12 +26,10 @@ router.get('/lists/tasks', function (req,res,next){
 });
 
 
-
-
 // View a specific task by ID
 router.get('/lists/tasks/:id', function (req, res, next){
     var id = req.params.id;
-    Task.findById(req.params.id, function (err, task){
+    Task.findById(id,function (err, task){
         if (err){
             return next(err);
         }
@@ -47,14 +44,14 @@ router.get('/lists/tasks/:id', function (req, res, next){
 //Update a task
 router.patch('/lists/tasks/:id', function (req, res, next){
     var id = req.params.id;
-    Task.findById(id, function(err, task){
+    Task.findById(id,function(err, task){
         if(err){
             return next(err);
         }
         if (task == null){
-            return res.status(404).json({"message": "Camel not found"});
+            return res.status(404).json({"message": "Task not found"});
         }
-        task.name = (req.body.color || task.color);
+        task.name = (req.body.name || task.name);
         task.startDate = (req.body.startDate || task.startDate);
         task.endDate = (req.body.endDate || task.endDate);
         task.list = (req.body.list || task.list);
@@ -64,14 +61,14 @@ router.patch('/lists/tasks/:id', function (req, res, next){
     
 });
 
-
-router.delete('/lists/tasks/:id',function(req,res,next) {
+//Delete a task 
+router.delete('/lists/tasks/:id',function(req,res,next){
     var id = req.params.id;
-    Task.findByIdAndDelete({_id : id }),function(err,task) {
-        if (err) {
+    Task.findByIdAndDelete({_id : id }),function(err,task){
+        if (err){
             return next(err);
         }
-        if (task === null) {
+        if (task == null) {
             return res.status(404).json({"message":"Unfortunately the task does not exist"});
         }
         res.json(task);    
