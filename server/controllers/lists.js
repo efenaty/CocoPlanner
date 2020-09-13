@@ -41,18 +41,35 @@ router.get('/lists/fav', function(req, res, next) {
 });
 
 //Show a certain list
-router.get('/lists/:id' , function(req,res,next){
+router.get('/lists/:id', function(req, res, next) {
     var id = req.params.id;
-    List.findById({ _id : id }) , function(err,lists){
-        if (err) {
-            return next(err);
+    List.findById(id , function(err, list) {
+        if(err) { 
+            returnnext(err);
         }
-        if (list === null) {
-            return res.status(404).json({"message":"Unfortunately the list was not found"});
+        if(list ==null) {
+         return res.status(404).json({"message":"List not found"});
         }
-        res.json({ lists});
-    }
+        res.json(list);
+    });
 });
+
+//Change the list type
+router.put('/lists/:id', function(req, res, next) {
+    var id = req.params.id;
+    List.findById(id , function(err, list) {
+        if(err) { 
+            returnnext(err);
+        }
+        if(list ==null) {
+         return res.status(404).json({"message":"List not found"});
+        }
+        list.name = req.body.name ;
+        list.save();
+        res.json(list);
+    });
+});
+
 
 //Delete a certain list 
 router.delete('/lists/:id',function(req,res,next) {
