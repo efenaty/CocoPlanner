@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 var List = require('../models/list');
 
 //Create a list 
@@ -15,12 +14,12 @@ router.post('/lists',function(req,res,next){
 });
 
 //Show all the normal lists 
-router.get('/lists', function(req, res, next) {
-    List.find({ is_favorite_list : "false" },function(err, lists) {
-        if(err) {
+router.get('/lists', function(req, res, next){
+    List.find({ is_favorite_list : "false" },function(err, lists){
+        if(err){
             return next(err);
         }
-        if(list==null){
+        if(list == null){
             return res.status(404).json({"message":"Unfortunately the list was not found"});
         }
         res.json({"The normal lists are ": lists});
@@ -28,9 +27,9 @@ router.get('/lists', function(req, res, next) {
 });
 
 //Show all the favorite lists
-router.get('/lists/fav', function(req, res, next) {
-    List.find({ is_favorite_list : "true" },function(err, lists) {
-        if(err) {
+router.get('/lists/fav', function(req, res, next){
+    List.find({ is_favorite_list : "true" },function(err, lists){
+        if(err){
             return next(err);
         }
         if(list == null){
@@ -41,28 +40,28 @@ router.get('/lists/fav', function(req, res, next) {
 });
 
 //Show a certain list
-router.get('/lists/:id', function(req, res, next) {
+router.get('/lists/:id', function(req, res, next){
     var id = req.params.id;
-    List.findById(id , function(err, list) {
-        if(err) { 
+    List.findById(id,function(err, list){
+        if(err){ 
             returnnext(err);
         }
-        if(list ==null) {
-         return res.status(404).json({"message":"List not found"});
+        if(list == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
         }
         res.json(list);
     });
 });
 
 //Change the list type
-router.put('/lists/:id', function(req, res, next) {
+router.put('/lists/:id', function(req, res, next){
     var id = req.params.id;
-    List.findById(id , function(err, list) {
-        if(err) { 
-            returnnext(err);
+    List.findById(id,function(err, list){
+        if(err){ 
+            return next(err);
         }
-        if(list ==null) {
-         return res.status(404).json({"message":"List not found"});
+        if(list == null) {
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
         }
         list.name = req.body.name ;
         list.save();
@@ -72,13 +71,13 @@ router.put('/lists/:id', function(req, res, next) {
 
 
 //Delete a certain list 
-router.delete('/lists/:id',function(req,res,next) {
+router.delete('/lists/:id',function(req,res,next){
     var id = req.params.id;
-    User.findByIdAndDelete({_id : id }),function(err,user) {
-        if (err) {
+    List.findByIdAndDelete({_id : id }),function(err,user){
+        if (err){
             return next(err);
         }
-        if (list === null) {
+        if (list == null){
             return res.status(404).json({"message":"Unfortunately the list was not found"});
         }
         res.json.list;    
