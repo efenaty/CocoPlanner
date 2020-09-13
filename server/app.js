@@ -5,10 +5,21 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+const { isDate } = require('util');
+
+var usersController = require('./controllers/users');
+var listsController = require('./controllers/lists');
+var tasksController = require('./controllers/tasks');
+var itemsController = require('./controllers/items');
+
+//Re write from the github for an error 
+mongoose.set('useCreateIndex', true)
+
 
 // Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
+var mongoURI = process.env.MONGODB_URI || 'mongodb+srv://group_18:group18isthebest@cluster0.lns4b.mongodb.net/My_coco_planner?retryWrites=true&w=majority';
 var port = process.env.PORT || 3000;
+
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
@@ -30,10 +41,23 @@ app.use(morgan('dev'));
 app.options('*', cors());
 app.use(cors());
 
-// Import routes
+//Define mangoose schema 
+// var Schema = mongoose.Schema;
+// var User = mongoose.model('users', userSchema);
+// var List = mongoose.model('list',listSchema);
+// var Task = mongoose.model('task',taskSchema);
+// var Item = mongoose.model('item',itemSchema);
+
+   // Import routes
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT341 backend ExpressJS project!'});
 });
+
+app.use(usersController);
+app.use(listsController);
+app.use(tasksController);
+app.use(itemsController);
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
