@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var List = require('../models/list');
+var Task = require('../models/task');
+var Item = require('../models/item');
+const { route } = require('./items');
 
 //Create a list 
 router.post('/lists',function(req,res,next){
@@ -11,6 +14,38 @@ router.post('/lists',function(req,res,next){
             }
         res.status(201).json(list);
     });
+});
+
+//Add a task to a list 
+router.post('/lists/:id/task',function(req,res,next){
+    var task = new Task(req.body);
+    task.save(function(err){
+        if(err){
+             return next(err);
+            }
+        List.findByIdAndUpdate({_id : req.params.id} , {tasks : task._id} , {new : true},function(err){
+            if(err){
+                return next(err);
+               };
+               res.json(task);  
+            });
+});
+});
+ 
+//Add an item to a list 
+router.post('/lists/:id/item',function(req,res,next){
+    var item = new Item(req.body);
+    item.save(function(err){
+        if(err){
+             return next(err);
+            }
+        List.findByIdAndUpdate({_id : req.params.id} , {items : item._id} , {new : true},function(err){
+            if(err){
+                return next(err);
+               };
+               res.json(item);  
+            });
+});
 });
 
 //Show all the normal lists 
@@ -70,7 +105,6 @@ router.put('/lists/:id', function(req, res, next){
         res.json(list);
     });
 });
-
 
 //Delete a certain list 
 router.delete('/lists/:id',function(req,res,next){
