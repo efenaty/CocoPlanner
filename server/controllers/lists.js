@@ -153,6 +153,24 @@ router.get('/lists/:id/item', function(req, res, next){
     });
 });
 
+//Show the specific task of a  list
+router.get('/lists/:id/tasks/:task_id', function(req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate('tasks').exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+        var array = [];
+        for ( i=0 ; i<list.tasks.length ; i++){
+            if(list.tasks[i]._id == req.params.task_id)
+            array.push(list.tasks[i]);
+        }
+    res.json(array);
+    });
+});
 
 
 
