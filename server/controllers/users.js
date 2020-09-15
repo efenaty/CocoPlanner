@@ -24,26 +24,25 @@ router.post('/login', function (req, res, next){
             return next(err);
         }
         if(user){
-            res.status(201).json({"message" : "Login successful"});
+            res.status(200).json({"message" : "Login successful."});
         }
         if(user === null) {
-            return res.status(400).json({"message" : "Unfortunately The user was not found"});
+            return res.status(404).json({"message" : "User not found."});
         }
     });
     
 });
 
 
-
-//Get all users (for testing)
-router.get('/users', function(req, res, next){
-    User.find(function(err, users){
-        if (err){
-             return next(err);
-            }
-            res.json({'users': users });
-        })
-    });
+// //Get all users (for testing)
+// router.get('/users', function(req, res, next){
+//     User.find(function(err, users){
+//         if (err){
+//              return next(err);
+//             }
+//             res.status(200).json({'users': users });
+//         })
+//     });
 
 //Get a specific user
 router.get('/users/:id', function(req, res, next){
@@ -53,9 +52,9 @@ router.get('/users/:id', function(req, res, next){
              return next(err);
             }
         if (user == null){
-            return res.status.json({"message" : "User not found"});
+            return res.status(404).json({"message" : "User not found."});
         }
-        res.json(user);
+        res.status(200).json(user);
         });
     });
 
@@ -69,14 +68,14 @@ router.patch("/users/:id" , function(req, res, next){
              return next(err);
             }
         if(user == null) {
-            return res.status(404).json({"message" : "Unfortunately The user was not found"});
+            return res.status(404).json({"message" : "User not found."});
         }
     user.username = (req.body.username || user.username);
     user.password = (req.body.password || user.password);
     user.email = (req.body.email|| user.email);
     user.birthDate = (req.body.birthDate || user.birthDate);
     user.save();
-    res.json(user);
+    res.status(200).json(user);
     })
 })
 
@@ -88,9 +87,9 @@ router.delete('/users/:id', function(req, res, next){
         return next(err);
     }
     if (user == null){
-    return res.status(404).json({"message": "Unfortunately the user not found"});
+    return res.status(404).json({"message": "User not found."});
     }
-    res.json(user);
+    res.status(200).json(user);
     });
     });
 
