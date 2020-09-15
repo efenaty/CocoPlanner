@@ -60,6 +60,64 @@ router.patch('/lists/tasks/:id', function (req, res, next){
     
 });
 
+
+
+//Update a task with a certain parameter, i.e, name
+router.patch('/lists/tasks/:id', function(req, res, next) {
+  var id = req.params.id;
+  Task.findById(id,function(err, task) {
+      if(err) { 
+          return next(err);
+      }
+      if(task == null) {
+       return res.status(404).json({"message": "Task not found."});
+      }
+
+      task.name = req.body.name ;
+      task.save();
+      res.json(task);
+  });
+});
+
+
+//Update a task with a certain parameter, i.e, startDate
+router.patch('/lists/tasks/:id', function(req, res, next) {
+  var id = req.params.id;
+  Task.findById(id,function(err, task) {
+      if(err) { 
+          return next(err);
+      }
+      if(task == null) {
+       return res.status(404).json({"message": "Task not found."});
+      }
+
+      task.startDate = req.body.startDate;
+      task.save();
+      res.json(task);
+  });
+});
+
+
+
+//Update a task with a certain parameter, i.e, endDate
+router.patch('/lists/tasks/:id', function(req, res, next) {
+  var id = req.params.id;
+  Task.findById(id,function(err, task) {
+      if(err) { 
+          return next(err);
+      }
+
+      if(task == null) {
+       return res.status(404).json({"message": "Task not found."});
+      }
+
+      task.endDate = req.body.endDate;
+      task.save();
+      res.json(task);
+  });
+});
+
+
 //Delete a task 
 router.delete('/lists/tasks/:id',function(req,res,next){
     var id = req.params.id;
@@ -73,6 +131,63 @@ router.delete('/lists/tasks/:id',function(req,res,next){
         res.json(task);    
     }
 });
+
+
+
+router.get("/lists/tasks").get(function(req, res) {
+  detail
+    .find({}, function(err, result) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(result);
+      }
+    })
+    .sort({ startDate: 1, name: 1});
+});
+
+
+//Sort Tasks with startDate only
+router.get("/lists/tasks").get(function(req, res) {
+  detail
+    .find({}, function(err, result) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(result);
+      }
+    })
+    .sort({ startDate: 1});
+});
+
+
+//Sort Tasks with endDate only
+router.get("/lists/tasks").get(function(req, res) {
+  detail
+    .find({}, function(err, result) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(result);
+      }
+    })
+    .sort({ endDate: 1});
+});
+
+
+//Sort Tasks with name only
+router.get("/lists/tasks").get(function(req, res) {
+  detail
+    .find({}, function(err, result) {
+      if (err) {
+        return next(err);
+      } else {
+        res.json(result);
+      }
+    })
+    .sort({ name : 1});
+});
+
 
 
 
