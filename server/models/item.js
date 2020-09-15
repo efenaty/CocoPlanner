@@ -9,6 +9,4 @@ var itemSchema = new Schema({
     list : { type : Schema.Types.ObjectId , ref : 'List'}
 
 });
-
-
    module.exports = mongoose.model('items', itemSchema);

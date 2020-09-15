@@ -106,6 +106,7 @@ router.put('/lists/:id', function(req, res, next){
     });
 });
 
+
 //Delete a certain list 
 router.delete('/lists/:id',function(req,res,next){
     var id = req.params.id;
@@ -119,5 +120,22 @@ router.delete('/lists/:id',function(req,res,next){
         res.json.list;    
     }
 });
+
+//Show the tasks of a certain list
+router.get('/lists/:id/tasks', function(req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate('task').exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+    
+         res.json(list.tasks)
+    
+    });
+});
+
 
 module.exports = router;

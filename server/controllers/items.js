@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Item = require('../models/item');
+var List = require('../models/list');
 
 
 // create an item  
@@ -112,6 +113,20 @@ router.patch('/lists/items/:id', function(req, res, next) {
         item.rating = req.body.rating ;
         item.save();
         res.json(item);
+    });
+});
+
+router.get('/lists/:id/tasks', function(req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate('tasks').exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+         res.json(list.tasks[0].body)
+        
     });
 });
 
