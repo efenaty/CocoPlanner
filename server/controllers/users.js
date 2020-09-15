@@ -68,7 +68,7 @@ router.patch("/users/:id" , function(req, res, next){
              return next(err);
             }
         if(user == null) {
-            return res.status(404).json({"message" : "Unfortunately The user was not found"});
+            return res.status(404).json({"message" : "User not found."});
         }
     user.username = (req.body.username || user.username);
     user.password = (req.body.password || user.password);
@@ -87,7 +87,7 @@ router.delete('/users/:id', function(req, res, next){
         return next(err);
     }
     if (user == null){
-    return res.status(404).json({"message": "Unfortunately the user not found"});
+    return res.status(404).json({"message": "User not found."});
     }
     res.status(200).json(user);
     });
