@@ -1,6 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var List = require('../models/list');
+var Task = require('../models/task');
+var Item = require('../models/item');
+/*const { route } = require('./items');
+const { route } = require('./tasks');*/
 
 //Create a list 
 router.post('/lists',function(req,res,next){
@@ -11,6 +15,39 @@ router.post('/lists',function(req,res,next){
             }
         res.status(201).json(list);
     });
+});
+
+//Add a task to a list
+//Source : https://kb.objectrocket.com/mongo-db/how-to-join-collections-using-mongoose-228 
+router.post('/lists/:id/task',function(req,res,next){
+    var task = new Task(req.body);
+    task.save(function(err){
+        if(err){
+             return next(err);
+            }
+        List.findByIdAndUpdate({_id : req.params.id} , {tasks : task._id} , {new : true},function(err){
+            if(err){
+                return next(err);
+               };
+               res.json(task);  
+            });
+});
+});
+ 
+//Add an item to a list 
+router.post('/lists/:id/item',function(req,res,next){
+    var item = new Item(req.body);
+    item.save(function(err){
+        if(err){
+             return next(err);
+            }
+        List.findByIdAndUpdate({_id : req.params.id} , {items : item._id} , {new : true},function(err){
+            if(err){
+                return next(err);
+               };
+               res.json(item);  
+            });
+});
 });
 
 //Show all the normal lists 
@@ -75,7 +112,7 @@ router.put('/lists/:id', function(req, res, next){
 //Delete a certain list 
 router.delete('/lists/:id',function(req,res,next){
     var id = req.params.id;
-    List.findByIdAndDelete({_id : id }),function(err,user){
+    List.findOneAndDelete({_id : id }),function(err,list){
         if (err){
             return next(err);
         }
@@ -85,6 +122,38 @@ router.delete('/lists/:id',function(req,res,next){
         res.json.list;    
     }
 });
+
+//Show the tasks of a certain list
+router.get('/lists/:id/tasks', function(req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate('tasks').exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+        
+         res.json(list.tasks)
+    
+    });
+});
+
+//Show the items of a certain favororite list 
+router.get('/lists/:id/item', function(req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate('items').exec(function(err,item){
+        if(err){ 
+            return next(err);
+        }
+        if(itemt == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+         res.json(list.items)
+    });
+});
+
+
 
 
 module.exports = router;
