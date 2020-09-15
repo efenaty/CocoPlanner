@@ -3,8 +3,8 @@ var router = express.Router();
 var List = require('../models/list');
 var Task = require('../models/task');
 var Item = require('../models/item');
-const { route } = require('./items');
-const { route } = require('./tasks');
+/*const { route } = require('./items');
+const { route } = require('./tasks');*/
 
 //Create a list 
 router.post('/lists',function(req,res,next){
