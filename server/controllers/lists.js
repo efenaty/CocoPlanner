@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var List = require('../models/list');
-var Task = require('../models/task');
+//var Task = require('../models/task');
 var Item = require('../models/item');
 const { route } = require('./items');
 
@@ -124,7 +124,7 @@ router.delete('/lists/:id',function(req,res,next){
 //Show the tasks of a certain list
 router.get('/lists/:id/tasks', function(req, res, next){
     var id = req.params.id;
-    List.findById({ _id : id }).populate('tasks').exec(function(err,list){
+    List.findById({ _id : id }).populate('tasks').exec(function(err,tasks){
         if(err){ 
             return next(err);
         }

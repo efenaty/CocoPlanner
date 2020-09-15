@@ -47,20 +47,17 @@ router.patch("users/:id" , function(req,res,next) {
 })
 
 //Delete a specific user 
-router.delete('users/:id',function(req,res,next) {
+router.delete('/users/:id', function(req, res, next) {
     var id = req.params.id;
-    User.findByIdAndDelete({_id : id }),function(err,user) {
-        if (err) {
-            return next(err);
-        }
-        if (user === null) {
-            return res.status(404).json({"message":"Unfortunately the user was not found"});
-        }
-        res.json.user;    
+    User.findOneAndDelete({_id: id}, function(err, user) {
+    if (err) { 
+        return next(err);
+     }
+    if (user == null) {
+    return res.status(404).json({"message": "Unfortunately the user not found"});
     }
-})
-
-
-
+    res.json(user);
+    });
+    });
 
 module.exports = router;
