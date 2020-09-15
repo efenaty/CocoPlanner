@@ -63,7 +63,7 @@ router.get('/users/:id', function(req, res, next){
 //Update user's information
 router.patch("/users/:id" , function(req, res, next){
     var id = req.params.id;
-    User.findById(req.params.id, function(err , user ){
+    User.findById(id, function(err , user ){
         if (err){
              return next(err);
             }

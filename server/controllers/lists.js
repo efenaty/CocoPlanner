@@ -6,6 +6,7 @@ var Item = require('../models/item');
 /*const { route } = require('./items');
 const { route } = require('./tasks');*/
 
+
 //Create a list 
 router.post('/lists',function(req,res,next){
     var list = new List(req.body);
@@ -17,38 +18,6 @@ router.post('/lists',function(req,res,next){
     });
 });
 
-//Add a task to a list
-//Source : https://kb.objectrocket.com/mongo-db/how-to-join-collections-using-mongoose-228 
-router.post('/lists/:id/task',function(req,res,next){
-    var task = new Task(req.body);
-    task.save(function(err){
-        if(err){
-             return next(err);
-            }
-        List.findByIdAndUpdate({_id : req.params.id} , {tasks : task._id} , {new : true},function(err){
-            if(err){
-                return next(err);
-               };
-               res.json(task);  
-            });
-});
-});
- 
-//Add an item to a list 
-router.post('/lists/:id/item',function(req,res,next){
-    var item = new Item(req.body);
-    item.save(function(err){
-        if(err){
-             return next(err);
-            }
-        List.findByIdAndUpdate({_id : req.params.id} , {items : item._id} , {new : true},function(err){
-            if(err){
-                return next(err);
-               };
-               res.json(item);  
-            });
-});
-});
 
 //Show all the normal lists 
 router.get('/lists', function(req, res, next){
@@ -58,10 +27,10 @@ router.get('/lists', function(req, res, next){
         }
 
         if(lists == null){
-            return res.status(404).json({"message":"The lists were not found."});
+            return res.status(404).json({"message":"Lists not found."});
         }
 
-        res.json({"The normal lists are ": lists});
+        res.status(200).json({"The normal lists are ": lists});
     });
 });
 
@@ -74,7 +43,7 @@ router.get('/lists/fav', function(req, res, next){
         if(lists == null){
          return res.status(404).json({"message":"The lists were not found."});
         }
-        res.json({"The favorite lists are ": lists});
+        res.status(200).json({"The favorite lists are ": lists});
     });
 });
 
@@ -88,7 +57,7 @@ router.get('/lists/:id', function(req, res, next){
         if(list == null){
          return res.status(404).json({"message":"Unfortunately the list was not found"});
         }
-        res.json(list);
+        res.status(200).json(list);
     });
 });
 
@@ -112,16 +81,54 @@ router.put('/lists/:id', function(req, res, next){
 //Delete a certain list 
 router.delete('/lists/:id',function(req,res,next){
     var id = req.params.id;
-    List.findOneAndDelete({_id : id }),function(err,list){
+    List.findOneAndDelete({_id : id },function(err,list){
         if (err){
             return next(err);
         }
         if (list == null){
             return res.status(404).json({"message":"Unfortunately the list was not found"});
         }
-        res.json.list;    
-    }
+        res.status(200).json(list);    
+    });
 });
+
+
+//Add a task to a list
+//Source : https://kb.objectrocket.com/mongo-db/how-to-join-collections-using-mongoose-228 
+router.post('/lists/:id/tasks',function(req,res,next){
+    var id = req.params.id;
+    var task = new Task(req.body);
+    task.save(function(err){
+        if(err){
+             return next(err);
+            }
+        List.findByIdAndUpdate({_id : req.params.id} , {tasks : task._id} , {new : true},function(err){
+            if(err){
+                return next(err);
+               };
+              task.list = id;
+              task.save();
+               res.status(201).json(task);  
+            });
+});
+});
+ 
+//Add an item to a list 
+router.post('/lists/:id/item',function(req,res,next){
+    var item = new Item(req.body);
+    item.save(function(err){
+        if(err){
+             return next(err);
+            }
+        List.findByIdAndUpdate({_id : req.params.id} , {items : item._id} , {new : true},function(err){
+            if(err){
+                return next(err);
+               };
+               res.json(item);  
+            });
+});
+});
+
 
 //Show the tasks of a certain list
 router.get('/lists/:id/tasks', function(req, res, next){
@@ -153,7 +160,7 @@ router.get('/lists/:id/item', function(req, res, next){
     });
 });
 
-//Show the specific task of a  list
+//Show the specific task of a list
 router.get('/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
@@ -171,6 +178,8 @@ router.get('/lists/:id/tasks/:task_id', function(req, res, next){
     res.json(array);
     });
 });
+
+
 
 
 
