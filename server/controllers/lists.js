@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
+
 var List = require('../models/list');
 var Task = require('../models/task');
 var Item = require('../models/item');
+
 /*const { route } = require('./items');
 const { route } = require('./tasks');*/
 
@@ -58,7 +60,7 @@ router.get('/lists', function(req, res, next){
         }
 
         if(lists == null){
-            return res.status(404).json({"message":"The lists were not found."});
+            return res.status(404).json({"message":"Lists not found."});
         }
 
         res.json({"The normal lists are ": lists});
@@ -72,7 +74,7 @@ router.get('/lists/fav', function(req, res, next){
             return next(err);
         }
         if(lists == null){
-         return res.status(404).json({"message":"The lists were not found."});
+         return res.status(404).json({"message":"Lists not found."});
         }
         res.json({"The favorite lists are ": lists});
     });
@@ -86,7 +88,7 @@ router.get('/lists/:id', function(req, res, next){
             returnnext(err);
         }
         if(list == null){
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+         return res.status(404).json({"message":"List not found"});
         }
         res.json(list);
     });
@@ -100,7 +102,7 @@ router.put('/lists/:id', function(req, res, next){
             return next(err);
         }
         if(list == null) {
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+         return res.status(404).json({"message":"List not found"});
         }
         list.name = req.body.name ;
         list.save();
@@ -117,7 +119,7 @@ router.delete('/lists/:id',function(req,res,next){
             return next(err);
         }
         if (list == null){
-            return res.status(404).json({"message":"Unfortunately the list was not found"});
+            return res.status(404).json({"message":"List not found"});
         }
         res.json.list;    
     }
@@ -131,25 +133,23 @@ router.get('/lists/:id/tasks', function(req, res, next){
             return next(err);
         }
         if(list == null){
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+         return res.status(404).json({"message":"List not found"});
         }
-        
-         res.json(list.tasks)
-    
+        res.json(list.tasks)
     });
 });
 
 //Show the items of a certain favororite list 
 router.get('/lists/:id/item', function(req, res, next){
     var id = req.params.id;
-    List.findById({ _id : id }).populate('items').exec(function(err,item){
+    List.findById({ _id : id }).populate('items').exec(function(err,list){
         if(err){ 
             return next(err);
         }
-        if(itemt == null){
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        if(list == null){
+         return res.status(404).json({"message":"List not found"});
         }
-         res.json(list.items)
+        res.json(list.items)
     });
 });
 
