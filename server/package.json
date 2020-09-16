@@ -23,10 +23,12 @@
     "url": "git+https://gitlab.com/dit341/group-00-web.git"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "connect-history-api-fallback": "^1.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "mongoose": "^5.10.0",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0"

@@ -15,12 +15,12 @@ router.post('/lists/tasks',function(req,res,next){
 
 
 //View all tasks
-router.get('/lists/tasks', function (req,res,next){
+router.get('/lists/tasks', function (req, res, next){
     Task.find(function (err, tasks){
         if(err){
             return next(err);
         }
-        res.json({"tasks" : tasks})
+        res.status(200).json({"tasks" : tasks})
     });
 });
 

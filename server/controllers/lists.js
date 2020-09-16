@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 var List = require('../models/list');
 var Task = require('../models/task');
 var Item = require('../models/item');
@@ -14,7 +15,7 @@ router.post('/lists',function(req,res,next){
     list.save(function(err){
         if(err){
              return next(err);
-            }
+        }
         res.status(201).json(list);
     });
 });
@@ -53,7 +54,7 @@ router.get('/lists/:id', function(req, res, next){
     var id = req.params.id;
     List.findById(id,function(err, list){
         if(err){ 
-            returnnext(err);
+            return next(err);
         }
         if(list == null){
          return res.status(404).json({"message":"List not found."});
@@ -80,7 +81,7 @@ router.put('/lists/:id', function(req, res, next){
 
 
 //Delete a certain list 
-router.delete('/lists/:id',function(req,res,next){
+router.delete('/lists/:id',function(req, res, next){
     var id = req.params.id;
     List.findOneAndDelete({_id : id },function(err,list){
         if (err){
