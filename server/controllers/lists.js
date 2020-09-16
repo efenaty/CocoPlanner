@@ -75,7 +75,7 @@ router.put('/lists/:id', function(req, res, next){
         }
         list.name = req.body.name ;
         list.save();
-        res.status(200).json(list);
+        res.json(list);
     });
 });
 
@@ -148,6 +148,52 @@ router.get('/lists/:id/tasks', function(req, res, next){
          res.status(200).json(list.tasks)
     });
 });
+
+
+//Sort the tasks of a certain list by name
+router.get('/lists/:id/tasks/sortbyName', function(req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate({path: 'tasks', options: { sort: { name: 1 } } }).exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"List not found."});
+        }
+         res.status(200).json(list.tasks)
+    })
+});
+
+
+
+//Sort the tasks of a certain list by name and startDate
+router.get('/lists/:id/tasks/sortbyNameandStartDate', function(req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate({path: 'tasks', options: { sort: { name: 1, startDate: 1 } } }).exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"List not found."});
+        }
+         res.status(200).json(list.tasks)
+    })
+});
+
+// //sort
+// router.get("/lists/:id/tasks/sortbyname").get(function(req, res, next) {
+//     detail
+//       .find({}, function(err, result) {
+//         if (err) {
+//           return next(err);
+//         } else {
+//           res.json(result);
+//         }
+//       })
+//       .sort({ name : 1});
+//   });
+  
+
 
 
 //Show the items of a certain favorite list 
