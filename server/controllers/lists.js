@@ -3,6 +3,7 @@ var router = express.Router();
 var List = require('../models/list');
 var Task = require('../models/task');
 var Item = require('../models/item');
+const list = require('../models/list');
 /*const { route } = require('./items');
 const { route } = require('./tasks');*/
 
@@ -102,13 +103,13 @@ router.post('/lists/:id/tasks',function(req,res,next){
         if(err){
              return next(err);
             }
-        List.findByIdAndUpdate({_id : req.params.id} , {tasks : task._id} , {new : true},function(err){
+        List.findByIdAndUpdate(id, { $push: { tasks: task } }).exec(function(err){
             if(err){
                 return next(err);
                };
               task.list = id;
               task.save();
-               res.status(201).json(task);  
+              res.status(201).json(task);  
             });
 });
 });
@@ -121,7 +122,7 @@ router.post('/lists/:id/items',function(req,res,next){
         if(err){
              return next(err);
             }
-        List.findByIdAndUpdate({_id : req.params.id} , {items : item._id} , {new : true},function(err){
+        List.findByIdAndUpdate(id, { $push: { items: item } }).exec(function(err){
             if(err){
                 return next(err);
                };
@@ -147,6 +148,7 @@ router.get('/lists/:id/tasks', function(req, res, next){
     });
 });
 
+
 //Show the items of a certain favorite list 
 router.get('/lists/:id/items', function(req, res, next){
     var id = req.params.id;
@@ -161,6 +163,7 @@ router.get('/lists/:id/items', function(req, res, next){
     });
 });
 
+
 //Show the specific task of a list
 router.get('/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
@@ -169,19 +172,48 @@ router.get('/lists/:id/tasks/:task_id', function(req, res, next){
             return next(err);
         }
         if(list == null){
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+         return res.status(404).json({"message":"List not found."});
         }
         var array = [];
         for ( i=0 ; i<list.tasks.length ; i++){
             if(list.tasks[i]._id == req.params.task_id)
             array.push(list.tasks[i]);
         }
-    res.json(array);
+    res.status(200).json(array);
     });
 });
 
 
+//delete a certain task in a certain list
+router.delete('/lists/:id/items/:item_id', function(req, res, next){
+        var id = req.params.id;
+        var item_id = req.params.item_id;
 
+        List.update({ _id: id }, { "$pull": { "items": { "item": item_id } }}, { safe: true, multi:true }, function(err, list) {
+            //do something smart
+            if(err){
+                return next(err);
+            };
+            if(list == null){
+                return res.status(404).json({"message":"List not found."});
+               }
+            res.status(200).json(item);  
+            
+        });
+
+    });
+    //     tasks.update(function(err){
+    //         if(err){
+    //              return next(err);
+    //             }
+    //         List.findByIdAndUpdate(id, { $pull: { items: { item._id = item_id } }}).exec(function(err){
+    //             if(err){
+    //                 return next(err);
+    //                };
+    //                res.status(201).json(item);  
+    //             });
+    // });
+    // });
 
 
 
