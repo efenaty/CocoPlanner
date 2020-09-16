@@ -278,6 +278,14 @@ router.get('/lists/:id/tasks/:task_id', function(req, res, next){
             index = list.tasks.indexOf(task_id);
             list.tasks.splice(index,1);
             list.save();
+        Task.findByIdAndDelete({_id : task_id} , function(err,task){
+            if (err) {
+                return next(err);
+            }
+            if (list == null){
+                return res.status(404).json({"message":"Task not found."});
+            }   
+        })
             res.status(200).json(list.tasks);
         });
         });
@@ -298,9 +306,17 @@ router.get('/lists/:id/tasks/:task_id', function(req, res, next){
             index = list.items.indexOf(item_id);
             list.items.splice(index,1);
             list.save();
+            Item.findByIdAndDelete({_id : item_id} , function(err,item){
+                if (err) {
+                    return next(err);
+                }
+                if (item == null){
+                    return res.status(404).json({"message":"Item not found."});
+                }  
             res.status(200).json(list.items);
         });
         });
+    });
 
 //Update a task
 router.patch('/lists/:id/tasks/:task_id', function (req, res, next){
@@ -348,10 +364,6 @@ router.patch('/lists/:id/items/:item_id', function (req, res, next){
         res.json(array[0]);
     });
 });
-
-    
-
-
 
 
 module.exports = router;
