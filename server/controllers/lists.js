@@ -75,7 +75,7 @@ router.put('/lists/:id', function(req, res, next){
         }
         list.name = req.body.name ;
         list.save();
-        res.json(list);
+        res.status(200).json(list);
     });
 });
 
