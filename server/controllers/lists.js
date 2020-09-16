@@ -31,7 +31,7 @@ router.get('/lists', function(req, res, next){
             return res.status(404).json({"message":"Lists not found."});
         }
 
-        res.status(200).json({"The normal lists are ": lists});
+        res.status(200).json({"Your lists are": lists});
     });
 });
 
@@ -42,9 +42,9 @@ router.get('/lists/fav', function(req, res, next){
             return next(err);
         }
         if(lists == null){
-         return res.status(404).json({"message":"The lists were not found."});
+         return res.status(404).json({"message":"Lists not found."});
         }
-        res.status(200).json({"The favorite lists are ": lists});
+        res.status(200).json({"Your favorite lists are": lists});
     });
 });
 
@@ -56,7 +56,7 @@ router.get('/lists/:id', function(req, res, next){
             returnnext(err);
         }
         if(list == null){
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+         return res.status(404).json({"message":"List not found."});
         }
         res.status(200).json(list);
     });
@@ -70,7 +70,7 @@ router.put('/lists/:id', function(req, res, next){
             return next(err);
         }
         if(list == null) {
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+         return res.status(404).json({"message":"List not found."});
         }
         list.name = req.body.name ;
         list.save();
@@ -87,7 +87,7 @@ router.delete('/lists/:id',function(req,res,next){
             return next(err);
         }
         if (list == null){
-            return res.status(404).json({"message":"Unfortunately the list was not found"});
+            return res.status(404).json({"message":"List not found."});
         }
         res.status(200).json(list);    
     });
@@ -184,38 +184,19 @@ router.get('/lists/:id/tasks/:task_id', function(req, res, next){
 });
 
 
-//delete a certain task in a certain list
-router.delete('/lists/:id/items/:item_id', function(req, res, next){
-        var id = req.params.id;
-        var item_id = req.params.item_id;
-
-        List.update({ _id: id }, { "$pull": { "items": { "item": item_id } }}, { safe: true, multi:true }, function(err, list) {
-            //do something smart
-            if(err){
-                return next(err);
-            };
-            if(list == null){
-                return res.status(404).json({"message":"List not found."});
-               }
-            res.status(200).json(item);  
-            
-        });
-
+router.delete('/lists/:id/tasks/:task_id', function(req, res, next){
+    var id = req.params.id;
+    var task_id = req.params.task_id;
+    List.findOneAndUpdate({_id : id} , {$pull: { tasks: {_id : task_id}}}, {new: true, multi: true, safe: true}, function(err, data){
+        if (err) {
+            return next(err);
+        }
+        if (task == null){
+            return res.status(404).json({"message":"Task not found."});
+        }
+        res.status(200).json(task);
     });
-    //     tasks.update(function(err){
-    //         if(err){
-    //              return next(err);
-    //             }
-    //         List.findByIdAndUpdate(id, { $pull: { items: { item._id = item_id } }}).exec(function(err){
-    //             if(err){
-    //                 return next(err);
-    //                };
-    //                res.status(201).json(item);  
-    //             });
-    // });
-    // });
-
-
+    });
 
 
 module.exports = router;
