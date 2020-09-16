@@ -202,7 +202,7 @@ router.get('/lists/:id/tasks/:task_id', function(req, res, next){
     });
 });
 
-router.delete('/lists/:id/tasks/:task_id', function(req, res, next){
+/*router.delete('/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
     var task_id = req.params.task_id;
     List.findOneAndUpdate({_id : id} , {$pull: { tasks: {_id : task_id}}}, {new: true, multi: true, safe: true}, function(err, data){
@@ -214,7 +214,26 @@ router.delete('/lists/:id/tasks/:task_id', function(req, res, next){
         }
         res.status(200).json(task);
     });
-    });
+    });*/
+
+    //Delete a task in the list 
+    router.delete('/lists/:id/tasks/:task_id', function(req, res, next){
+        var id = req.params.id;
+        const task_id = req.params.task_id;
+        List.findOne({_id : id} , function(err, list){
+            if (err) {
+                return next(err);
+            }
+            if (list == null){
+                return res.status(404).json({"message":"Task not found."});
+            }
+            var index;
+            index = list.tasks.indexOf(task_id);
+            list.tasks.splice(index,1);
+            list.save();
+            res.status(200).json(list.tasks);
+        });
+        });
 
 
 module.exports = router;
