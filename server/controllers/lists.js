@@ -317,10 +317,10 @@ router.patch('/lists/:id/tasks/:task_id', function (req, res, next){
             if(list.tasks[i]._id == req.params.task_id)
             array.push(list.tasks[i]);
         }
-        array[0].name=(req.params.name || body.name);
-        array[0].startDate=(req.params.startDate || body.startDate);
-        array[0].endDate=(req.params.endDate || body.ensDate);
-        array[0].save;
+        array[0].name=(req.body.name || array[0].name);
+        array[0].startDate=(req.body.startDate || array[0].startDate);
+        array[0].endDate=(req.body.endDate || array[0].endDate);
+        array[0].save();
         res.json(array[0]);
     });
 });
