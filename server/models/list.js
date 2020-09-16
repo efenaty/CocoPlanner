@@ -9,7 +9,7 @@ var listSchema = new Schema({
     name : { type : String , required : true },
     is_favorite_list : { type : Boolean },
     user : { type : Schema.Types.ObjectId , ref : User} ,
-    tasks : [{ type : Schema.Types.ObjectID , ref : Task}],
+    tasks : [{ type : Schema.Types.ObjectId , ref : Task}],
     items : [{ type : Schema.Types.ObjectId , ref : Item}]
 });
  module.exports = mongoose.model('lists', listSchema); 
