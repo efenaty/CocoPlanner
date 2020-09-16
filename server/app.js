@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
+var session = require('express-session');
 var history = require('connect-history-api-fallback');
 const { isDate } = require('util');
 
@@ -57,6 +58,8 @@ app.use(usersController);
 app.use(listsController);
 app.use(tasksController);
 app.use(itemsController);
+
+app.use(session({secret: "myesdvbjvbvdsjvgxn23344", resave: false, saveUninitialized:true}))
 
 
 // Catch all non-error handler for api (i.e., 404 Not Found)

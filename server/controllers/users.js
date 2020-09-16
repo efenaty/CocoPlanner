@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcrypt');
 var User = require('../models/user');
 
 
@@ -17,21 +18,36 @@ router.post('/users', function(req, res, next){
 
  //Loging in
 router.post('/login', function (req, res, next){
-    var email = req.body.email;
+    var username = req.body.username;
     var password = req.body.password;
-    User.findOne({email: password}, function (err, user){
-        if (err) {
+    User.findOne({username: username}, function (err, user){
+        if(err){
             return next(err);
         }
-        if(user){
-            res.status(200).json({"message" : "Login successful."});
-        }
-        if(user === null) {
-            return res.status(404).json({"message" : "User not found."});
-        }
-    });
+        user.comparePassword(password, function (err, isMatch){
+            if (err){
+                return next(err);
+            }
+        })
+            
+        
+        //req.session.user = user;
+        res.status(200).json(user);
+    
+         });
     
 });
+
+
+// router.get('/dashboard', function (req,res){
+//     if(!req.session.user){
+//         return res.status(401).json({"message": "Sorry, you are not logged in"});
+//     }
+
+//     return res.status(200).send("Welcome to COcoPlannerr");
+
+
+// });
 
 
 // //Get all users (for testing)

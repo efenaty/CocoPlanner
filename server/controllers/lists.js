@@ -14,7 +14,7 @@ router.post('/lists',function(req,res,next){
     list.save(function(err){
         if(err){
              return next(err);
-            }
+        }
         res.status(201).json(list);
     });
 });
@@ -30,7 +30,7 @@ router.post('/lists/:id/task',function(req,res,next){
         List.findByIdAndUpdate({_id : req.params.id} , {tasks : task._id} , {new : true},function(err){
             if(err){
                 return next(err);
-               };
+            };
                res.json(task);  
             });
 });
@@ -85,7 +85,7 @@ router.get('/lists/:id', function(req, res, next){
     var id = req.params.id;
     List.findById(id,function(err, list){
         if(err){ 
-            returnnext(err);
+            return next(err);
         }
         if(list == null){
          return res.status(404).json({"message":"List not found"});
@@ -112,17 +112,17 @@ router.put('/lists/:id', function(req, res, next){
 
 
 //Delete a certain list 
-router.delete('/lists/:id',function(req,res,next){
+router.delete('/lists/:id',function(req, res, next){
     var id = req.params.id;
-    List.findOneAndDelete({_id : id }),function(err,list){
+    List.findOneAndDelete({_id: id},function(err,list){
         if (err){
             return next(err);
         }
         if (list == null){
-            return res.status(404).json({"message":"List not found"});
+            return res.status(404).json({"message" :"List not found"});
         }
-        res.json.list;    
-    }
+        res.json(list);    
+    });
 });
 
 //Show the tasks of a certain list
