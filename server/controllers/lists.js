@@ -256,4 +256,32 @@ router.get('/lists/:id/tasks/:task_id', function(req, res, next){
         });
         });
 
+//Update a task
+router.patch('/lists/:id/tasks/:task_id', function (req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate('tasks').exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+        var array = [];
+        for ( i=0 ; i<list.tasks.length ; i++){
+            if(list.tasks[i]._id == req.params.task_id)
+            array.push(list.tasks[i]);
+        }
+        array[0].name=(req.params.name || body.name);
+        array[0].startDate=(req.params.startDate || body.startDate);
+        array[0].endDate=(req.params.endDate || body.ensDate);
+        array[0].save;
+        res.json(array[0]);
+    });
+});
+
+    
+
+
+
+
 module.exports = router;
