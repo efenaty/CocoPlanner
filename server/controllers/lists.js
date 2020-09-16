@@ -114,7 +114,8 @@ router.post('/lists/:id/tasks',function(req,res,next){
 });
  
 //Add an item to a list 
-router.post('/lists/:id/item',function(req,res,next){
+router.post('/lists/:id/items',function(req,res,next){
+    var id = req.params.id;
     var item = new Item(req.body);
     item.save(function(err){
         if(err){
@@ -124,7 +125,9 @@ router.post('/lists/:id/item',function(req,res,next){
             if(err){
                 return next(err);
                };
-               res.json(item);  
+               item.list = id;
+               item.save();
+               res.status(201).json(item);  
             });
 });
 });
@@ -138,25 +141,23 @@ router.get('/lists/:id/tasks', function(req, res, next){
             return next(err);
         }
         if(list == null){
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+         return res.status(404).json({"message":"List not found."});
         }
-        
-         res.json(list.tasks)
-    
+         res.status(200).json(list.tasks)
     });
 });
 
-//Show the items of a certain favororite list 
-router.get('/lists/:id/item', function(req, res, next){
+//Show the items of a certain favorite list 
+router.get('/lists/:id/items', function(req, res, next){
     var id = req.params.id;
-    List.findById({ _id : id }).populate('items').exec(function(err,item){
+    List.findById({ _id : id }).populate('items').exec(function(err,list){
         if(err){ 
             return next(err);
         }
-        if(itemt == null){
-         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        if(list == null){
+         return res.status(404).json({"message":"List not found."});
         }
-         res.json(list.items)
+         res.status(200).json(list.items)
     });
 });
 
