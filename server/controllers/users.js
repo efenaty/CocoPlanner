@@ -122,7 +122,7 @@ router.delete('/users/:id', function(req, res, next){
     if (user == null){
     return res.status(404).json({"message": "User not found."});
     }
-    res.status(200).json(user);
+    res.status(204).json(user);
     });
     });
 

@@ -337,7 +337,7 @@ router.patch('/lists/:id/tasks/:task_id', function (req, res, next){
         array[0].startDate=(req.body.startDate || array[0].startDate);
         array[0].endDate=(req.body.endDate || array[0].endDate);
         array[0].save();
-        res.json(array[0]);
+        res.status(200).json(array[0]);
     });
 });
 
