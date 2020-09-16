@@ -325,6 +325,30 @@ router.patch('/lists/:id/tasks/:task_id', function (req, res, next){
     });
 });
 
+
+//Update an item
+router.patch('/lists/:id/items/:item_id', function (req, res, next){
+    var id = req.params.id;
+    List.findById({ _id : id }).populate('items').exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+        var array = [];
+        for ( i=0 ; i<list.items.length ; i++){
+            if(list.items[i]._id == req.params.item_id)
+            array.push(list.items[i]);
+        }
+        array[0].name=(req.body.name || array[0].name);
+        array[0].review=(req.body.review|| array[0].review);
+        array[0].rating=(req.body.rating || array[0].rating);
+        array[0].save();
+        res.json(array[0]);
+    });
+});
+
     
 
 
