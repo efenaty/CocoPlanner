@@ -5,7 +5,7 @@ var User = require('../models/user');
 
 
 //Create a new user or sign up
-router.post('api/users', function(req, res, next){
+router.post('/api/users', function(req, res, next){
     var user = new User(req.body);
     user.save(function(err) {
     if (err) {
@@ -17,7 +17,7 @@ router.post('api/users', function(req, res, next){
 
 
  //Logging in
-router.post('api/login', function (req, res, next){
+router.post('/api/login', function (req, res, next){
     var username = req.body.username;
     var password = req.body.password;
 
@@ -58,7 +58,7 @@ router.post('api/login', function (req, res, next){
 
 
     //Update all user's information
-router.put("api/users/:id" , function(req, res, next){
+router.put("/api/users/:id" , function(req, res, next){
     var id = req.params.id;
     User.findById(id, function(err , user ){
         if (err){
@@ -78,7 +78,7 @@ router.put("api/users/:id" , function(req, res, next){
 
 
 //Update any of user's information
-router.patch("api/users/:id" , function(req, res, next){
+router.patch("/api/users/:id" , function(req, res, next){
     var id = req.params.id;
     User.findById(id, function(err , user ){
         if (err){
@@ -97,7 +97,7 @@ router.patch("api/users/:id" , function(req, res, next){
 })
 
 //Delete a specific user 
-router.delete('api/users/:id', function(req, res, next){
+router.delete('/api/users/:id', function(req, res, next){
     var id = req.params.id;
     User.findOneAndDelete({_id: id}, function(err, user){
     if (err){ 

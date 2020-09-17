@@ -10,7 +10,7 @@ const { route } = require('./tasks');*/
 
 
 //Create a list 
-router.post('api/lists',function(req,res,next){
+router.post('/api/lists',function(req,res,next){
     var list = new List(req.body);
     list.save(function(err){
         if(err){
@@ -22,7 +22,7 @@ router.post('api/lists',function(req,res,next){
 
 
 //Show all the normal lists 
-router.get('api/lists', function(req, res, next){
+router.get('/api/lists', function(req, res, next){
     List.find({ is_favorite_list : false },function(err, lists){
         if(err){
             return next(err);
@@ -37,7 +37,7 @@ router.get('api/lists', function(req, res, next){
 });
 
 //Show all the favorite lists
-router.get('api/lists/fav', function(req, res, next){
+router.get('/api/lists/fav', function(req, res, next){
     List.find({ is_favorite_list : true },function(err, lists){
         if(err){
             return next(err);
@@ -50,7 +50,7 @@ router.get('api/lists/fav', function(req, res, next){
 });
 
 //Show a certain list
-router.get('api/lists/:id', function(req, res, next){
+router.get('/api/lists/:id', function(req, res, next){
     var id = req.params.id;
     List.findById(id,function(err, list){
         if(err){ 
@@ -64,7 +64,7 @@ router.get('api/lists/:id', function(req, res, next){
 });
 
 //Change the list type
-router.put('api/lists/:id', function(req, res, next){
+router.put('/api/lists/:id', function(req, res, next){
     var id = req.params.id;
     List.findById(id,function(err, list){
         if(err){ 
@@ -81,7 +81,7 @@ router.put('api/lists/:id', function(req, res, next){
 
 
 //Delete a certain list 
-router.delete('api/lists/:id',function(req, res, next){
+router.delete('/api/lists/:id',function(req, res, next){
     var id = req.params.id;
     List.findOneAndDelete({_id : id },function(err,list){
         if (err){
@@ -97,7 +97,7 @@ router.delete('api/lists/:id',function(req, res, next){
 
 //Add a task to a list
 //Source : https://kb.objectrocket.com/mongo-db/how-to-join-collections-using-mongoose-228 
-router.post('api/lists/:id/tasks',function(req,res,next){
+router.post('/api/lists/:id/tasks',function(req,res,next){
     var id = req.params.id;
     var task = new Task(req.body);
     task.save(function(err){
@@ -116,7 +116,7 @@ router.post('api/lists/:id/tasks',function(req,res,next){
 });
  
 //Add an item to a list 
-router.post('api/lists/:id/items',function(req,res,next){
+router.post('/api/lists/:id/items',function(req,res,next){
     var id = req.params.id;
     var item = new Item(req.body);
     item.save(function(err){
@@ -136,7 +136,7 @@ router.post('api/lists/:id/items',function(req,res,next){
 
 
 //Show the tasks of a certain list
-router.get('api/lists/:id/tasks', function(req, res, next){
+router.get('/api/lists/:id/tasks', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
@@ -151,7 +151,7 @@ router.get('api/lists/:id/tasks', function(req, res, next){
 
 
 //Sort the tasks of a certain list by name
-router.get('api/lists/:id/tasks/sortbyName', function(req, res, next){
+router.get('/api/lists/:id/tasks/sortbyName', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate({path: 'tasks', options: { sort: { name: 1 } } }).exec(function(err,list){
         if(err){ 
@@ -167,7 +167,7 @@ router.get('api/lists/:id/tasks/sortbyName', function(req, res, next){
 
 
 //Sort the tasks of a certain list by name and startDate
-router.get('api/lists/:id/tasks/sortbyNameandStartDate', function(req, res, next){
+router.get('/api/lists/:id/tasks/sortbyNameandStartDate', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate({path: 'tasks', options: { sort: { name: 1, startDate: 1 } } }).exec(function(err,list){
         if(err){ 
@@ -197,7 +197,7 @@ router.get('api/lists/:id/tasks/sortbyNameandStartDate', function(req, res, next
 
 
 //Show the items of a certain favorite list 
-router.get('api/lists/:id/items', function(req, res, next){
+router.get('/api/lists/:id/items', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('items').exec(function(err,list){
         if(err){ 
@@ -212,7 +212,7 @@ router.get('api/lists/:id/items', function(req, res, next){
 
 
 //Show the specific task of a list
-router.get('api/lists/:id/tasks/:task_id', function(req, res, next){
+router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
@@ -231,7 +231,7 @@ router.get('api/lists/:id/tasks/:task_id', function(req, res, next){
 });
 
 //Show the specific task of a  list
-router.get('api/lists/:id/tasks/:task_id', function(req, res, next){
+router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
@@ -264,7 +264,7 @@ router.get('api/lists/:id/tasks/:task_id', function(req, res, next){
     });*/
 
     //Delete a task in the list 
-    router.delete('api/lists/:id/tasks/:task_id', function(req, res, next){
+    router.delete('/api/lists/:id/tasks/:task_id', function(req, res, next){
         var id = req.params.id;
         const task_id = req.params.task_id;
         List.findOne({_id : id} , function(err, list){
@@ -291,7 +291,7 @@ router.get('api/lists/:id/tasks/:task_id', function(req, res, next){
         });
 
 
-        router.delete('api/lists/:id/items/:item_id', function(req, res, next){
+        router.delete('/api/lists/:id/items/:item_id', function(req, res, next){
             var id = req.params.id;
             const item_id = req.params.item_id;
             List.findOne({_id : id} , function(err, list){
@@ -319,7 +319,7 @@ router.get('api/lists/:id/tasks/:task_id', function(req, res, next){
     
 
 //Update a task
-router.patch('api/lists/:id/tasks/:task_id', function (req, res, next){
+router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
@@ -343,7 +343,7 @@ router.patch('api/lists/:id/tasks/:task_id', function (req, res, next){
 
 
 //Update an item
-router.patch('api/lists/:id/items/:item_id', function (req, res, next){
+router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('items').exec(function(err,list){
         if(err){ 
