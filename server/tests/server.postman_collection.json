@@ -22,9 +22,9 @@
 									"\r",
 									"pm.test(\"Correct user response\", function() {\r",
 									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.username).to.eql(\"haibara\");\r",
+									"    pm.expect(jsonData.username).to.eql(\"haibara2\");\r",
 									"    pm.expect(jsonData.password).to.eql(\"biochemistry\");\r",
-									"    pm.expect(jsonData.email).to.eql(\"haibara@hotmail.com\");\r",
+									"    pm.expect(jsonData.email).to.eql(\"haibara2@hotmail.com\");\r",
 									"    pm.expect(jsonData.birthDate).to.eql(\"1993-06-12T00:00:00.000Z\");\r",
 									"    \r",
 									"});\r",
@@ -66,7 +66,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \"username\" : \"haibara\",\r\n  \"password\" : \"biochemistry\",\r\n  \"email\" : \"haibara@hotmail.com\",\r\n  \"birthDate\" : \"1993-06-12\" }\r\n"
+							"raw": "{ \"username\" : \"haibara2\",\r\n  \"password\" : \"biochemistry\",\r\n  \"email\" : \"haibara2@hotmail.com\",\r\n  \"birthDate\" : \"1993-06-12\" }\r\n"
 						},
 						"url": {
 							"raw": "{{host}}/users",
@@ -1867,7 +1867,7 @@
 		{
 			"id": "cd185905-a834-4211-8030-583d17702534",
 			"key": "host",
-			"value": "http://localhost:3000",
+			"value": "http://localhost:3001",
 			"type": "string"
 		}
 	],
