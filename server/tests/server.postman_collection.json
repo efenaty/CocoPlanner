@@ -1,9 +1,77 @@
 {
 	"info": {
-		"_postman_id": "1fca6a10-3ddb-4798-9b32-18af477debfa",
+		"_postman_id": "f7ee95b5-9cb9-442f-a6a9-42de46138872",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
+	"item": [
+		{
+			"name": "GET /api",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b58d92ec-5214-450c-adb0-28e068aa71b9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "05864cff-5cba-4070-bac3-a59328954ebf",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "e9c319be-3306-4fc5-ba34-fcf64391213a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "cd185905-a834-4211-8030-583d17702534",
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	],
+
 	"item": [
 		{
 			"name": "Users.js",
@@ -1597,7 +1665,7 @@
 							"raw": "{\"name\" : \"clean the bathroom\"}"
 						},
 						"url": {
-							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/5f63cd76df19fe1878482d88",
 							"host": [
 								"{{host}}"
 							],
@@ -1847,14 +1915,6 @@
 				}
 			],
 			"protocolProfileBehavior": {}
-		}
-	], 
-           "variable": [
-		{
-			"id": "cd185905-a834-4211-8030-583d17702534",
-			"key": "host",
-			"value": "http://localhost:3000",
-			"type": "string"
 		}
 	],
 	"protocolProfileBehavior": {}
