@@ -71,5 +71,1780 @@
 			"type": "string"
 		}
 	],
+
+	"item": [
+		{
+			"name": "Users.js",
+			"item": [
+				{
+					"name": "Create a User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9c46a9a8-5711-4f4d-99a5-9ee4ae698a3e",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.username).to.eql(\"haibara1\");\r",
+									"    pm.expect(jsonData.password).to.eql(\"biochemistry\");\r",
+									"    pm.expect(jsonData.email).to.eql(\"haibara1@hotmail.com\");\r",
+									"    pm.expect(jsonData.birthDate).to.eql(\"1993-06-12T00:00:00.000Z\");\r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "caad07b3-67f4-4a30-9389-aa845ec71117",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\" : \"haibara\",\r\n  \"password\" : \"biochemistry\",\r\n  \"email\" : \"haibara@hotmail.com\",\r\n  \"birthDate\" : \"1993-06-12\" }\r\n"
+						},
+						"url": {
+							"raw": "{{host}}/api/users",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a User's information (All)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "35936b7a-8e46-44b4-9eba-12db80966eb9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "0aa4ff4a-a65b-499c-ae7c-8b6b0cdc1ad3",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.username).to.eql(\"aerith\");\r",
+									"    pm.expect(jsonData.password).to.eql(\"flowergirl\");\r",
+									"    pm.expect(jsonData.email).to.eql(\"aerithflower@hotmail.com\");\r",
+									"    pm.expect(jsonData.birthDate).to.eql(\"1985-02-07T00:00:00.000Z\");\r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\" : \"aerith\",\r\n  \"password\" :\"flowergirl\",\r\n    \"email\": \"aerithflower@hotmail.com\",\r\n    \"birthDate\": \"1985-02-07\"\r\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/users/5f6376856d60b14b603cc4e7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"5f6376856d60b14b603cc4e7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a User's username",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "565751b6-6b9e-407b-ae4f-03e10984cf23",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ad0ab22-7502-445e-97f7-cdb08a8bc81e",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.username).to.eql(\"aerithpower\");\r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\" : \"aerithpower\"}"
+						},
+						"url": {
+							"raw": "{{host}}/api/users/5f6376856d60b14b603cc4e7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"5f6376856d60b14b603cc4e7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a User's email",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b65b1c98-d553-4822-9632-ff1a2b8dd615",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "f53558f1-0922-42e3-b83f-3351b18c433e",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.email).to.eql(\"flower123@hotmail.com\");\r",
+									"\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"email\" : \"flower123@hotmail.com\"\r\n  }"
+						},
+						"url": {
+							"raw": "{{host}}/api/5f6376856d60b14b603cc4e7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"5f6376856d60b14b603cc4e7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a User's password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3118f081-1686-4fb4-add5-4de888f19417",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e30e7bcd-d8ba-4d0e-b0c0-1083e47faa77",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.password).to.eql(\"bestflowergirl\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"password\" : \"bestflowergirl\" }"
+						},
+						"url": {
+							"raw": "{{host}}/api/users/5f6376856d60b14b603cc4e7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"5f6376856d60b14b603cc4e7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a User's birthdate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "f480ee60-e48f-4432-9209-aac08d33e0b7",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "cfe28554-25d7-4515-a49a-11857eebd82f",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.birthDate).to.eql(\"1985-02-07T00:00:00.000Z\");\r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true,
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"birthDate\" : \"1985-02-07\" }"
+						},
+						"url": {
+							"raw": "{{host}}/api/users/5f6376856d60b14b603cc4e7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"5f6376856d60b14b603cc4e7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fccce305-2b75-42eb-bc76-d1a362afe482",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/5f638d8548943d5c68a2f598",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"5f638d8548943d5c68a2f598"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Lists.js",
+			"item": [
+				{
+					"name": "Create a List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e2d165e0-60f8-41f0-9f95-27b78c927575",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"To-draw list\");\r",
+									"    pm.expect(jsonData.is_favorite_list).to.eql(false);\r",
+									"    pm.expect(jsonData.user).to.eql(\"5f6375f06d60b14b603cc4e4\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\" : \"To-draw list\",\r\n  \"is_favorite_list\" : \"false\",\r\n  \"user\" : \"5f6375f06d60b14b603cc4e4\"}\r\n"
+						},
+						"url": {
+							"raw": "{{host}}/api/lists",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Favorite List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "33add156-c7cb-41cb-a24e-57b4e8fffd2b",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"Books\");\r",
+									"    pm.expect(jsonData.is_favorite_list).to.eql(true);\r",
+									"    pm.expect(jsonData.user).to.eql(\"5f6376286d60b14b603cc4e5\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\" : \"Books\",\r\n  \"is_favorite_list\" : \"true\",\r\n   \"user\" : \"5f6376286d60b14b603cc4e5\"}\r\n"
+						},
+						"url": {
+							"raw": "{{host}}/api/lists",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show all Normal Lists ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e0e60c8d-d57e-4913-8a8e-683a716486bd",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/lists",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show all Favorite Lists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d0a0ba86-2c8a-4c7f-a2d6-a181c78c6256",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/fav",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"fav"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show a certain Normal List",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "db3fd4fa-934f-4261-8278-03b5965675c3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "5631d40a-56fd-4266-9688-e492a8e84aa7",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f59b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show a certain Normal List that doesn't exist",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "da96bd1b-748e-41b9-9569-6f9bec52828b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e61d3366-a588-4c92-89d1-f22f53658203",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f599",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f599"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show a certain Favorite List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "85352ac5-1050-423e-9e95-548f763dfac8",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638ece48943d5c68a2f5a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show a certain Favorite List that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c8264b47-d09b-4ed3-9127-8e9468eb242f",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638ece48943d5c68a2f5a2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change the name of any List / Favorite List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8c0fd097-23de-4055-b1ad-efcbab3da909",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"my epic fav rock bands\");\r",
+									"    \r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\" : \"my epic fav rock bands\"}",
+							"options": {
+								"raw": {}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638ece48943d5c68a2f5a1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete any List / Favorite List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3048f1d3-cdb1-4547-9505-23113afe640f",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e8248943d5c68a2f59e",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e8248943d5c68a2f59e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete any List / Favorite List that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "274750fb-676b-47e1-8f98-db037ddcab79",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f624d98264a83741cbad6de",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f624d98264a83741cbad6de"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a Task in a List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1c65ed44-43a5-49d1-905d-bc96f4e329df",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"attend a lecture\");\r",
+									"    pm.expect(jsonData.startDate).to.eql(\"2020-11-10T00:00:00.000Z\");\r",
+									"    pm.expect(jsonData.endDate).to.eql(\"2020-11-10T00:00:00.000Z\");\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\" : \"attend a lecture\",\r\n  \"startDate\" : \"2020-11-10\",\r\n  \"endDate\" : \"2020-11-10\" }\r\n"
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f59b",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an Item in a Favorite List Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1464b116-4f8e-4bd7-b6ad-d5e46f96254c",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct user response\", function() {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.name).to.eql(\"RED\");\r",
+									"    pm.expect(jsonData.review).to.eql(\"Great lyrics\");\r",
+									"    pm.expect(jsonData.rating).to.eql(4);\r",
+									"    \r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"name\" : \"RED\",\r\n  \"review\" : \"Great lyrics\",\r\n  \"rating\" : \"4\" }\r\n"
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1/items",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638ece48943d5c68a2f5a1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show the Tasks of a certain List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04c686a7-2df3-4073-8e01-a60d3e7e3296",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f59b",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show the Tasks of a certain List that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e22a4e3e-0683-40bf-8ff7-b617d3f0b0a1",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f624d98264a83741cbad6de/tasks",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f624d98264a83741cbad6de",
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show the Items of a certain Favorite  List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c640023c-08f0-4078-ae8f-e89c16bb8f86",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1/items",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638ece48943d5c68a2f5a1",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show the Items of a certain Favorite List that doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "77f6c2a8-f4bf-49cb-adff-90f97a9ebbcc",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f624d98264a83741cbad6de/items",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f624d98264a83741cbad6de",
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show a Task of a certain List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91493b61-89d1-4355-bce9-cfcd10d195f6",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f59b",
+								"tasks",
+								"5f63ab1cc6247b67c4dafb1c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a Task",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4971dd4b-8d8b-4c1c-8978-1770e97d36a0",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\" : \"clean the bathroom\"}"
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/5f63cd76df19fe1878482d88",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f59b",
+								"tasks",
+								"5f63ab1cc6247b67c4dafb1c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "866f2f07-9796-4970-989c-b12653d4ee74",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\" : \"Shinedown\"}"
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1/items/5f63ab52c6247b67c4dafb1e",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638ece48943d5c68a2f5a1",
+								"items",
+								"5f63ab52c6247b67c4dafb1e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a Task in a List ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0790a2bf-624a-405d-9adb-806b98cdd0a4",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f59b",
+								"tasks",
+								"5f63ab1cc6247b67c4dafb1c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Item in a Favorite List",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0af83f09-c5d0-4252-b78e-9274a8f89eba",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1/items/5f63ab52c6247b67c4dafb1e",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638ece48943d5c68a2f5a1",
+								"items",
+								"5f63ab52c6247b67c4dafb1e"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Lists.js for Sorting",
+			"item": [
+				{
+					"name": "Sort a List by name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d04b691-0171-4315-8fd7-1b6071cdd8d2",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/sortbyName",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f59b",
+								"tasks",
+								"sortbyName"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sort a List by name and start date",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b4abd6f-0e25-42c4-b379-f8d70f25c0ed",
+								"exec": [
+									"pm.test(\"Correct status code\", function() { \r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/sortbyNameandStartDate",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"lists",
+								"5f638e5548943d5c68a2f59b",
+								"tasks",
+								"sortbyNameandStartDate"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
 	"protocolProfileBehavior": {}
 }
