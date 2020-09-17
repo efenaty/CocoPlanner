@@ -16,7 +16,7 @@ router.post('/users', function(req, res, next){
 });
 
 
- //Loging in
+ //Logging in
 router.post('/login', function (req, res, next){
     var username = req.body.username;
     var password = req.body.password;
@@ -29,8 +29,6 @@ router.post('/login', function (req, res, next){
                 return next(err);
             }
         })
-            
-        
         //req.session.user = user;
         res.status(200).json(user);
     
@@ -44,35 +42,9 @@ router.post('/login', function (req, res, next){
 //         return res.status(401).json({"message": "Sorry, you are not logged in"});
 //     }
 
-//     return res.status(200).send("Welcome to COcoPlannerr");
-
-
+//     return res.status(200).send("Welcome to CoCoPlanner");
 // });
 
-
-// //Get all users (for testing)
-// router.get('/users', function(req, res, next){
-//     User.find(function(err, users){
-//         if (err){
-//              return next(err);
-//             }
-//             res.status(200).json({'users': users });
-//         })
-//     });
-
-//Get a specific user
-router.get('/users/:id', function(req, res, next){
-    var id = req.params.id;
-    User.findById(req.params.id, function(err, user){
-        if (err){
-             return next(err);
-            }
-        if (user == null){
-            return res.status(404).json({"message" : "User not found."});
-        }
-        res.status(200).json(user);
-        });
-    });
 
     //Update all user's information
 router.put("/users/:id" , function(req, res, next){
@@ -92,6 +64,7 @@ router.put("/users/:id" , function(req, res, next){
     res.status(200).json(user);
     })
 })
+
 
 //Update any of user's information
 router.patch("/users/:id" , function(req, res, next){
@@ -122,7 +95,7 @@ router.delete('/users/:id', function(req, res, next){
     if (user == null){
     return res.status(404).json({"message": "User not found."});
     }
-    res.status(204).json(user);
+    res.status(200).json(user);
     });
     });
 
