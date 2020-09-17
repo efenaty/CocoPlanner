@@ -22,9 +22,9 @@
 									"\r",
 									"pm.test(\"Correct user response\", function() {\r",
 									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.username).to.eql(\"haibara2\");\r",
+									"    pm.expect(jsonData.username).to.eql(\"haibara\");\r",
 									"    pm.expect(jsonData.password).to.eql(\"biochemistry\");\r",
-									"    pm.expect(jsonData.email).to.eql(\"haibara2@hotmail.com\");\r",
+									"    pm.expect(jsonData.email).to.eql(\"haibara@hotmail.com\");\r",
 									"    pm.expect(jsonData.birthDate).to.eql(\"1993-06-12T00:00:00.000Z\");\r",
 									"    \r",
 									"});\r",
@@ -66,14 +66,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \"username\" : \"haibara2\",\r\n  \"password\" : \"biochemistry\",\r\n  \"email\" : \"haibara2@hotmail.com\",\r\n  \"birthDate\" : \"1993-06-12\" }\r\n"
+							"raw": "{ \"username\" : \"haibara\",\r\n  \"password\" : \"biochemistry\",\r\n  \"email\" : \"haibara@hotmail.com\",\r\n  \"birthDate\" : \"1993-06-12\" }\r\n"
 						},
 						"url": {
-							"raw": "{{host}}/users",
+							"raw": "{{host}}/api/users",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"users"
 							]
 						}
@@ -139,11 +140,12 @@
 							"raw": "{ \r\n  \"username\" : \"CloudStrife\",\r\n  \"password\" : \"soldier1stclass\"\r\n  }"
 						},
 						"url": {
-							"raw": "{{host}}/login",
+							"raw": "{{host}}/api/login",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"login"
 							]
 						}
@@ -211,11 +213,12 @@
 							"raw": "{ \"username\" : \"aerith\",\r\n  \"password\" :\"flowergirl\",\r\n    \"email\": \"aerithflower@hotmail.com\",\r\n    \"birthDate\": \"1985-02-07\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/users/5f6376856d60b14b603cc4e7",
+							"raw": "{{host}}/api/users/5f6376856d60b14b603cc4e7",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"5f6376856d60b14b603cc4e7"
 							]
@@ -281,11 +284,12 @@
 							"raw": "{ \"username\" : \"aerithpower\"}"
 						},
 						"url": {
-							"raw": "{{host}}/users/5f6376856d60b14b603cc4e7",
+							"raw": "{{host}}/api/users/5f6376856d60b14b603cc4e7",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"5f6376856d60b14b603cc4e7"
 							]
@@ -351,12 +355,12 @@
 							"raw": "{ \r\n  \"email\" : \"flower123@hotmail.com\"\r\n  }"
 						},
 						"url": {
-							"raw": "{{host}}/users/5f6376856d60b14b603cc4e7",
+							"raw": "{{host}}/api/5f6376856d60b14b603cc4e7",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"users",
+								"api",
 								"5f6376856d60b14b603cc4e7"
 							]
 						}
@@ -420,11 +424,12 @@
 							"raw": "{ \r\n  \"password\" : \"bestflowergirl\" }"
 						},
 						"url": {
-							"raw": "{{host}}/users/5f6376856d60b14b603cc4e7",
+							"raw": "{{host}}/api/users/5f6376856d60b14b603cc4e7",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"5f6376856d60b14b603cc4e7"
 							]
@@ -490,11 +495,12 @@
 							"raw": "{\r\n  \"birthDate\" : \"1985-02-07\" }"
 						},
 						"url": {
-							"raw": "{{host}}/users/5f6376856d60b14b603cc4e7",
+							"raw": "{{host}}/api/users/5f6376856d60b14b603cc4e7",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"5f6376856d60b14b603cc4e7"
 							]
@@ -544,11 +550,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/users/5f638d8548943d5c68a2f598",
+							"raw": "{{host}}/api/users/5f638d8548943d5c68a2f598",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"5f638d8548943d5c68a2f598"
 							]
@@ -605,11 +612,12 @@
 							"raw": "{ \"name\" : \"To-draw list\",\r\n  \"is_favorite_list\" : \"false\",\r\n  \"user\" : \"5f6375f06d60b14b603cc4e4\"}\r\n"
 						},
 						"url": {
-							"raw": "{{host}}/lists",
+							"raw": "{{host}}/api/lists",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists"
 							]
 						}
@@ -659,11 +667,12 @@
 							"raw": "{ \"name\" : \"Books\",\r\n  \"is_favorite_list\" : \"true\",\r\n   \"user\" : \"5f6376286d60b14b603cc4e5\"}\r\n"
 						},
 						"url": {
-							"raw": "{{host}}/lists",
+							"raw": "{{host}}/api/lists",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists"
 							]
 						}
@@ -711,11 +720,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/lists",
+							"raw": "{{host}}/api/lists",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists"
 							]
 						}
@@ -763,11 +773,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/lists/fav",
+							"raw": "{{host}}/api/lists/fav",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"fav"
 							]
@@ -826,11 +837,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f59b",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f59b"
 							]
@@ -889,11 +901,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f599",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f599",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f599"
 							]
@@ -942,11 +955,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638ece48943d5c68a2f5a1",
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638ece48943d5c68a2f5a1"
 							]
@@ -995,11 +1009,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638ece48943d5c68a2f5a2",
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a2",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638ece48943d5c68a2f5a2"
 							]
@@ -1052,11 +1067,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638ece48943d5c68a2f5a1",
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638ece48943d5c68a2f5a1"
 							]
@@ -1099,11 +1115,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638e8248943d5c68a2f59e",
+							"raw": "{{host}}/api/lists/5f638e8248943d5c68a2f59e",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e8248943d5c68a2f59e"
 							]
@@ -1146,11 +1163,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f624d98264a83741cbad6de",
+							"raw": "{{host}}/api/lists/5f624d98264a83741cbad6de",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f624d98264a83741cbad6de"
 							]
@@ -1201,11 +1219,12 @@
 							"raw": "{ \"name\" : \"attend a lecture\",\r\n  \"startDate\" : \"2020-11-10\",\r\n  \"endDate\" : \"2020-11-10\" }\r\n"
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f59b/tasks",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f59b",
 								"tasks"
@@ -1257,11 +1276,12 @@
 							"raw": "{ \"name\" : \"RED\",\r\n  \"review\" : \"Great lyrics\",\r\n  \"rating\" : \"4\" }\r\n"
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638ece48943d5c68a2f5a1/items",
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1/items",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638ece48943d5c68a2f5a1",
 								"items"
@@ -1310,11 +1330,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f59b/tasks",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f59b",
 								"tasks"
@@ -1363,11 +1384,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f624d98264a83741cbad6de/tasks",
+							"raw": "{{host}}/api/lists/5f624d98264a83741cbad6de/tasks",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f624d98264a83741cbad6de",
 								"tasks"
@@ -1415,11 +1437,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638ece48943d5c68a2f5a1/items",
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1/items",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638ece48943d5c68a2f5a1",
 								"items"
@@ -1467,11 +1490,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f624d98264a83741cbad6de/items",
+							"raw": "{{host}}/api/lists/5f624d98264a83741cbad6de/items",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f624d98264a83741cbad6de",
 								"items"
@@ -1520,11 +1544,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f59b",
 								"tasks",
@@ -1572,11 +1597,12 @@
 							"raw": "{\"name\" : \"clean the bathroom\"}"
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f59b",
 								"tasks",
@@ -1624,11 +1650,12 @@
 							"raw": "{\"name\" : \"Shinedown\"}"
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638ece48943d5c68a2f5a1/items/5f63ab52c6247b67c4dafb1e",
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1/items/5f63ab52c6247b67c4dafb1e",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638ece48943d5c68a2f5a1",
 								"items",
@@ -1675,11 +1702,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/5f63ab1cc6247b67c4dafb1c",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f59b",
 								"tasks",
@@ -1726,58 +1754,16 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/lists/5f638ece48943d5c68a2f5a1/items/5f63ab52c6247b67c4dafb1e",
+							"raw": "{{host}}/api/lists/5f638ece48943d5c68a2f5a1/items/5f63ab52c6247b67c4dafb1e",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638ece48943d5c68a2f5a1",
 								"items",
 								"5f63ab52c6247b67c4dafb1e"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update a task name",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "e11e5f81-8904-466a-b2a8-ba662fd4bcb8",
-								"exec": [
-									"pm.test(\"Correct status code\", function() { ",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{ \"name\" : \"Cook biryani\"}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{host}}/lists/5f61224c7b4881380c3dc412/tasks/5f620731123f2059f889cdf4",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"lists",
-								"5f61224c7b4881380c3dc412",
-								"tasks",
-								"5f620731123f2059f889cdf4"
 							]
 						}
 					},
@@ -1809,11 +1795,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f59b/tasks/sortbyName",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/sortbyName",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f59b",
 								"tasks",
@@ -1843,11 +1830,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/lists/5f638e5548943d5c68a2f59b/tasks/sortbyNameandStartDate",
+							"raw": "{{host}}/api/lists/5f638e5548943d5c68a2f59b/tasks/sortbyNameandStartDate",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"lists",
 								"5f638e5548943d5c68a2f59b",
 								"tasks",
@@ -1860,8 +1848,8 @@
 			],
 			"protocolProfileBehavior": {}
 		}
-	],
-	"variable": [
+	], 
+           "variable": [
 		{
 			"id": "cd185905-a834-4211-8030-583d17702534",
 			"key": "host",
