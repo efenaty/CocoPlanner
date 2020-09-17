@@ -20,19 +20,30 @@ router.post('/users', function(req, res, next){
 router.post('/login', function (req, res, next){
     var username = req.body.username;
     var password = req.body.password;
-    User.findOne({username: username}, function (err, user){
+
+
+    User.findOne({username: username, password: password},function (err,user){
         if(err){
             return next(err);
         }
-        user.comparePassword(password, function (err, isMatch){
-            if (err){
-                return next(err);
-            }
-        })
-        //req.session.user = user;
+        if(!user){
+            res.status(404).json({"message": "User not found."});
+        }
         res.status(200).json(user);
+});
+    // User.findOne({username: username}, function (err, user){
+    //     if(err){
+    //         return next(err);
+    //     }
+    //     user.comparePassword(password, function (err, isMatch){
+    //         if (err){
+    //             return next(err);
+    //         }
+    //     })
+    //     //req.session.user = user;
+    //     res.status(200).json(user);
     
-         });
+    //      });
     
 });
 
