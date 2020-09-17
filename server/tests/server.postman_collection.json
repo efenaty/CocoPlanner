@@ -1769,12 +1769,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/lists/5f61224c7b4881380c3dc412/tasks/5f620731123f2059f889cdf4",
-							"protocol": "http",
+							"raw": "{{host}}/lists/5f61224c7b4881380c3dc412/tasks/5f620731123f2059f889cdf4",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "3000",
 							"path": [
 								"lists",
 								"5f61224c7b4881380c3dc412",
