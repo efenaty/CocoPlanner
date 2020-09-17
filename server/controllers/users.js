@@ -74,9 +74,26 @@ router.get('/users/:id', function(req, res, next){
         });
     });
 
-    
+    //Update all user's information
+router.put("/users/:id" , function(req, res, next){
+    var id = req.params.id;
+    User.findById(id, function(err , user ){
+        if (err){
+             return next(err);
+            }
+        if(user == null) {
+            return res.status(404).json({"message" : "User not found."});
+        }
+    user.username = (req.body.username || user.username);
+    user.password = (req.body.password || user.password);
+    user.email = (req.body.email|| user.email);
+    user.birthDate = (req.body.birthDate || user.birthDate);
+    user.save();
+    res.status(200).json(user);
+    })
+})
 
-//Update user's information
+//Update any of user's information
 router.patch("/users/:id" , function(req, res, next){
     var id = req.params.id;
     User.findById(id, function(err , user ){
@@ -105,7 +122,7 @@ router.delete('/users/:id', function(req, res, next){
     if (user == null){
     return res.status(404).json({"message": "User not found."});
     }
-    res.status(200).json(user);
+    res.status(204).json(user);
     });
     });
 
