@@ -67,10 +67,10 @@ router.put("/api/users/:id" , function(req, res, next){
         if(user == null) {
             return res.status(404).json({"message" : "User not found."});
         }
-    user.username = (req.body.username || user.username);
-    user.password = (req.body.password || user.password);
-    user.email = (req.body.email|| user.email);
-    user.birthDate = (req.body.birthDate || user.birthDate);
+    user.username = req.body.username;
+    user.password = req.body.password;
+    user.email = req.body.email;
+    user.birthDate = req.body.birthDate;
     user.save();
     res.status(200).json(user);
     })
