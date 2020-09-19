@@ -110,4 +110,14 @@ router.delete('/api/users/:id', function(req, res, next){
     });
     });
 
+//Show all the users 
+router.get('/api/users', function(req, res, next){
+    User.find(function(err,users){
+        if(err){
+            return next(err);
+        }
+        res.status(200).json({"The users are": users});
+    })
+    });
+
 module.exports = router;
