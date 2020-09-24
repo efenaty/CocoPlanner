@@ -52,38 +52,6 @@ router.get('/api/lists', function(req, res){
 
 
 
-// //Show all the normal lists 
-// router.get('/api/lists', function(req, res, next){
-    
-//     List.find({ is_favorite_list : false },function(err, lists){
-//         if(err){
-//             return next(err);
-//         }
-
-//         if(lists == null){
-//             return res.status(404).json({"message":"Lists not found."});
-//         }
-
-//         res.status(200).json({"Your lists are": lists});
-//     });
-    
-// });
-
-// //Show all the favorite lists
-// router.get('/api/lists', function(req, res, next){
-
-//     List.find({ is_favorite_list : true },function(err, lists){
-//         if(err){
-//             return next(err);
-//         }
-//         if(lists == null){
-//          return res.status(404).json({"message":"Lists not found."});
-//         }
-//         res.status(200).json({"Your favorite lists are": lists});
-//     });
-    
-// });
-
 //Show a certain list
 router.get('/api/lists/:id', function(req, res, next){
     var id = req.params.id;
