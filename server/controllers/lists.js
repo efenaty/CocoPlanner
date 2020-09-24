@@ -153,9 +153,10 @@ router.get('/lists/:id/tasks', function(req, res, next){
 //Sort the tasks of a certain list by name
 router.get('/api/lists/:id/tasks', function(req, res, next){
     var id = req.params.id;
-    var filter = req.query.name;
-    if(filter){
-    List.findById({ _id : id }).populate({path: 'tasks', options: { sort: { name: 1 } } }).exec(function(err,list){
+    var query = {};
+    if(req.query.name) query.name = req.query.name;
+    
+    List.findById({ _id : id }).populate({path: 'tasks', options: { sort: {name : query.name} }}).exec(function(err,list){
         if(err){ 
             return next(err);
         }
@@ -164,8 +165,8 @@ router.get('/api/lists/:id/tasks', function(req, res, next){
         }
         res.status(200).json(list.tasks)
     })
-}
 });
+
 
 //Sort the tasks of a certain list by name and startDate
 // router.get('/api/lists/:id/tasks/sortbyNameandStartDate', function(req, res, next){
