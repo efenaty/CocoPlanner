@@ -67,7 +67,7 @@ router.get('/api/lists/:id', function(req, res, next){
 });
 
 //Change the list type
-router.put('/lists/:id', function(req, res, next){
+router.put('/api/lists/:id', function(req, res, next){
     var id = req.params.id;
     List.findById(id,function(err, list){
         if(err){ 
@@ -83,7 +83,7 @@ router.put('/lists/:id', function(req, res, next){
 });
 
 //Delete a certain list 
-router.delete('/lists/:id',function(req, res, next){
+router.delete('/api/lists/:id',function(req, res, next){
     var id = req.params.id;
     List.findOneAndDelete({_id : id },function(err,list){
         if (err){
@@ -99,7 +99,7 @@ router.delete('/lists/:id',function(req, res, next){
 
 //Add a task to a list
 //Source : https://kb.objectrocket.com/mongo-db/how-to-join-collections-using-mongoose-228 
-router.post('/lists/:id/tasks',function(req,res,next){
+router.post('/api/lists/:id/tasks',function(req,res,next){
     var id = req.params.id;
     var task = new Task(req.body);
     task.save(function(err){
@@ -118,7 +118,7 @@ router.post('/lists/:id/tasks',function(req,res,next){
 });
  
 //Add an item to a list 
-router.post('/lists/:id/items',function(req,res,next){
+router.post('/api/lists/:id/items',function(req,res,next){
     var id = req.params.id;
     var item = new Item(req.body);
     item.save(function(err){
@@ -137,7 +137,7 @@ router.post('/lists/:id/items',function(req,res,next){
 });
 
 //Show the tasks of a certain list
-router.get('/lists/:id/tasks', function(req, res, next){
+router.get('/api/lists/:id/tasks', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
@@ -183,7 +183,7 @@ router.get('/api/lists/:id/tasks', function(req, res, next){
 // });
 
 //Show the items of a certain favorite list 
-router.get('/lists/:id/items', function(req, res, next){
+router.get('/api/lists/:id/items', function(req, res, next){
     var id = req.params.id;
     List.findById({ _id : id }).populate('items').exec(function(err,list){
         if(err){ 
@@ -197,7 +197,7 @@ router.get('/lists/:id/items', function(req, res, next){
 });
 
 //Show the specific task of a list
-router.get('/lists/:id/tasks/:task_id', function(req, res, next){
+router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
     var task_id = req.params.task_id;
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
@@ -240,12 +240,12 @@ router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
             if(list.tasks[i]._id == req.params.task_id)
             array.push(list.tasks[i]);
         }
-    res.json(array);
+    res.status(200).json(array);
     });
 });
 
 //Delete a task in the list 
-router.delete('/lists/:id/tasks/:task_id', function(req, res, next){
+router.delete('/api/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
     var task_id = req.params.task_id;
     // const task_id = req.params.task_id;
@@ -282,7 +282,7 @@ router.delete('/lists/:id/tasks/:task_id', function(req, res, next){
 
     
 //Delete an item in a list
-router.delete('/lists/:id/tasks/:item_id', function(req, res, next){
+router.delete('/api/lists/:id/tasks/:item_id', function(req, res, next){
     var id = req.params.id;
     var item_id = req.params.item_id;
     // const task_id = req.params.task_id;
@@ -336,7 +336,7 @@ router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
         array[0].startDate=(req.body.startDate || array[0].startDate);
         array[0].endDate=(req.body.endDate || array[0].endDate);
         array[0].save();
-        res.json(array[0]);
+        res.status(200).json(array[0]);
     });
 });
 
@@ -359,7 +359,7 @@ router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
         array[0].review=(req.body.review|| array[0].review);
         array[0].rating=(req.body.rating || array[0].rating);
         array[0].save();
-        res.json(array[0]);
+        res.status(200).json(array[0]);
     });
 });
 
