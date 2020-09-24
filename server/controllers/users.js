@@ -16,12 +16,12 @@ router.post('/api/users', function(req, res, next){
 });
 
 //Logging in
-router.post('/api/login', function (req, res, next){
+router.get('/api/login/:id', function (req, res, next){
+    var id = req.params.id;
     var username = req.body.username;
     var password = req.body.password;
 
-
-    User.findOne({username: username, password: password},function (err,user){
+    User.findOne({_id: id, username: username, password: password},function (err,user){
         if(err){
             return next(err);
         }
@@ -29,6 +29,7 @@ router.post('/api/login', function (req, res, next){
             res.status(404).json({"message": "User not found."});
         }
         res.status(200).json(user);
+});
 });
     
 //Update all user's information
@@ -107,7 +108,6 @@ router.get('/api/users', function(req, res, next){
     
     //      });
     
-});
 
 // router.get('/dashboard', function (req,res){
 //     if(!req.session.user){
