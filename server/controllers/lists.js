@@ -67,7 +67,7 @@ router.get('/api/lists/:id', function(req, res, next){
 });
 
 //Change the list type
-router.put('/api/lists/:id', function(req, res, next){
+router.patch('/api/lists/:id', function(req, res, next){
     var id = req.params.id;
     List.findById(id,function(err, list){
         if(err){ 
@@ -282,7 +282,7 @@ router.delete('/api/lists/:id/tasks/:task_id', function(req, res, next){
 
     
 //Delete an item in a list
-router.delete('/api/lists/:id/tasks/:item_id', function(req, res, next){
+router.delete('/api/lists/:id/items/:item_id', function(req, res, next){
     var id = req.params.id;
     var item_id = req.params.item_id;
     // const task_id = req.params.task_id;
