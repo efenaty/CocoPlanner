@@ -34,37 +34,55 @@ router.post('/api/lists',function(req,res,next){
 });
 
 
-//Show all the normal lists 
-router.get('/api/lists', function(req, res, next){
-    
-    List.find({ is_favorite_list : false },function(err, lists){
+//show normal lists or favorite lists 
+router.get('/api/lists', function(req, res){
+    var query = {};
+    if(req.query.is_favorite_list) query.is_favorite_list = req.query.is_favorite_list;
+
+    List.find(query, function (err, lists) {
         if(err){
-            return next(err);
-        }
-
+        return next(err); }
+            
         if(lists == null){
-            return res.status(404).json({"message":"Lists not found."});
-        }
-
-        res.status(200).json({"Your lists are": lists});
-    });
-    
+         return res.status(404).json({"message":"Lists not found."});}
+        
+        return res.status(200).json(lists);
+    });   
 });
 
-//Show all the favorite lists
-router.get('/api/lists', function(req, res, next){
 
-    List.find({ is_favorite_list : true },function(err, lists){
-        if(err){
-            return next(err);
-        }
-        if(lists == null){
-         return res.status(404).json({"message":"Lists not found."});
-        }
-        res.status(200).json({"Your favorite lists are": lists});
-    });
+
+// //Show all the normal lists 
+// router.get('/api/lists', function(req, res, next){
     
-});
+//     List.find({ is_favorite_list : false },function(err, lists){
+//         if(err){
+//             return next(err);
+//         }
+
+//         if(lists == null){
+//             return res.status(404).json({"message":"Lists not found."});
+//         }
+
+//         res.status(200).json({"Your lists are": lists});
+//     });
+    
+// });
+
+// //Show all the favorite lists
+// router.get('/api/lists', function(req, res, next){
+
+//     List.find({ is_favorite_list : true },function(err, lists){
+//         if(err){
+//             return next(err);
+//         }
+//         if(lists == null){
+//          return res.status(404).json({"message":"Lists not found."});
+//         }
+//         res.status(200).json({"Your favorite lists are": lists});
+//     });
+    
+// });
 
 //Show a certain list
 router.get('/api/lists/:id', function(req, res, next){
