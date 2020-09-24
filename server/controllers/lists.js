@@ -76,9 +76,9 @@ router.put('/lists/:id', function(req, res, next){
         if(list == null) {
          return res.status(404).json({"message":"List not found."});
         }
-        list.is_favorite_list = req.body.is_favorite_list;
+        list.name = req.body.name;
         list.save();
-        res.json(list);
+        res.status(200).json(list);
     });
 });
 
