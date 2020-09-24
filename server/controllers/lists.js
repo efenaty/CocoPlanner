@@ -20,7 +20,6 @@ router.post('/api/lists',function(req,res,next){
     });
 });
 
-
 //Show all the normal lists 
 router.get('/api/lists', function(req, res, next){
     List.find({ is_favorite_list : false },function(err, lists){
@@ -79,7 +78,6 @@ router.put('/api/lists/:id', function(req, res, next){
     });
 });
 
-
 //Delete a certain list 
 router.delete('/api/lists/:id',function(req, res, next){
     var id = req.params.id;
@@ -93,7 +91,6 @@ router.delete('/api/lists/:id',function(req, res, next){
         res.status(200).json(list);    
     });
 });
-
 
 //Add a task to a list
 //Source : https://kb.objectrocket.com/mongo-db/how-to-join-collections-using-mongoose-228 
@@ -134,7 +131,6 @@ router.post('/api/lists/:id/items',function(req,res,next){
 });
 });
 
-
 //Show the tasks of a certain list
 router.get('/api/lists/:id/tasks', function(req, res, next){
     var id = req.params.id;
@@ -148,7 +144,6 @@ router.get('/api/lists/:id/tasks', function(req, res, next){
          res.status(200).json(list.tasks)
     });
 });
-
 
 //Sort the tasks of a certain list by name
 router.get('/api/lists/:id/tasks/sortbyName', function(req, res, next){
@@ -164,8 +159,6 @@ router.get('/api/lists/:id/tasks/sortbyName', function(req, res, next){
     })
 });
 
-
-
 //Sort the tasks of a certain list by name and startDate
 router.get('/api/lists/:id/tasks/sortbyNameandStartDate', function(req, res, next){
     var id = req.params.id;
@@ -180,22 +173,6 @@ router.get('/api/lists/:id/tasks/sortbyNameandStartDate', function(req, res, nex
     })
 });
 
-// //sort
-// router.get("/lists/:id/tasks/sortbyname").get(function(req, res, next) {
-//     detail
-//       .find({}, function(err, result) {
-//         if (err) {
-//           return next(err);
-//         } else {
-//           res.json(result);
-//         }
-//       })
-//       .sort({ name : 1});
-//   });
-  
-
-
-
 //Show the items of a certain favorite list 
 router.get('/api/lists/:id/items', function(req, res, next){
     var id = req.params.id;
@@ -209,7 +186,6 @@ router.get('/api/lists/:id/items', function(req, res, next){
          res.status(200).json(list.items)
     });
 });
-
 
 //Show the specific task of a list
 router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
@@ -249,21 +225,7 @@ router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
     });
 });
 
-/*router.delete('/lists/:id/tasks/:task_id', function(req, res, next){
-    var id = req.params.id;
-    var task_id = req.params.task_id;
-    List.findOneAndUpdate({_id : id} , {$pull: { tasks: {_id : task_id}}}, {new: true, multi: true, safe: true}, function(err, data){
-        if (err) {
-            return next(err);
-        }
-        if (task == null){
-            return res.status(404).json({"message":"Task not found."});
-        }
-        res.status(200).json(task);
-    });
-    });*/
-
-    //Delete a task in the list 
+//Delete a task in the list 
     router.delete('/api/lists/:id/tasks/:task_id', function(req, res, next){
         var id = req.params.id;
         const task_id = req.params.task_id;
@@ -286,38 +248,37 @@ router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
                 return res.status(404).json({"message":"Task not found."});
             }   
         })
-            res.status(200).json(list.tasks);
-        });
-        });
+        res.status(200).json(list.tasks);
+    });
+});
 
-
-        router.delete('/api/lists/:id/items/:item_id', function(req, res, next){
-            var id = req.params.id;
-            const item_id = req.params.item_id;
-            List.findOne({_id : id} , function(err, list){
-                if (err) {
-                    return next(err);
-                }
-                if (list == null){
-                    return res.status(404).json({"message":"Item not found."});
-                }
-                var index;
-                index = list.items.indexOf(item_id);
-                list.items.splice(index,1);
-                list.save();
-                Item.findByIdAndDelete({_id : item_id} , function(err,item){
-                    if (err) {
-                        return next(err);
-                    }
-                    if (item == null){
-                        return res.status(404).json({"message":"Item not found."});
-                    }  
-                res.status(200).json(list.items);
-            });
-            });
+//Delete an item in a list
+router.delete('/api/lists/:id/items/:item_id', function(req, res, next){
+    var id = req.params.id;
+    const item_id = req.params.item_id;
+    List.findOne({_id : id} , function(err, list){
+        if (err) {
+        return next(err);
+        }
+        if (list == null){
+            return res.status(404).json({"message":"Item not found."});
+        }
+    var index;
+    ndex = list.items.indexOf(item_id);
+    list.items.splice(index,1);
+    list.save();
+    Item.findByIdAndDelete({_id : item_id} , function(err,item){
+        if (err) {
+          return next(err);
+        }
+        if (item == null){
+         return res.status(404).json({"message":"Item not found."});
+            }  
+        res.status(200).json(list.items);
         });
+});  
+});
     
-
 //Update a task
 router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
     var id = req.params.id;
@@ -340,7 +301,6 @@ router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
         res.json(array[0]);
     });
 });
-
 
 //Update an item
 router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
@@ -365,6 +325,18 @@ router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
     });
 });
 
+// //sort
+// router.get("/lists/:id/tasks/sortbyname").get(function(req, res, next) {
+//     detail
+//       .find({}, function(err, result) {
+//         if (err) {
+//           return next(err);
+//         } else {
+//           res.json(result);
+//         }
+//       })
+//       .sort({ name : 1});
+//   });
     
 
 module.exports = router;
