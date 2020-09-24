@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var uniqueValidator = require('mongoose-unique-validator');
 // var bcrypt = require('bcrypt');
 // var SALT_WORK_FACTOR = 10;
-var uniqueValidator = require('mongoose-unique-validator');
 
 //Define userSchema
 var userSchema = new Schema({
@@ -10,9 +10,7 @@ var userSchema = new Schema({
     password : { type : String , required : true ,  minlength : 8 },
     email : { type : String , required : true , unique : true },
     birthDate : { type : Date }
-   });
-
-
+});
 
 // userSchema.pre('save', function(next) { 
 //     var user = this;
