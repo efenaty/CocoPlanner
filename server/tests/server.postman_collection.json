@@ -86,17 +86,6 @@
 					"response": []
 				},
 				{
-					"name": "Get all Users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Update a User's information (All)",
 					"event": [
 						{
@@ -945,62 +934,6 @@
 								"api",
 								"lists",
 								"{{favlist_id}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update all List information",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "55749227-44f6-4aea-a7b4-fbfca69b9bd2",
-								"exec": [
-									"pm.test(\"Correct status code\", function() { \r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"\r",
-									"pm.test(\"Correct user response\", function() {\r",
-									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.name).to.eql(\"To watch and read list\");\r",
-									"    pm.expect(jsonData.is_favorite_list).to.eql(false);\r",
-									"   pm.expect(jsonData.user).to.eql(pm.variables.get('user_id'));\r",
-									"    \r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{ \"name\" : \"To watch and read list\",\r\n  \"is_favorite_list\" : \"false\",\r\n  \"user\" : \"{{user_id}}\"}\r\n"
-						},
-						"url": {
-							"raw": "{{host}}/api/lists/{{list_id}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"lists",
-								"{{list_id}}"
 							]
 						}
 					},
