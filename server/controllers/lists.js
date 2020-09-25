@@ -51,6 +51,25 @@ router.get('/api/lists', function(req, res){
 });
 
 
+//Update all list's information
+router.put("/api/lists/:id" , function(req, res, next){
+    var id = req.params.id;
+    List.findById(id, function(err , list){
+        if (err){
+             return next(err);
+            }
+        if(list == null) {
+            return res.status(404).json({"message" : "List not found."});
+        }
+    list.name = req.body.name;
+    list.is_favorite_list = req.body.is_favorite_list;
+    list.user = req.body.user;
+    list.save();
+    res.status(200).json(list);
+    })
+});
+
+
 
 //Show a certain list
 router.get('/api/lists/:id', function(req, res, next){
