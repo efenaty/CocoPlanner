@@ -97,6 +97,19 @@ router.get('/api/users', function(req, res, next){
     })
 });
 
+//Delete all users
+router.delete('api/users', function (req, res, next){
+    User.deleteMany({ username : { $ne : null } } , function (err, users){
+        if (err){
+            return next(err);
+        }
+        if(users == null){
+            res.status(404).json({"message": "No users exist to delete :3"});
+        }
+        res.status(200).json(users);
+    })
+})
+
 
 
 
