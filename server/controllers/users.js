@@ -90,9 +90,17 @@ router.get('/api/users', function(req, res, next){
         if(err){
             return next(err);
         }
+        if(users == null) {
+            return res.status(404).json({"message": "User not found."});
+        }
         res.status(200).json({"The users are": users});
     })
 });
+
+
+
+
+
 
 // User.findOne({username: username}, function (err, user){
     //     if(err){
