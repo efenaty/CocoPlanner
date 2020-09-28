@@ -17,7 +17,7 @@ router.post('/api/users', function(req, res, next){
 });
 
 //Logging in
-router.get('/api/login/:id', function (req, res, next){
+router.get('/api/users/:id', function (req, res, next){
     var id = req.params.id;
     var username = req.body.username;
     var password = req.body.password;
