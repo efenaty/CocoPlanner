@@ -35,6 +35,7 @@ router.get('/api/login/:id', function (req, res, next){
 //Update all user's information
 router.put("/api/users/:id" , function(req, res, next){
     var id = req.params.id;
+    if( mongoose.Types.ObjectId.isValid(id) ){
     User.findById(id, function(err , user ){
         if (err){
              return next(err);
@@ -49,11 +50,15 @@ router.put("/api/users/:id" , function(req, res, next){
     user.save();
     res.status(200).json(user);
     })
+}else{
+    return res.status(404).json({message: "Check the ID"});
+}
 });
 
 //Update any of user's information
 router.patch("/api/users/:id" , function(req, res, next){
     var id = req.params.id;
+    if( mongoose.Types.ObjectId.isValid(id) ){
     User.findById(id, function(err , user ){
         if (err){
              return next(err);
@@ -67,12 +72,15 @@ router.patch("/api/users/:id" , function(req, res, next){
     user.birthDate = (req.body.birthDate || user.birthDate);
     user.save();
     res.status(200).json(user);
-    })
+    })}else{
+        return res.status(404).json({message: "Check the ID"});}
+    
 });
 
 //Delete a specific user 
 router.delete('/api/users/:id', function(req, res, next){
     var id = req.params.id;
+    if( mongoose.Types.ObjectId.isValid(id) ){
     User.findOneAndDelete({_id: id}, function(err, user){
     if (err){ 
         return next(err);
@@ -82,6 +90,9 @@ router.delete('/api/users/:id', function(req, res, next){
     }
     res.status(200).json(user);
     });
+}else{
+    return res.status(404).json({message: "Check the ID"});
+}
 });
 
 //Show all the users 

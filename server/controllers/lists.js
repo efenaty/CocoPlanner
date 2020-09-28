@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
 
 var User = require('../models/user');
 var List = require('../models/list');
@@ -8,18 +9,14 @@ var Item = require('../models/item');
 
 const list = require('../models/list');
 
-
-
 //Create a list
 router.post('/api/lists',function(req,res,next){
     var list = new List(req.body);
     var id = list.user;
-
     User.findOne({_id: id}, function(err , user ){
         if (err){
              return next(err);
         }
-
         if(user == null) {
             return res.status(404).json({"message" : "Sorry, the user does not exist XD."});
         }
@@ -32,7 +29,6 @@ router.post('/api/lists',function(req,res,next){
         
     });
 });
-
 
 //show normal lists or favorite lists 
 router.get('/api/lists', function(req, res){
@@ -54,6 +50,10 @@ router.get('/api/lists', function(req, res){
 //Update all list's information
 router.put("/api/lists/:id" , function(req, res, next){
     var id = req.params.id;
+
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }
     List.findById(id, function(err , list){
         if (err){
              return next(err);
@@ -69,25 +69,29 @@ router.put("/api/lists/:id" , function(req, res, next){
     })
 });
 
-
-
 //Show a certain list
 router.get('/api/lists/:id', function(req, res, next){
     var id = req.params.id;
-    List.findById(id,function(err, list){
-        if(err){ 
-            return next(err);
-        }
-        if(list == null){
-         return res.status(404).json({"message":"List not found."});
-        }
-        res.status(200).json(list);
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});}
+        List.findById(id,function(err, list){
+            if(err){ 
+                return next(err);
+            }
+            if(list == null){
+             return res.status(404).json({"message":"List not found."});
+            }
+            res.status(200).json(list);
     });
+    
 });
+    
 
 //Change the list type
 router.patch('/api/lists/:id', function(req, res, next){
     var id = req.params.id;
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});}
     List.findById(id,function(err, list){
         if(err){ 
             return next(err);
@@ -104,6 +108,8 @@ router.patch('/api/lists/:id', function(req, res, next){
 //Delete a certain list 
 router.delete('/api/lists/:id',function(req, res, next){
     var id = req.params.id;
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});}
     List.findOneAndDelete({_id : id },function(err,list){
         if (err){
             return next(err);
@@ -121,6 +127,8 @@ router.delete('/api/lists/:id',function(req, res, next){
 router.post('/api/lists/:id/tasks',function(req,res,next){
     var id = req.params.id;
     var task = new Task(req.body);
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});}
     task.save(function(err){
         if(err){
              return next(err);
@@ -140,6 +148,8 @@ router.post('/api/lists/:id/tasks',function(req,res,next){
 router.post('/api/lists/:id/items',function(req,res,next){
     var id = req.params.id;
     var item = new Item(req.body);
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});}
     item.save(function(err){
         if(err){
              return next(err);
@@ -158,6 +168,8 @@ router.post('/api/lists/:id/items',function(req,res,next){
 //Show the tasks of a certain list
 router.get('/api/lists/:id/tasks', function(req, res, next){
     var id = req.params.id;
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});}
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
             return next(err);
@@ -172,6 +184,8 @@ router.get('/api/lists/:id/tasks', function(req, res, next){
 //Sort the tasks of a certain list by name
 router.get('/api/lists/:id/tasks', function(req, res, next){
     var id = req.params.id;
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});}
     var query = {};
     if(req.query.name) query.name = req.query.name;
     
@@ -204,6 +218,8 @@ router.get('/api/lists/:id/tasks', function(req, res, next){
 //Show the items of a certain favorite list 
 router.get('/api/lists/:id/items', function(req, res, next){
     var id = req.params.id;
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});}
     List.findById({ _id : id }).populate('items').exec(function(err,list){
         if(err){ 
             return next(err);
@@ -219,6 +235,12 @@ router.get('/api/lists/:id/items', function(req, res, next){
 router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
     var task_id = req.params.task_id;
+
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }else if( !mongoose.Types.ObjectId.isValid(task_id) ){
+        return res.status(404).json({message: "Check the ID"});}
+
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
             return next(err);
@@ -247,6 +269,13 @@ router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
 //Show the specific task of a  list
 router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
+    var task_id = req.params.task_id;
+
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }else if( !mongoose.Types.ObjectId.isValid(task_id) ){
+        return res.status(404).json({message: "Check the ID"}); }
+
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
             return next(err);
@@ -267,7 +296,12 @@ router.get('/api/lists/:id/tasks/:task_id', function(req, res, next){
 router.delete('/api/lists/:id/tasks/:task_id', function(req, res, next){
     var id = req.params.id;
     var task_id = req.params.task_id;
-    // const task_id = req.params.task_id;
+
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }else if( !mongoose.Types.ObjectId.isValid(task_id) ){
+        return res.status(404).json({message: "Check the ID"});}
+
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if (err) {
             return next(err);
@@ -304,7 +338,12 @@ router.delete('/api/lists/:id/tasks/:task_id', function(req, res, next){
 router.delete('/api/lists/:id/items/:item_id', function(req, res, next){
     var id = req.params.id;
     var item_id = req.params.item_id;
-    // const task_id = req.params.task_id;
+
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }else if( !mongoose.Types.ObjectId.isValid(item_id) ){
+        return res.status(404).json({message: "Check the ID"});}
+    
     List.findById({ _id : id }).populate('items').exec(function(err,list){
         if (err) {
             return next(err);
@@ -339,6 +378,13 @@ router.delete('/api/lists/:id/items/:item_id', function(req, res, next){
 //Update a task
 router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
     var id = req.params.id;
+    var task_id = req.params.id;
+
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }else if( !mongoose.Types.ObjectId.isValid(task_id) ){
+        return res.status(404).json({message: "Check the ID"});}
+
     List.findById({ _id : id }).populate('tasks').exec(function(err,list){
         if(err){ 
             return next(err);
@@ -362,6 +408,13 @@ router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
 //Update an item
 router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
     var id = req.params.id;
+    var item_id = req.params.id; 
+
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }else if( !mongoose.Types.ObjectId.isValid(item_id) ){
+        return res.status(404).json({message: "Check the ID"});}
+
     List.findById({ _id : id }).populate('items').exec(function(err,list){
         if(err){ 
             return next(err);
