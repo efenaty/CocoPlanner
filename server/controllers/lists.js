@@ -378,7 +378,7 @@ router.delete('/api/lists/:id/items/:item_id', function(req, res, next){
 //Update a task
 router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
     var id = req.params.id;
-    var task_id = req.params.id;
+    var task_id = req.params.task_id;
 
     if( !mongoose.Types.ObjectId.isValid(id) ){
         return res.status(404).json({message: "Check the ID"});
@@ -408,7 +408,7 @@ router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
 //Update an item
 router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
     var id = req.params.id;
-    var item_id = req.params.id; 
+    var item_id = req.params.item_id; 
 
     if( !mongoose.Types.ObjectId.isValid(id) ){
         return res.status(404).json({message: "Check the ID"});

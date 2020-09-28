@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
 var User = require('../models/user');
+var mongoose = require ("mongoose");
 
 
 //Create a new user or sign up
