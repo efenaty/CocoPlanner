@@ -21,7 +21,9 @@ router.get('/api/users/:id', function (req, res, next){
     var id = req.params.id;
     var username = req.body.username;
     var password = req.body.password;
-
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }
     User.findOne({_id: id, username: username, password: password},function (err,user){
         if(err){
             return next(err);
