@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcrypt');
 var User = require('../models/user');
+var mongoose = require ("mongoose");
 
 
 //Create a new user or sign up
@@ -16,11 +17,13 @@ router.post('/api/users', function(req, res, next){
 });
 
 //Logging in
-router.get('/api/login/:id', function (req, res, next){
+router.get('/api/users/:id', function (req, res, next){
     var id = req.params.id;
     var username = req.body.username;
     var password = req.body.password;
-
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }
     User.findOne({_id: id, username: username, password: password},function (err,user){
         if(err){
             return next(err);
@@ -35,6 +38,7 @@ router.get('/api/login/:id', function (req, res, next){
 //Update all user's information
 router.put("/api/users/:id" , function(req, res, next){
     var id = req.params.id;
+    if( mongoose.Types.ObjectId.isValid(id) ){
     User.findById(id, function(err , user ){
         if (err){
              return next(err);
@@ -49,11 +53,15 @@ router.put("/api/users/:id" , function(req, res, next){
     user.save();
     res.status(200).json(user);
     })
+}else{
+    return res.status(404).json({message: "Check the ID"});
+}
 });
 
 //Update any of user's information
 router.patch("/api/users/:id" , function(req, res, next){
     var id = req.params.id;
+    if( mongoose.Types.ObjectId.isValid(id) ){
     User.findById(id, function(err , user ){
         if (err){
              return next(err);
@@ -67,12 +75,15 @@ router.patch("/api/users/:id" , function(req, res, next){
     user.birthDate = (req.body.birthDate || user.birthDate);
     user.save();
     res.status(200).json(user);
-    })
+    })}else{
+        return res.status(404).json({message: "Check the ID"});}
+    
 });
 
 //Delete a specific user 
 router.delete('/api/users/:id', function(req, res, next){
     var id = req.params.id;
+    if( mongoose.Types.ObjectId.isValid(id) ){
     User.findOneAndDelete({_id: id}, function(err, user){
     if (err){ 
         return next(err);
@@ -82,6 +93,9 @@ router.delete('/api/users/:id', function(req, res, next){
     }
     res.status(200).json(user);
     });
+}else{
+    return res.status(404).json({message: "Check the ID"});
+}
 });
 
 //Show all the users 
@@ -90,9 +104,30 @@ router.get('/api/users', function(req, res, next){
         if(err){
             return next(err);
         }
+        if(users == null) {
+            return res.status(404).json({"message": "User not found."});
+        }
         res.status(200).json({"The users are": users});
     })
 });
+
+//Delete all users
+router.delete('api/users', function (req, res, next){
+    User.deleteMany({ username : { $ne : null } } , function (err, users){
+        if (err){
+            return next(err);
+        }
+        if(users == null){
+            res.status(404).json({"message": "No users exist to delete :3"});
+        }
+        res.status(200).json(users);
+    })
+})
+
+
+
+
+
 
 // User.findOne({username: username}, function (err, user){
     //     if(err){
