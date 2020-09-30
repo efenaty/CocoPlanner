@@ -1,5 +1,5 @@
 <template>
-    <h1> we will have our Calendar here </h1>
+    <h1> We will have our Calendar here </h1>
 </template>
 
 <script>
