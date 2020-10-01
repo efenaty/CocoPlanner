@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Calendar from './views/Calendar.vue'
 import Tasks from './views/Tasks.vue'
 import Favorites from './views/Favorites.vue'
+import Signup from './views/Signup.vue'
 // import Account from './views/Account.vue'
 
 Vue.use(Router)
@@ -31,6 +32,11 @@ export default new Router({
       path: '/favorites',
       name: 'favorites',
       component: Favorites
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: Signup
     }
     //,
     // {
