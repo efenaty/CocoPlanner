@@ -2,7 +2,7 @@
    <div>
         <p>Here are my lists:</p>
         <div v-for="list in lists" v-bind:key="list._id">
-            <list-item v-bind:list="list" v-on:del-list="deleteList"/>
+            <list-item v-bind:list="list" v-on:get-tasks="getTasks"/>
         </div>
     </div>
 </template>
@@ -17,36 +17,54 @@ export default {
     ListItem
   },
   mounted() {
-    console.log('PAGE is loaded')
+    this.getLists()
     // Load the real list from the server
-    Api.get('/lists')
-      .then(response => {
-        console.log(response.data)
-        this.lists = response.data
-      })
-      .catch(error => {
-        this.message = error.message
-        console.error(error)
-        this.lists = []
-        // TODO: display error message
-      })
-      .then(() => {
-        //   This code is always executed at the end. After success or failure.
-      })
   },
   data() {
     return {
       lists: [],
+      tasks: [],
       message: '',
       text: ''
     }
   },
   methods: {
-    deleteList(id) {
-      Api.delete(`/lists/${id}`)
+    getLists() {
+      Api.get('/lists')
+        .then(response => {
+          console.log(response.data)
+          this.lists = response.data
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          this.lists = []
+        // TODO: display error message
+        })
+        .then(() => {
+        //   This code is always executed at the end. After success or failure.
+        })
+    },
+    getTasks(id) {
+      Api.get(`/lists/${id}/tasks`)
+        .then(response => {
+          console.log(response.data)
+          this.tasks = response.data
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          this.tasks = []
+        })
+        .then(() => {
+          // This code is always executed at the end. After success or failure.
+        })
+    },
+    deleteCamel(id) {
+      Api.delete(`/camels/${id}`)
         .then(reponse => {
-          const index = this.lists.findIndex(list => list._id === id)
-          this.lists.splice(index, 1)
+          const index = this.camels.findIndex(camel => camel._id === id)
+          this.camels.splice(index, 1)
         })
         .catch(error => {
           console.error(error)

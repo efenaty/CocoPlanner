@@ -1,5 +1,5 @@
 <template>
-<h1> WE WILL HAVE STH</h1>
+<h1>We will have our account here</h1>
 </template>
 
 <script>
