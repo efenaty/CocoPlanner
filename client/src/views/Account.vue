@@ -1,15 +1,78 @@
 <template>
-<h1>We will have our account here</h1>
+  <div class="container">
+    <b-form  @delete="onDelete" v-if="show">
+      <b-form-group id="input-1" label="Username" label-for="input-1">
+        <b-form-input id="input-1" v-model="form.username" placeholder="Enter your new username"></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-2" label="Password:" label-for="input-2">
+        <b-form-input id="input-2" v-model="form.password" type="password" placeholder="Enter your new password"></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-3" label="Email address:" label-for="input-3">
+       <b-form-input id="input-3" v-model="form.email" type="email" placeholder="Enter email"></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-4" label="Birthdate:" label-for="input-4">
+        <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
+      </b-form-group>
+      <b-button type="submit" variant="primary">Save</b-button>
+      <b-button type="delete" variant="danger" @click="onDelete">Delete</b-button>
+    </b-form>
+  </div>
 </template>
 
 <script>
+
+import { Api } from '@/Api'
+
 export default {
-  name: 'account'
+  data() {
+    return {
+      form: {
+        username: '',
+        password: '',
+        email: '',
+        birthDate: ''
+      },
+      show: true
+    }
+  },
+  methods: {
+    onSubmit(e) {
+      // console.log(this.form)
+      // e.preventDefault()
+      Api.patch('/users/5f7611111ccf6bb050a1663d', this.form)
+        .then((result) => {
+          console.log(result)
+        }).catch(error => {
+          console.error(error)
+        // TODO: display error message
+        })
+        .then(() => {
+        //   This code is always executed at the end. After success or failure.
+        })
+    },
+
+    onDelete(e) {
+      // console.log(this.form)
+      e.preventDefault()
+      Api.request({ url: '/users/5f76138c1ccf6bb050a1663f', method: 'delete' })
+        .catch(error => {
+          console.error(error)
+        // TODO: display error message
+        })
+        .then(() => {
+        //   This code is always executed at the end. After success or failure.
+        })
+    }
+  }
 }
 </script>
 
 <style scoped>
- h1 {
-     color: purple;
- }
- </style>
+.container {
+    width: 30%;
+    height: 30%;
+    margin: auto;
+    display: inline-block;
+}
+
+</style>
