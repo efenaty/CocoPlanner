@@ -2,17 +2,27 @@
     <div>
   <b-card
     no-body
+    style="max-width: 20rem;"
   >
     <template v-slot:header>
       <h4 class="mb-0">{{list.name}}</h4>
     </template>
 
-<div v-for="task in tasks" v-bind:key="task._id">
+<form id="formElement">
+  <label for="name">Task name:</label><br>
+  <input type="text" id="name" name="name" v-model="form.name"><br>
+  <label for='startDate'>Startdate:</label><br>
+  <input type="date" id="startDate" name="startDate" v-model="form.username"><br>
+  <label for='endDate'>Enddate:</label><br>
+  <input type="date" id="endDate" name="endDate" v-model="form.username"><br>
+  <input type="submit" value="Submit" @click="addNewTasks">
+</form>
 
-<b-list-group flush>
+  <div v-for="task in tasks" v-bind:key="task._id">
+    <b-list-group flush>
       <b-list-group-item>{{task.name}}</b-list-group-item>
     </b-list-group>
-    </div>
+  </div>
 
   </b-card>
 </div>
@@ -28,7 +38,12 @@ export default {
   data() {
     return {
       tasks: [],
-      message: ''
+      message: '',
+      form: {
+        name: '',
+        startDate: '',
+        endDate: ''
+      }
     }
   },
   methods: {
@@ -57,9 +72,28 @@ export default {
         .catch(error => {
           console.error(error)
         })
-    }
+    },
 
+    // showForm(e) {
+    //   document.getElementById('formElement').style.display = 'block'
+    // },
+
+    addNewTasks(e) {
+      var id = this.list._id
+      Api.post(`/lists/${id}/tasks`, this.form)
+        .then((result) => {
+          console.log(result)
+        }).catch(error => {
+          console.error(error)
+        // TODO: display error message
+        })
+        .then(() => {
+        //   This code is always executed at the end. After success or failure.
+        })
+      e.preventDefault()
+    }
   },
+
   mounted() {
     this.getTasks()
   }
