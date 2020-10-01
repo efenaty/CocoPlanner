@@ -1,7 +1,20 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
+    <!-- <div id="nav">
+      <router-link to="/">Home </router-link>
+      <router-link to="/calendar">Calendar</router-link>
+    </div> -->
+    <div>
+    <b-nav tabs justified>
+    <b-nav-item to ="/">Home</b-nav-item>
+    <b-nav-item to = "/calendar">Calendar</b-nav-item>
+    <b-nav-item to = "/tasks">Tasks</b-nav-item>
+    <b-nav-item to = "/favorites">Favorites</b-nav-item>
+    <b-nav-item to = "/">Account</b-nav-item>
+<div>
+</div>
+    <!-- <b-nav-item disabled>Disabled</b-nav-item> -->
+    </b-nav>
     </div>
     <!-- Render the content of the current page view -->
     <router-view/>
