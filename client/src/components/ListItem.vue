@@ -12,9 +12,9 @@
   <label for="name">Task name:</label><br>
   <input type="text" id="name" name="name" v-model="form.name"><br>
   <label for='startDate'>Startdate:</label><br>
-  <input type="date" id="startDate" name="startDate" v-model="form.username"><br>
+  <input type="date" id="startDate" name="startDate" data-date-format="DD MMMM YYYY" v-model="form.startDate"><br>
   <label for='endDate'>Enddate:</label><br>
-  <input type="date" id="endDate" name="endDate" v-model="form.username"><br>
+  <input type="date" id="endDate" name="endDate" v-model="form.endDate"><br>
   <input type="submit" value="Submit" @click="addNewTasks">
 </form>
 
@@ -83,6 +83,7 @@ export default {
       Api.post(`/lists/${id}/tasks`, this.form)
         .then((result) => {
           console.log(result)
+          console.log(this.form)
         }).catch(error => {
           console.error(error)
         // TODO: display error message
