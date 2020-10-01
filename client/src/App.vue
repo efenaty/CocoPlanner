@@ -10,7 +10,7 @@
     <b-nav-item to = "/calendar">Calendar</b-nav-item>
     <b-nav-item to = "/tasks">Tasks</b-nav-item>
     <b-nav-item to = "/favorites">Favorites</b-nav-item>
-    <b-nav-item to = "/">Account</b-nav-item>
+    <b-nav-item to = "/account">Account</b-nav-item>
 <div>
 </div>
     <!-- <b-nav-item disabled>Disabled</b-nav-item> -->
