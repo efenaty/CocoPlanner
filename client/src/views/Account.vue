@@ -13,8 +13,8 @@
       <b-form-group id="input-4" label="Birthdate:" label-for="input-4">
         <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
       </b-form-group>
-      <!-- <b-button type="submit" variant="primary">Save</b-button> -->
-       <b-button type="delete" variant="danger">Delete</b-button>
+      <b-button type="submit" variant="primary">Save</b-button>
+      <b-button type="delete" variant="danger" @click="onDelete">Delete</b-button>
     </b-form>
   </div>
 </template>
@@ -36,24 +36,25 @@ export default {
     }
   },
   methods: {
-    // onSubmit(e) {
-    //   // console.log(this.form)
-    //   e.preventDefault()
-    //   Api.patch('/users/5f7611111ccf6bb050a1663d', this.form)
-    //     .then((result) => {
-    //       console.log(result)
-    //     }).catch(error => {
-    //       console.error(error)
-    //     // TODO: display error message
-    //     })
-    //     .then(() => {
-    //     //   This code is always executed at the end. After success or failure.
-    //     })
-    // },
+    onSubmit(e) {
+      // console.log(this.form)
+      // e.preventDefault()
+      Api.patch('/users/5f7611111ccf6bb050a1663d', this.form)
+        .then((result) => {
+          console.log(result)
+        }).catch(error => {
+          console.error(error)
+        // TODO: display error message
+        })
+        .then(() => {
+        //   This code is always executed at the end. After success or failure.
+        })
+    },
+
     onDelete(e) {
       // console.log(this.form)
       e.preventDefault()
-      Api.request({ url: '/users/5f7611111ccf6bb050a1663d', method: 'delete' })
+      Api.request({ url: '/users/5f76138c1ccf6bb050a1663f', method: 'delete' })
         .catch(error => {
           console.error(error)
         // TODO: display error message
