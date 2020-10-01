@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-form @submit="onSubmit" v-if="show">
+    <b-form  @delete="onDelete" v-if="show">
       <b-form-group id="input-1" label="Username" label-for="input-1">
         <b-form-input id="input-1" v-model="form.username" placeholder="Enter your new username"></b-form-input>
       </b-form-group>
@@ -11,9 +11,10 @@
        <b-form-input id="input-3" v-model="form.email" type="email" placeholder="Enter email"></b-form-input>
       </b-form-group>
       <b-form-group id="input-4" label="Birthdate:" label-for="input-4">
-        <b-form-input id="input-4" v-model="form.email" type="date" placeholder="Enter your new birthdate"></b-form-input>
+        <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Save</b-button>
+      <!-- <b-button type="submit" variant="primary">Save</b-button> -->
+       <b-button type="delete" variant="danger">Delete</b-button>
     </b-form>
   </div>
 </template>
@@ -35,19 +36,31 @@ export default {
     }
   },
   methods: {
-    onSubmit(e) {
+    // onSubmit(e) {
+    //   // console.log(this.form)
+    //   e.preventDefault()
+    //   Api.patch('/users/5f7611111ccf6bb050a1663d', this.form)
+    //     .then((result) => {
+    //       console.log(result)
+    //     }).catch(error => {
+    //       console.error(error)
+    //     // TODO: display error message
+    //     })
+    //     .then(() => {
+    //     //   This code is always executed at the end. After success or failure.
+    //     })
+    // },
+    onDelete(e) {
       // console.log(this.form)
-      Api.patch('/users/', this.form)
-        .then((result) => {
-          console.log(result)
-        }).catch(error => {
+      e.preventDefault()
+      Api.request({ url: '/users/5f7611111ccf6bb050a1663d', method: 'delete' })
+        .catch(error => {
           console.error(error)
         // TODO: display error message
         })
         .then(() => {
         //   This code is always executed at the end. After success or failure.
         })
-      e.preventDefault()
     }
   }
 }

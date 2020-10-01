@@ -31,13 +31,8 @@
       </b-form-group>
 
       </b-form-group>
-      <!-- <b-form-group id="input-group-4" label="Birth date:" label-for="input-4">
-        <b-form-select
-          id="input-4"
-          v-model="form.birthdate"
-          :options="Birthdate"
-          required
-        ></b-form-select>
+     <!-- <b-form-group id="input-4" label="Birthdate:" label-for="input-4">
+        <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
       </b-form-group> -->
 
       <b-button type="submit" variant="primary">Sign up</b-button>
@@ -58,7 +53,8 @@ export default {
       form: {
         username: '',
         password: '',
-        email: null
+        email: ''
+        // birthDate: ''
       },
       show: true
     }
@@ -89,5 +85,4 @@ export default {
     margin: auto;
     display: inline-block;
 }
-
 </style>
