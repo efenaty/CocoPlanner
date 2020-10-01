@@ -5,6 +5,7 @@ import Calendar from './views/Calendar.vue'
 import Tasks from './views/Tasks.vue'
 import Favorites from './views/Favorites.vue'
 import Signup from './views/Signup.vue'
+import Account from './views/Account.vue'
 // import Account from './views/Account.vue'
 
 Vue.use(Router)
@@ -37,12 +38,11 @@ export default new Router({
       path: '/signup',
       name: 'signup',
       component: Signup
+    },
+    {
+      path: '/account',
+      name: 'account',
+      component: Account
     }
-    //,
-    // {
-    //   path: '/account',
-    //   name: 'account',
-    //   component: Account
-    // }
   ]
 })
