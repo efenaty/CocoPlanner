@@ -30,6 +30,21 @@ router.post('/api/login', function (req, res, next){
         res.status(200).json(user);
 });
 });
+
+//Find a specific user
+router.get('/api/users/:id', function (req, res, next){
+    var id = req.params.id
+    User.findById({ _id : id },function (err,user){
+        if(err){
+            return next(err);
+        }
+        if(user == null){
+            res.status(404).json({"message": "User not found."});
+        }
+        res.status(200).json(user);
+});
+}); 
+
     
 //Update all user's information
 router.put("/api/users/:id" , function(req, res, next){
