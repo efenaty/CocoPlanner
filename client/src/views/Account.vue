@@ -22,7 +22,7 @@
 <script>
 
 import { Api } from '@/Api'
-
+const id = localStorage.getItem('objectId')
 export default {
   data() {
     return {
@@ -38,8 +38,8 @@ export default {
   methods: {
     onSubmit(e) {
       // console.log(this.form)
-      // e.preventDefault()
-      Api.patch('/users/5f7611111ccf6bb050a1663d', this.form)
+      e.preventDefault()
+      Api.patch(`/users/${id}`, this.form)
         .then((result) => {
           console.log(result)
         }).catch(error => {
@@ -54,7 +54,7 @@ export default {
     onDelete(e) {
       // console.log(this.form)
       e.preventDefault()
-      Api.request({ url: '/users/5f76138c1ccf6bb050a1663f', method: 'delete' })
+      Api.request({ url: `/users/${id}`, method: 'delete' })
         .catch(error => {
           console.error(error)
         // TODO: display error message

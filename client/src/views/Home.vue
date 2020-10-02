@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{message}}</p>
+    <h1>{{message}}</h1>
   </div>
 </template>
 
@@ -30,5 +30,8 @@ export default {
 <style>
 .btn_message {
   margin-bottom: 1em;
+}
+h1{
+  color: crimson;
 }
 </style>

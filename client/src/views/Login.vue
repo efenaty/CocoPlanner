@@ -34,7 +34,7 @@ export default {
           // Saving the user's _id
           const objectId = result.data._id
           // Clear the local storage before saving the _id
-          // localStorage.clear()
+          localStorage.clear()
           // Saving the objectId in the local storage
           localStorage.setItem('objectId', objectId)
           this.$router.push('/')
