@@ -17,14 +17,10 @@ router.post('/api/users', function(req, res, next){
 });
 
 //Logging in
-router.get('/api/users/:id', function (req, res, next){
-    var id = req.params.id;
+router.post('/api/login', function (req, res, next){
     var username = req.body.username;
     var password = req.body.password;
-    if( !mongoose.Types.ObjectId.isValid(id) ){
-        return res.status(404).json({message: "Check the ID"});
-    }
-    User.findOne({_id: id, username: username, password: password},function (err,user){
+    User.findOne({ username: username, password: password},function (err,user){
         if(err){
             return next(err);
         }
