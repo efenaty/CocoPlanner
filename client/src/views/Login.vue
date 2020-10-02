@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+ <div class="container">
     <b-form @submit="onSubmit" v-if="show">
       <b-form-group id="input-1" label="Username" label-for="input-1">
         <b-form-input id="input-1" v-model="form.username" placeholder="Enter your new username"></b-form-input>
@@ -38,6 +38,7 @@ export default {
           // Saving the objectId in the local storage
           localStorage.setItem('objectId', objectId)
           this.$router.push('/')
+          this.$router.go(0)
         }).catch(error => {
           console.error(error)
         // TODO: display error message
