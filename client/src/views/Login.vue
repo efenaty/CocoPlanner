@@ -1,5 +1,7 @@
 <template>
  <div class="container">
+   <h1>Log in</h1>
+   <br>
     <b-form @submit="onSubmit" v-if="show">
       <b-form-group id="input-1" label="Username" label-for="input-1">
         <b-form-input id="input-1" v-model="form.username" placeholder="Enter your new username"></b-form-input>
@@ -58,5 +60,6 @@ export default {
     height: 30%;
     margin: auto;
     display: inline-block;
+    margin-top: 5%;
 }
 </style>
