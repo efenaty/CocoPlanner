@@ -3,6 +3,7 @@ var router = express.Router();
 var bcrypt = require('bcrypt');
 var User = require('../models/user');
 var mongoose = require ("mongoose");
+const user = require('../models/user');
 
 
 //Create a new user or sign up
@@ -20,15 +21,23 @@ router.post('/api/users', function(req, res, next){
 router.post('/api/login', function (req, res, next){
     var username = req.body.username;
     var password = req.body.password;
-    User.findOne({ username: username, password: password},function (err,user){
+    User.findOne({ username: username },function (err,user){
         if(err){
             return next(err);
         }
         if(!user){
             res.status(404).json({"message": "User not found."});
         }
-        res.status(200).json(user);
-});
+        //res.status(200).json(user);
+        var correctPass= password===user.password;
+        if (!correctPass){
+            res.status(404).json({"message": "User not found."});
+        }else{
+            res.status(200).json(user);
+        }
+        
+    });
+      
 });
 
 //Find a specific user
