@@ -10,6 +10,7 @@
         <b-form-input id="input-2" v-model="form.password" type="password" placeholder="Enter your new password"></b-form-input>
       </b-form-group>
       <b-button type="submit" variant="primary">log in</b-button>
+      <b-button variant="primary" @click="openSignup" >Sign up</b-button>
     </b-form>
   </div>
 </template>
@@ -40,7 +41,7 @@ export default {
           // Saving the objectId in the local storage
           localStorage.setItem('objectId', objectId)
           this.$router.push('/')
-          this.$router.go(0)
+          // this.$router.go(0)
         }).catch(error => {
           console.error(error)
         // TODO: display error message
@@ -49,6 +50,9 @@ export default {
         //   This code is always executed at the end. After success or failure.
         })
       e.preventDefault()
+    },
+    openSignup() {
+      this.$router.push('/signup')
     }
   }
 }
