@@ -1,13 +1,13 @@
 <template>
   <div>
     <h1>{{message}}</h1>
+    <b-button type="submit" variant="primary" @click="signOut">Sign out</b-button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-const id = localStorage.getItem('objectId')
 export default {
   name: 'home',
   data() {
@@ -16,15 +16,21 @@ export default {
     }
   },
   mounted() {
+    const id = localStorage.getItem('objectId')
     Api.get(`/users/${id}`)
       .then(response => {
-        this.message = 'welcome ' + response.data.username
+        this.message = 'Welcome, ' + response.data.username + '!'
       })
       .catch(error => {
         this.message = error
       })
   },
   methods: {
+    signOut() {
+      localStorage.clear()
+      this.$router.push('/login')
+      console.log('Signed out!')
+    }
 
   }
 }
@@ -35,6 +41,8 @@ export default {
   margin-bottom: 1em;
 }
 h1{
-  color: crimson;
+  color:#D65DB1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-block-start: 4%;
 }
 </style>
