@@ -34,7 +34,7 @@
       <label for="input-group-4">Birth Date</label>
     </b-col>
     <b-col sm="10">
-        <b-form-input id="input-4" v-model="form.birthDate" type="birthdate" required placeholder="Enter your new birthdate"></b-form-input>
+        <b-form-input id="input-4" v-model="form.birthDate" type="date" required placeholder="Enter your new birthdate"></b-form-input>
     </b-col>
   </b-row>
 

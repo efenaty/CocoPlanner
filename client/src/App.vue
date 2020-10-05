@@ -15,8 +15,8 @@
 </div>
     </b-nav>
     </div> -->
-     <navigation v-if="showNavigation">
     <div>
+      <div class= "navigation" v-if="showNavigation">
   <b-navbar class= "navbar" type="dark" >
     <b-navbar-nav>
     <b-nav-item href ="/">Home</b-nav-item>
@@ -30,8 +30,8 @@
       </b-nav-item-dropdown>
     </b-navbar-nav>
   </b-navbar>
+  </div>
 </div>
-     </navigation>
     <!-- Render the content of the current page view -->
     <router-view/>
   </div>
@@ -41,6 +41,9 @@
 export default {
   data() {
     this.$route.path === '/login' || this.$route.path === '/signup' ? this.showNavigation = false : this.showNavigation = true
+    return {
+      count: 0
+    }
   }
 }
 </script>
