@@ -22,7 +22,7 @@
 <script>
 
 import { Api } from '@/Api'
-const id = localStorage.getItem('objectId')
+var id = localStorage.getItem('objectId')
 export default {
   data() {
     return {

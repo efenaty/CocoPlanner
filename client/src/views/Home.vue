@@ -8,7 +8,6 @@
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-const id = localStorage.getItem('objectId')
 export default {
   name: 'home',
   data() {
@@ -17,6 +16,7 @@ export default {
     }
   },
   mounted() {
+    const id = localStorage.getItem('objectId')
     Api.get(`/users/${id}`)
       .then(response => {
         this.message = 'welcome ' + response.data.username
@@ -27,6 +27,7 @@ export default {
   },
   methods: {
     signOut() {
+      localStorage.clear()
       this.$router.push('/login')
       console.log('Signed out!')
     }
