@@ -27,13 +27,13 @@ router.post('/api/login', function (req, res, next){
         }
         if(!user){
             res.status(404).json({"message": "User not found."});
-        }
-        //res.status(200).json(user);
+        }else{
         var correctPass= password===user.password;
         if (!correctPass){
             res.status(404).json({"message": "User not found."});
         }else{
             res.status(200).json(user);
+        }
         }
         
     });
