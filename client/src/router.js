@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+// import Home from './views/Home.vue'
 import Calendar from './views/Calendar.vue'
 import Tasks from './views/Tasks.vue'
 import Favorites from './views/Favorites.vue'
@@ -17,7 +17,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Signup
     },
     {
       path: '/calendar',
@@ -34,11 +34,11 @@ export default new Router({
       name: 'favorites',
       component: Favorites
     },
-    {
-      path: '/signup',
-      name: 'signup',
-      component: Signup
-    },
+    // {
+    //   path: '/signup',
+    //   name: 'signup',
+    //   component: Signup
+    // },
     {
       path: '/account',
       name: 'account',
