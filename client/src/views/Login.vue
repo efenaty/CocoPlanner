@@ -2,7 +2,7 @@
  <div class="container">
    <h1>Log in</h1>
    <br>
-    <b-form @submit="onSubmit" v-if="show">
+    <b-form @submit="login" v-if="show">
       <b-form-group id="input-1" label="Username" label-for="input-1">
         <b-form-input id="input-1" v-model="form.username" placeholder="Enter your new username"></b-form-input>
       </b-form-group>
@@ -30,10 +30,10 @@ export default {
     }
   },
   methods: {
-    onSubmit(e) {
+    login(e) {
       Api.post('/login', this.form)
         .then((result) => {
-          console.log(result)
+          console.log('Logged in!')
           // Saving the user's _id
           const objectId = result.data._id
           // Clear the local storage before saving the _id
