@@ -435,6 +435,26 @@ router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
     });
 });
 
+
+//get all the lists of a specific user
+router.get('/api/:userid/lists', function (req, res, next){
+    var id = req.params.userid;
+    if (!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({message: "Check the ID"});
+    }
+        List.find({user : id}, function (err, lists) {
+            if(err){
+                return next(err); 
+            }
+                    
+            if(lists == null){
+                return res.status(404).json({"message":"Lists not found."});
+            }
+                
+                return res.status(200).json(lists);
+        });   
+});
+
 // //sort
 // router.get("/lists/:id/tasks/sortbyname").get(function(req, res, next) {
 //     detail

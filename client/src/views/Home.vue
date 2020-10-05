@@ -23,6 +23,9 @@ export default {
       .catch(error => {
         this.message = error
       })
+  },
+  methods: {
+
   }
 }
 </script>
