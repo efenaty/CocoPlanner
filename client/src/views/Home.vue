@@ -19,7 +19,7 @@ export default {
   mounted() {
     Api.get(`/users/${id}`)
       .then(response => {
-        this.message = 'welcome ' + response.data.username
+        this.message = 'Welcome, ' + response.data.username + '!'
       })
       .catch(error => {
         this.message = error
@@ -40,6 +40,8 @@ export default {
   margin-bottom: 1em;
 }
 h1{
-  color: crimson;
+  color:#D65DB1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-block-start: 4%;
 }
 </style>
