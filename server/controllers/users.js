@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var bcrypt = require('bcrypt');
+// var bcrypt = require('bcrypt');
 var User = require('../models/user');
 var mongoose = require ("mongoose");
 const user = require('../models/user');
@@ -50,7 +50,7 @@ router.get('/api/users/:id', function (req, res, next){
         if(user == null){
             res.status(404).json({"message": "User not found."});
         }
-        res.status(200).json(user);
+    res.status(200).json(user);
 });
 }); 
 
@@ -133,14 +133,16 @@ router.get('/api/users', function(req, res, next){
 
 //Delete all users
 router.delete('api/users', function (req, res, next){
-    User.deleteMany({ username : { $ne : null } } , function (err, users){
+    User.deleteMany({ username : { $ne : null }} , function (err, users){
         if (err){
             return next(err);
         }
         if(users == null){
-            res.status(404).json({"message": "No users exist to delete :3"});
+            return res.status(404).json({"message": "Users not found"})
         }
-        res.status(200).json(users);
+        res.status(200).send()
+        
+        // res.status(200).send();
     })
 })
 
