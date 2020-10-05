@@ -15,6 +15,7 @@
 </div>
     </b-nav>
     </div> -->
+     <navigation v-if="showNavigation">
     <div>
   <b-navbar class= "navbar" type="dark" >
     <b-navbar-nav>
@@ -30,10 +31,19 @@
     </b-navbar-nav>
   </b-navbar>
 </div>
+     </navigation>
     <!-- Render the content of the current page view -->
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    this.$route.path === '/login' || this.$route.path === '/signup' ? this.showNavigation = false : this.showNavigation = true
+  }
+}
+</script>
 
 <style>
 #app {

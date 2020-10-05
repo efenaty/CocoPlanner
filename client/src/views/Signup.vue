@@ -1,5 +1,6 @@
 <template>
 <body>
+  <div id="background">
   <div class="container">
     <p>Join us here!</p>
     <b-form @submit="onSubmit" v-if="show">
@@ -54,6 +55,7 @@
     </b-card> -->
 
   </div>
+  </div>
   </body>
 </template>
 
@@ -101,7 +103,7 @@ export default {
     margin: auto;
     display: inline-block; */
     box-shadow: 7px 7px 4px 0px rgba(0, 0, 0, 0.123);
-    margin-top: 7%
+    margin-top: 2%
 }
 .signupbtn {
     margin-left: 75%;
@@ -117,6 +119,7 @@ export default {
 div {
   border-radius: 5px;
   padding: 20px;
+  margin-top: 2%;
   min-height: 100%;
 }
 
@@ -136,7 +139,9 @@ p {
 body {
   position: relative;
   min-height: 100%;
-  /* background-color:#845EC2; */
+  background-color:#845EC2;
+  padding: 66px;
+  margin-top: 0%;
 }
 
 html { height: 100%; }
