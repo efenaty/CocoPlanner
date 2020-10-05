@@ -13,7 +13,7 @@
       <b-form-group id="input-4" label="Birthdate:" label-for="input-4">
         <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">Save</b-button>
+      <b-button type="submit" variant="primary" @click="updateUser" v-if="show">Save</b-button>
       <b-button type="delete" variant="danger" @click="onDelete">Delete</b-button>
     </b-form>
   </div>
@@ -36,12 +36,12 @@ export default {
     }
   },
   methods: {
-    onSubmit(e) {
+    updateUser(e) {
       // console.log(this.form)
       e.preventDefault()
       Api.patch(`/users/${id}`, this.form)
         .then((result) => {
-          console.log(result)
+          console.log('Updated')
         }).catch(error => {
           console.error(error)
         // TODO: display error message
@@ -61,6 +61,8 @@ export default {
         })
         .then(() => {
         //   This code is always executed at the end. After success or failure.
+          console.log('Deleted')
+          this.$router.push('/login')
         })
     }
   }
