@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <b-container>
     <h1>{{message}}</h1>
     <b-button type="submit" variant="primary" @click="signOut">Sign out</b-button>
-  </div>
+  </b-container>
 </template>
 
 <script>

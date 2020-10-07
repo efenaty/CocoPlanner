@@ -15,34 +15,21 @@
 </div>
     </b-nav>
     </div> -->
-    <div>
-      <div class= "navigation" v-if="showNavigation">
-  <b-navbar class= "navbar" type="dark" >
-    <b-navbar-nav>
-    <b-nav-item href ="/">Home</b-nav-item>
-    <b-nav-item href ="/calendar">Calendar</b-nav-item>
-    <b-nav-item href ="/tasks">Tasks</b-nav-item>
-    <b-nav-item href ="/favorites">Favorites</b-nav-item>
-      <!-- Navbar dropdowns -->
-      <b-nav-item-dropdown text="Account" right>
-        <b-dropdown-item href="/Account">Profile Settings</b-dropdown-item>
-        <b-dropdown-item href="/login">Log out</b-dropdown-item>
-      </b-nav-item-dropdown>
-    </b-navbar-nav>
-  </b-navbar>
-  </div>
-</div>
     <!-- Render the content of the current page view -->
+    <navigation />
     <router-view/>
   </div>
 </template>
 
 <script>
+import Navigation from '@/components/Navigation.vue'
+
 export default {
+  components: {
+    Navigation
+  },
   data() {
-    this.$route.path === '/login' || this.$route.path === '/signup' ? this.showNavigation = false : this.showNavigation = true
     return {
-      count: 0
     }
   }
 }
@@ -57,7 +44,4 @@ export default {
   color: #2c3e50;
 }
 
-.navbar {
- background-color: #845EC2;
-}
 </style>

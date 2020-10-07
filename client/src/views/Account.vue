@@ -31,7 +31,7 @@
 
   <b-row class="my-1">
     <b-col sm="2">
-      <label for="input-group-4">Birth Date</label>
+      <label for="input-group-4">Birth date</label>
     </b-col>
     <b-col sm="10">
         <b-form-input id="input-4" v-model="form.birthDate" type="date" required placeholder="Enter your new birthdate"></b-form-input>
