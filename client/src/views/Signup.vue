@@ -10,7 +10,7 @@
       <label for="input-group-1">Username</label>
     </b-col>
     <b-col sm="10">
-         <b-form-input id="input-1" v-model="form.username" required placeholder="Enter password"></b-form-input>
+         <b-form-input id="input-1" v-model="form.username" required placeholder="Enter username"></b-form-input>
     </b-col>
   </b-row>
 
@@ -19,7 +19,7 @@
       <label for="input-group-2">Password</label>
     </b-col>
     <b-col sm="10">
-         <b-form-input id="input-2" v-model="form.password" required placeholder="Enter password"></b-form-input>
+         <b-form-input id="input-2" v-model="form.password" type="password" required placeholder="Enter password"></b-form-input>
     </b-col>
   </b-row>
 
