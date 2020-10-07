@@ -1,20 +1,45 @@
 <template>
   <div class="container">
+    <p>Update your profile here!</p>
     <b-form  @delete="onDelete" v-if="show">
-      <b-form-group id="input-1" label="Username" label-for="input-1">
-        <b-form-input id="input-1" v-model="form.username" placeholder="Enter your new username"></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-2" label="Password:" label-for="input-2">
-        <b-form-input id="input-2" v-model="form.password" type="password" placeholder="Enter your new password"></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-3" label="Email address:" label-for="input-3">
-       <b-form-input id="input-3" v-model="form.email" type="email" placeholder="Enter email"></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-4" label="Birthdate:" label-for="input-4">
-        <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
-      </b-form-group>
-      <b-button type="submit" variant="primary">Save</b-button>
-      <b-button type="delete" variant="danger" @click="onDelete">Delete</b-button>
+      <b-row class="my-1">
+    <b-col sm="2">
+      <label for="input-group-1">Username</label>
+    </b-col>
+    <b-col sm="10">
+         <b-form-input id="input-1" v-model="form.username" required placeholder="Enter password"></b-form-input>
+    </b-col>
+  </b-row>
+
+     <b-row class="my-1">
+    <b-col sm="2">
+      <label for="input-group-2">Password</label>
+    </b-col>
+    <b-col sm="10">
+         <b-form-input id="input-2" v-model="form.password" required placeholder="Enter password"></b-form-input>
+    </b-col>
+  </b-row>
+
+     <b-row class="my-1">
+    <b-col sm="2">
+      <label for="input-group-3">Email</label>
+    </b-col>
+    <b-col sm="10">
+        <b-form-input id="input-3" v-model="form.email" type="email" required placeholder="Enter email"></b-form-input>
+    </b-col>
+  </b-row>
+
+  <b-row class="my-1">
+    <b-col sm="2">
+      <label for="input-group-4">Birth date</label>
+    </b-col>
+    <b-col sm="10">
+        <b-form-input id="input-4" v-model="form.birthDate" type="date" required placeholder="Enter your new birthdate"></b-form-input>
+    </b-col>
+  </b-row>
+
+      <b-button class="savebtn" type="submit" @click="updateUser" v-if="show">Save</b-button>
+      <b-button class="deletebtn" type="delete" @click="onDelete">Delete account</b-button>
     </b-form>
   </div>
 </template>
@@ -22,7 +47,7 @@
 <script>
 
 import { Api } from '@/Api'
-
+var id = localStorage.getItem('objectId')
 export default {
   data() {
     return {
@@ -36,12 +61,12 @@ export default {
     }
   },
   methods: {
-    onSubmit(e) {
+    updateUser(e) {
       // console.log(this.form)
-      // e.preventDefault()
-      Api.patch('/users/5f7611111ccf6bb050a1663d', this.form)
+      e.preventDefault()
+      Api.patch(`/users/${id}`, this.form)
         .then((result) => {
-          console.log(result)
+          console.log('Updated')
         }).catch(error => {
           console.error(error)
         // TODO: display error message
@@ -54,13 +79,15 @@ export default {
     onDelete(e) {
       // console.log(this.form)
       e.preventDefault()
-      Api.request({ url: '/users/5f76138c1ccf6bb050a1663f', method: 'delete' })
+      Api.request({ url: `/users/${id}`, method: 'delete' })
         .catch(error => {
           console.error(error)
         // TODO: display error message
         })
         .then(() => {
         //   This code is always executed at the end. After success or failure.
+          console.log('Deleted')
+          this.$router.push('/login')
         })
     }
   }
@@ -69,10 +96,51 @@ export default {
 
 <style scoped>
 .container {
-    width: 30%;
-    height: 30%;
+    width: 50%;
+    height: 50%;
+    background-color: #FF6F91;
+    /* position: relative;
     margin: auto;
-    display: inline-block;
+    display: inline-block; */
+    margin-top: 7%
+}
+.my-1 {
+  padding-bottom: 10px;
 }
 
+div {
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 100%;
+}
+
+label {
+  color: white;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.savebtn {
+margin-left: 75%;
+    background-color: darkgray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-bottom: 5px;
+}
+
+.deletebtn {
+  margin-left: 75%;
+    background-color: darkgray;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 1%;
+    padding-bottom: 5px;
+}
+
+p {
+ color: white;
+ font-weight: bold;
+ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ text-align: center;
+ font-size: 20px
+}
 </style>

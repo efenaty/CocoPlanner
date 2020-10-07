@@ -322,15 +322,8 @@ router.delete('/api/lists/:id/tasks/:task_id', function(req, res, next){
         if (task == null){
             return res.status(404).json({"message":"Task not found."});
         }
-        // var array = [];
-        // for ( i=0 ; i<list.tasks.length ; i++){
-        //     if(list.tasks[i]._id == task_id)
-        //     array.push(list.tasks[i]);
-        // }
         res.status(200).send();
-        //res.status(200).json(list.tasks);
         });
-        // res.status(200).json(list.tasks);
     });
 
     
@@ -364,15 +357,8 @@ router.delete('/api/lists/:id/items/:item_id', function(req, res, next){
         if (item == null){
             return res.status(404).json({"message":"Item not found."});
         }
-        // var array = [];
-        // for ( i=0 ; i<list.tasks.length ; i++){
-        //     if(list.tasks[i]._id == task_id)
-        //     array.push(list.tasks[i]);
-        // }
         res.status(200).send();
-        //res.status(200).json(list.tasks);
         });
-        // res.status(200).json(list.tasks);
     });
     
 //Update a task
@@ -405,16 +391,16 @@ router.patch('/api/lists/:id/tasks/:task_id', function (req, res, next){
     });
 });
 
+
+
 //Update an item
 router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
     var id = req.params.id;
     var item_id = req.params.item_id; 
-
     if( !mongoose.Types.ObjectId.isValid(id) ){
         return res.status(404).json({message: "Check the ID"});
     }else if( !mongoose.Types.ObjectId.isValid(item_id) ){
         return res.status(404).json({message: "Check the ID"});}
-
     List.findById({ _id : id }).populate('items').exec(function(err,list){
         if(err){ 
             return next(err);
@@ -435,18 +421,26 @@ router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
     });
 });
 
-// //sort
-// router.get("/lists/:id/tasks/sortbyname").get(function(req, res, next) {
-//     detail
-//       .find({}, function(err, result) {
-//         if (err) {
-//           return next(err);
-//         } else {
-//           res.json(result);
-//         }
-//       })
-//       .sort({ name : 1});
-//   });
+
+//get all the lists of a specific user
+router.get('/api/:userid/lists', function (req, res, next){
+    var id = req.params.userid;
+    if (!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({message: "Check the ID"});
+    }
+        List.find({user : id}, function (err, lists) {
+            if(err){
+                return next(err); 
+            }
+                    
+            if(lists == null){
+                return res.status(404).json({"message":"Lists not found."});
+            }
+                
+                return res.status(200).json(lists);
+        });   
+});
+
     
 
 module.exports = router;

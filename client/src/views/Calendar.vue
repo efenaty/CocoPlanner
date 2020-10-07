@@ -1,5 +1,5 @@
 <template>
-    <h1> We will have our Calendar here </h1>
+     <b-calendar class = "calendar" block locale="en-US"></b-calendar>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
 </script>
 
 <style scoped>
- h1 {
-     color: blue;
+ .calendar {
+    padding: 30px;
  }
  </style>

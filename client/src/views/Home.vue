@@ -1,17 +1,13 @@
 <template>
-  <div>
-    <b-jumbotron header="DIT341 Frontend" lead="Welcome to your DIT341 Frontend Vue.js App">
-      <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
-      <p>Message from the server:<br/>
-      {{ message }}</p>
-    </b-jumbotron>
-  </div>
+  <b-container>
+    <h1>{{message}}</h1>
+    <b-button type="submit" variant="primary" @click="signOut">Sign out</b-button>
+  </b-container>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
-
 export default {
   name: 'home',
   data() {
@@ -19,16 +15,23 @@ export default {
       message: 'none'
     }
   },
+  mounted() {
+    const id = localStorage.getItem('objectId')
+    Api.get(`/users/${id}`)
+      .then(response => {
+        this.message = 'Welcome, ' + response.data.username + '!'
+      })
+      .catch(error => {
+        this.message = error
+      })
+  },
   methods: {
-    getMessage() {
-      Api.get('/')
-        .then(response => {
-          this.message = response.data.message
-        })
-        .catch(error => {
-          this.message = error
-        })
+    signOut() {
+      localStorage.clear()
+      this.$router.push('/login')
+      console.log('Signed out!')
     }
+
   }
 }
 </script>
@@ -36,5 +39,10 @@ export default {
 <style>
 .btn_message {
   margin-bottom: 1em;
+}
+h1{
+  color:#D65DB1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-block-start: 4%;
 }
 </style>

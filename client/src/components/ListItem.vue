@@ -7,6 +7,7 @@
     <template v-slot:header>
       <h4 class="mb-0">{{list.name}}</h4>
     </template>
+  <b-button type="delete" variant="danger" @click="onDelete(task._id)">Delete</b-button>
 
 <form id="formElement">
   <label for="name">Task name:</label><br>
@@ -21,6 +22,7 @@
   <div v-for="task in tasks" v-bind:key="task._id">
     <b-list-group flush>
       <b-list-group-item>{{task.name}}</b-list-group-item>
+      <b-button type="delete" variant="danger" @click="onDelete(task._id)">Delete</b-button>
     </b-list-group>
   </div>
 
@@ -62,18 +64,6 @@ export default {
         })
     },
 
-    deleteCamel(e) {
-      var id = this.list._id
-      Api.delete(`/lists/${id}`)
-        .then(response => {
-          const index = this.lists.findIndex(list => list._id === id)
-          this.lists.splice(index, 1)
-        })
-        .catch(error => {
-          console.error(error)
-        })
-    },
-
     // showForm(e) {
     //   document.getElementById('formElement').style.display = 'block'
     // },
@@ -89,9 +79,22 @@ export default {
         // TODO: display error message
         })
         .then(() => {
+          this.getTasks()
         //   This code is always executed at the end. After success or failure.
         })
       e.preventDefault()
+    },
+
+    onDelete(id) {
+      var listid = this.list._id
+      Api.request({ url: `/lists/${listid}/tasks/${id}`, method: 'delete' })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          this.getTasks()
+        //   This code is always executed at the end. After success or failure.
+        })
     }
   },
 

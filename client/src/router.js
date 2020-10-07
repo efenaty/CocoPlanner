@@ -6,7 +6,7 @@ import Tasks from './views/Tasks.vue'
 import Favorites from './views/Favorites.vue'
 import Signup from './views/Signup.vue'
 import Account from './views/Account.vue'
-// import Account from './views/Account.vue'
+import Login from './views/Login.vue'
 
 Vue.use(Router)
 
@@ -43,6 +43,11 @@ export default new Router({
       path: '/account',
       name: 'account',
       component: Account
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })

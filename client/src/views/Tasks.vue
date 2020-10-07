@@ -10,6 +10,7 @@
 <script>
 import { Api } from '@/Api'
 import ListItem from '@/components/ListItem.vue'
+const userid = localStorage.getItem('objectId')
 
 export default {
   name: 'lists',
@@ -30,7 +31,7 @@ export default {
   },
   methods: {
     getLists() {
-      Api.get('/lists')
+      Api.get(`/${userid}/lists`)
         .then(response => {
           console.log(response.data)
           this.lists = response.data

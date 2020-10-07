@@ -4,7 +4,7 @@
       <router-link to="/">Home </router-link>
       <router-link to="/calendar">Calendar</router-link>
     </div> -->
-    <div>
+    <!-- <div>
     <b-nav tabs justified>
     <b-nav-item to ="/">Home</b-nav-item>
     <b-nav-item to = "/calendar">Calendar</b-nav-item>
@@ -13,13 +13,27 @@
     <b-nav-item to = "/account">Account</b-nav-item>
 <div>
 </div>
-    <!-- <b-nav-item disabled>Disabled</b-nav-item> -->
     </b-nav>
-    </div>
+    </div> -->
     <!-- Render the content of the current page view -->
+    <navigation />
     <router-view/>
   </div>
 </template>
+
+<script>
+import Navigation from '@/components/Navigation.vue'
+
+export default {
+  components: {
+    Navigation
+  },
+  data() {
+    return {
+    }
+  }
+}
+</script>
 
 <style>
 #app {
@@ -29,4 +43,5 @@
   text-align: center;
   color: #2c3e50;
 }
+
 </style>
