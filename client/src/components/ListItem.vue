@@ -1,11 +1,11 @@
 <template>
-  <b-card no-body style="max-width: 20rem;">
+  <b-card no-body class="mt-4" style="max-width: 20rem;">
     <template v-slot:header>
       <h4 class="mb-0">{{list.name}}</h4>
       <b-button-close type="delete"  @click="onDelete(task._id)"></b-button-close>
     </template>
 
-  <div v-for="task in tasks" v-bind:key="task._id">
+  <div class= "taskName" v-for="task in tasks" v-bind:key="task._id">
     <b-list-group>
       <b-list-group-item>{{task.name}}</b-list-group-item>
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
@@ -13,7 +13,7 @@
   </div>
 
  <hr>
-<form id="formElement">
+<form class= "form" id="formElement">
   <label for="name">Task name:</label><br>
   <input type="text" id="name" name="name" v-model="form.name"><br>
   <label for='startDate'>Startdate:</label><br>
@@ -103,5 +103,17 @@ export default {
 <style scoped>
 p {
     background-color: rgb(134, 155, 226);
+}
+
+.mb-0 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.taskName {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>

@@ -1,7 +1,10 @@
 <template>
-   <div class = "cards">
+   <div class= "mt-4 mb-5">
         <b-container>
-      <b-button class = "deleteAll">Delete all lists</b-button>
+          <div>
+      <b-button class= "deleteAll">Delete all lists</b-button>
+      <b-button class= "addAList">Add a new list</b-button>
+      </div>
       <b-row>
         <b-col cols="12" sm="6" md="4" v-for="list in lists" v-bind:key="list._id">
             <list-item v-bind:list="list" v-on:get-tasks="getTasks"/>
@@ -88,13 +91,12 @@ export default {
     color: red;
 }
 
-.cards {
-  padding: 40px;
-}
-
 .deleteAll {
-  margin-bottom: 40px;
   margin-left: 80%;
+
+}
+.addAList {
+  margin-right: 80%;
 
 }
 </style>
