@@ -1,9 +1,13 @@
 <template>
-   <div>
-        <p>Here are my lists:</p>
-        <div v-for="list in lists" v-bind:key="list._id">
+   <div class = "cards">
+        <b-container>
+      <b-button class = "deleteAll">Delete all lists</b-button>
+      <b-row>
+        <b-col cols="12" sm="6" md="4" v-for="list in lists" v-bind:key="list._id">
             <list-item v-bind:list="list" v-on:get-tasks="getTasks"/>
-        </div>
+            </b-col>
+                 </b-row>
+        </b-container>
     </div>
 </template>
 
@@ -82,5 +86,15 @@ export default {
 <style scoped>
 .red {
     color: red;
+}
+
+.cards {
+  padding: 40px;
+}
+
+.deleteAll {
+  margin-bottom: 40px;
+  margin-left: 80%;
+
 }
 </style>

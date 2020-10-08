@@ -1,14 +1,18 @@
 <template>
-    <div>
-  <b-card
-    no-body
-    style="max-width: 20rem;"
-  >
+  <b-card no-body style="max-width: 20rem;">
     <template v-slot:header>
       <h4 class="mb-0">{{list.name}}</h4>
+      <b-button-close type="delete"  @click="onDelete(task._id)"></b-button-close>
     </template>
-  <b-button type="delete" variant="danger" @click="onDelete(task._id)">Delete</b-button>
 
+  <div v-for="task in tasks" v-bind:key="task._id">
+    <b-list-group>
+      <b-list-group-item>{{task.name}}</b-list-group-item>
+      <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
+    </b-list-group>
+  </div>
+
+ <hr>
 <form id="formElement">
   <label for="name">Task name:</label><br>
   <input type="text" id="name" name="name" v-model="form.name"><br>
@@ -19,16 +23,7 @@
   <input type="submit" value="Submit" @click="addNewTasks">
 </form>
 
-  <div v-for="task in tasks" v-bind:key="task._id">
-    <b-list-group flush>
-      <b-list-group-item>{{task.name}}</b-list-group-item>
-      <b-button type="delete" variant="danger" @click="onDelete(task._id)">Delete</b-button>
-    </b-list-group>
-  </div>
-
   </b-card>
-</div>
-
 </template>
 
 <script>
