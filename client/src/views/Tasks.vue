@@ -3,7 +3,17 @@
         <b-container>
           <div>
       <b-button class= "deleteAll" @click="deleteAll">Delete all lists</b-button>
-      <b-button class= "addAList">Add a new list</b-button>
+      <b-button class= "addAList"  v-b-modal.modal-prevent-closing>Add a new list</b-button>
+
+      <b-modal id="modal-prevent-closing" ref="modal" title="Add a new list" @show="resetModal" @hidden="resetModal" @ok="handleOk">
+      <form ref="form" @submit.stop.prevent="handleSubmit">
+        <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
+          <b-form-input id="name-input" v-model="name" required >
+          </b-form-input>
+        </b-form-group>
+      </form>
+    </b-modal>
+
       </div>
       <b-row>
         <b-col cols="12" sm="6" md="4" v-for="list in lists" v-bind:key="list._id">
@@ -30,6 +40,8 @@ export default {
   },
   data() {
     return {
+      name: '',
+      nameState: null,
       lists: [],
       tasks: [],
       message: '',
@@ -77,6 +89,33 @@ export default {
     createList() {
       console.log(this.text)
     //   Api.post(...)
+    },
+    checkFormValidity() {
+      const valid = this.$refs.form.checkValidity()
+      this.nameState = valid
+      return valid
+    },
+    resetModal() {
+      this.name = ''
+      this.nameState = null
+    },
+    handleOk(bvModalEvt) {
+      // Prevent modal from closing
+      bvModalEvt.preventDefault()
+      // Trigger submit handler
+      this.handleSubmit()
+    },
+    handleSubmit() {
+      // Exit when the form isn't valid
+      if (!this.checkFormValidity()) {
+        return
+      }
+      // Push the name to submitted names
+      this.favoriteItems.push(this.name)
+      // Hide the modal manually
+      this.$nextTick(() => {
+        this.$bvModal.hide('modal-prevent-closing')
+      })
     }
   }
 }

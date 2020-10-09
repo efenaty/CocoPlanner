@@ -17,12 +17,12 @@
 
     <b-modal id="modal-prevent-closing" ref="modal" title="Add a new favorite" @show="resetModal" @hidden="resetModal" @ok="handleOk">
       <form ref="form" @submit.stop.prevent="handleSubmit">
-        <b-form-group :state="nameState" label="name" label-for="name-input" invalid-feedback="Name is required">
+        <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
           <b-form-input id="name-input" v-model="name" required >
           </b-form-input>
         </b-form-group>
 
-          <b-form-group :state="reviewState" label="review" label-for="review-input" invalid-feedback="Review is required">
+          <b-form-group :state="reviewState" label="Review" label-for="review-input" invalid-feedback="Review is required">
           <b-form-input id="review-input" v-model="review" :state="reviewState"></b-form-input>
         </b-form-group>
 

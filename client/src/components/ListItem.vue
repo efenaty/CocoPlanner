@@ -2,20 +2,20 @@
   <b-card no-body class="mt-4" style="max-width: 20rem;">
     <template v-slot:header>
       <h4 class="mb-0">{{list.name}}</h4>
-      <b-button-close type="delete"  v-on:click="$emit('delete-lists', list._id)"></b-button-close>
+      <b-button-close class="listDelete" type="delete"  v-on:click="$emit('delete-lists', list._id)"></b-button-close>
     </template>
 
   <div class= "taskName" v-for="task in tasks" v-bind:key="task._id">
     <b-list-group>
       <b-list-group-item>{{task.name}}</b-list-group-item>
-      <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
+      <b-button-close class="taskDelete" type="delete" @click="onDelete(task._id)"></b-button-close>
     </b-list-group>
   </div>
 
  <hr>
 <form class= "form" id="formElement">
   <label for="name">Task name:</label><br>
-  <input type="text" id="name" name="name" v-model="form.name"><br>
+  <input type="text" id="name" name="name" placeholder="task name.." v-model="form.name"><br>
   <label for='startDate'>Startdate:</label><br>
   <input type="date" id="startDate" name="startDate" data-date-format="DD MMMM YYYY" v-model="form.startDate"><br>
   <label for='endDate'>Enddate:</label><br>
@@ -111,9 +111,23 @@ p {
 
 .form {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.listDelete {
+  position: absolute;
+  top:16px;
+  right:8px;
 }
 
 .taskName {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.taskDelete {
+  position: absolute;
+  top:10px;
+  right:5px;
 }
 </style>
