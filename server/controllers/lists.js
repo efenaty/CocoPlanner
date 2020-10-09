@@ -47,7 +47,7 @@ router.get('/api/lists', function(req, res){
 });
 
 
-//Update all list's information
+//Update a list's information
 router.put("/api/lists/:id" , function(req, res, next){
     var id = req.params.id;
 
@@ -68,6 +68,7 @@ router.put("/api/lists/:id" , function(req, res, next){
     res.status(200).json(list);
     })
 });
+
 
 //Show a certain list
 router.get('/api/lists/:id', function(req, res, next){
@@ -105,6 +106,7 @@ router.patch('/api/lists/:id', function(req, res, next){
     });
 });
 
+
 //Delete a certain list 
 router.delete('/api/lists/:id',function(req, res, next){
     var id = req.params.id;
@@ -117,10 +119,36 @@ router.delete('/api/lists/:id',function(req, res, next){
         if (list == null){
             return res.status(404).json({"message":"List not found."});
         }
-        res.status(200).json(list);    
+        //res.status(200).json(list);    
     });
+    Task.deleteMany({list : id}, function (err,tasks){
+        if (err){
+            return next(err)
+        }
+        if (tasks == null){
+            return res.status(404).json({"message": "Task not found"})
+        }
+        res.status(200).send();
+    })
+    
 });
 
+//Delete all lists for a user
+router.delete('/api/users/:userid/lists', function(req, res, next){
+    var user = req.params.userid;
+    if( !mongoose.Types.ObjectId.isValid(user) ){
+        return res.status(404).json({message: "Check the ID"});}
+        List.deleteMany({user : user, is_favorite_list: "false"}, function (err, lists){
+            if (err){
+                return next(err);
+            }
+            if(lists == null){
+                return res.status(404).json({"message": "Lists not found"})
+            }
+            res.status(200).send()
+        })
+
+})
 
 //Add a task to a list
 //Source : https://kb.objectrocket.com/mongo-db/how-to-join-collections-using-mongoose-228 
