@@ -1,7 +1,6 @@
 <template>
    <div class= "mt-4 mb-5">
         <b-container>
-          <div>
       <b-button class= "deleteAll" @click="deleteAll">Delete all lists</b-button>
       <b-button class= "addAList"  v-b-modal.modal-prevent-closing>Add a new list</b-button>
 
@@ -14,7 +13,6 @@
       </form>
     </b-modal>
 
-      </div>
       <b-row>
         <b-col cols="12" sm="6" md="4" v-for="list in lists" v-bind:key="list._id">
             <list-item v-bind:list="list" v-on:delete-lists="deleteList"/>
