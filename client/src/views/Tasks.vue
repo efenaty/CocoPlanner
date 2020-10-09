@@ -2,12 +2,12 @@
    <div class= "mt-4 mb-5">
         <b-container>
           <div>
-      <b-button class= "deleteAll">Delete all lists</b-button>
+      <b-button class= "deleteAll" @click="deleteAll">Delete all lists</b-button>
       <b-button class= "addAList">Add a new list</b-button>
       </div>
       <b-row>
         <b-col cols="12" sm="6" md="4" v-for="list in lists" v-bind:key="list._id">
-            <list-item v-bind:list="list" v-on:get-tasks="getTasks"/>
+            <list-item v-bind:list="list" v-on:delete-lists="deleteList"/>
             </b-col>
                  </b-row>
         </b-container>
@@ -53,29 +53,25 @@ export default {
         //   This code is always executed at the end. After success or failure.
         })
     },
-    getTasks(id) {
-      Api.get(`/lists/${id}/tasks`)
-        .then(response => {
-          console.log(response.data)
-          this.tasks = response.data
-        })
+    deleteList(id) {
+      // var listid = this.list._id
+      Api.request({ url: `/lists/${id}`, method: 'delete' })
         .catch(error => {
-          this.message = error.message
           console.error(error)
-          this.tasks = []
         })
         .then(() => {
-          // This code is always executed at the end. After success or failure.
+          this.getLists()
         })
     },
-    deleteCamel(id) {
-      Api.delete(`/camels/${id}`)
-        .then(reponse => {
-          const index = this.camels.findIndex(camel => camel._id === id)
-          this.camels.splice(index, 1)
-        })
+
+    deleteAll() {
+      Api.request({ url: `/users/${userid}/lists`, method: 'delete' })
         .catch(error => {
           console.error(error)
+        // TODO: display error message
+        })
+        .then(() => {
+          this.getLists()
         })
     },
     createList() {
