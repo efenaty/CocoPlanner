@@ -130,4 +130,8 @@ p {
   top:10px;
   right:5px;
 }
+
+#name {
+  font-style: italic;
+}
 </style>

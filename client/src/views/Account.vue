@@ -143,4 +143,9 @@ p {
  text-align: center;
  font-size: 20px
 }
+
+#input-1, #input-2, #input-3, #input-4 {
+  font-style: italic;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 </style>
