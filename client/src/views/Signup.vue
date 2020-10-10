@@ -146,4 +146,8 @@ body {
 
 html { height: 100%; }
 
+::placeholder {
+  font-style: italic;
+}
+
 </style>
