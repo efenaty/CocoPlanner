@@ -17,7 +17,7 @@
  <hr>
 <form class= "form" id="formElement">
   <label for="name">Task name:</label><br>
-  <input type="text" id="name" name="name" v-model="form.name"><br>
+  <input type="text" id="name" name="name" placeholder="task name.." v-model="form.name"><br>
   <label for='startDate'>Startdate:</label><br>
   <input type="date" id="startDate" name="startDate" data-date-format="DD MMMM YYYY" v-model="form.startDate"><br>
   <label for='endDate'>Enddate:</label><br>
@@ -113,9 +113,27 @@ p {
 
 .form {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.listDelete {
+  position: absolute;
+  top:16px;
+  right:8px;
 }
 
 .taskName {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+.taskDelete {
+  position: absolute;
+  top:10px;
+  right:5px;
+}
+
+#name {
+  font-style: italic;
 }
 </style>
