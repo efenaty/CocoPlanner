@@ -4,7 +4,7 @@
       <b-button class= "deleteAll" @click="deleteAll">Delete all lists</b-button>
       <b-button class= "addAList"  v-b-modal.modal-prevent-closing>Add a new list</b-button>
 
-      <b-modal id="modal-prevent-closing" ref="modal" title="Add a new list" @show="resetModal" @hidden="resetModal" @ok="handleOk" @click="addNewList" >
+      <b-modal id="modal-prevent-closing" ref="modal" title="Add a new list" @show="resetModal" @hidden="resetModal" @ok="handleOk">
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
           <b-form-input id="name-input" v-model="name" required >
