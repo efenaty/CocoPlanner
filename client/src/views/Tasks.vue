@@ -1,8 +1,8 @@
 <template>
    <div class= "mt-4 mb-5">
         <b-container>
-      <b-button class= "deleteAll" @click="deleteAll">Delete all lists</b-button>
-      <b-button class= "addAList"  v-b-modal.modal-prevent-closing>Add a new list</b-button>
+      <b-button id= "deleteAll" @click="deleteAll">Delete all lists</b-button>
+      <b-button id= "addAList"  v-b-modal.modal-prevent-closing>Add a new list</b-button>
 
       <b-modal id="modal-prevent-closing" ref="modal" title="Add a new list" @show="resetModal" @hidden="resetModal" @ok="handleOk">
       <form ref="form" @submit.stop.prevent="handleSubmit">
@@ -136,15 +136,12 @@ export default {
 </script>
 
 <style scoped>
-.red {
-    color: red;
-}
 
-.deleteAll {
+#deleteAll {
   margin-left: 80%;
 
 }
-.addAList {
+#addAList {
   margin-right: 80%;
 
 }

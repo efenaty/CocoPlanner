@@ -35,7 +35,6 @@ export default {
     justify-content: space-between;
     align-items: center;
     background-color: #845EC2;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: large;
 }
 

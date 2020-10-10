@@ -107,12 +107,7 @@ p {
     background-color: rgb(134, 155, 226);
 }
 
-.mb-0 {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 .form {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
 }
 
@@ -123,7 +118,6 @@ p {
 }
 
 .taskName {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
 }
 
@@ -133,7 +127,7 @@ p {
   right:5px;
 }
 
-#name {
+::placeholder {
   font-style: italic;
 }
 </style>

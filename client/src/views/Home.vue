@@ -42,7 +42,6 @@ export default {
 }
 h1{
   color:#D65DB1;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding-block-start: 4%;
 }
 </style>
