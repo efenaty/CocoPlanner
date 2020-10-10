@@ -4,7 +4,7 @@
       <b-button class= "deleteAll" @click="deleteAll">Delete all lists</b-button>
       <b-button class= "addAList"  v-b-modal.modal-prevent-closing>Add a new list</b-button>
 
-      <b-modal id="modal-prevent-closing" ref="modal" title="Add a new list" @show="resetModal" @hidden="resetModal" @ok="handleOk">
+      <b-modal id="modal-prevent-closing" ref="modal" title="Add a new list" @show="resetModal" @hidden="resetModal" @ok="handleOk" @click="addNewList" >
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
           <b-form-input id="name-input" v-model="name" required >
@@ -15,9 +15,7 @@
 
       <b-row>
         <b-col cols="12" sm="6" md="4" v-for="list in lists" v-bind:key="list._id">
-            <list-item v-bind:list="list" v-on:delete-lists="deleteList"
-            v-on:add-list="addNewList"
-            />
+            <list-item v-bind:list="list" v-on:delete-lists="deleteList"/>
             </b-col>
                  </b-row>
         </b-container>
@@ -87,9 +85,25 @@ export default {
         })
     },
     addNewList() {
-      console.log(this.text)
-    //   Api.post(...)
+      var form = {
+        name: this.name,
+        is_favorite_list: false,
+        user: userid
+      }
+      Api.post('/lists', form)
+        .then((result) => {
+          console.log(result)
+        }).catch(error => {
+          console.error(error)
+        // TODO: display error message
+        })
+        .then(() => {
+          this.getLists()
+        //   This code is always executed at the end. After success or failure.
+        })
+      // e.preventDefault()
     },
+
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity()
       this.nameState = valid
@@ -110,8 +124,8 @@ export default {
       if (!this.checkFormValidity()) {
         return
       }
-      // Push the name to submitted names
-      this.favoriteItems.push(this.name)
+      // Add the list to the database
+      this.addNewList()
       // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide('modal-prevent-closing')
