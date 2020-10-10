@@ -7,7 +7,9 @@
       </div>
       <b-row>
         <b-col cols="12" sm="6" md="4" v-for="list in lists" v-bind:key="list._id">
-            <list-item v-bind:list="list" v-on:delete-lists="deleteList"/>
+            <list-item v-bind:list="list" v-on:delete-lists="deleteList"
+            v-on:add-list="addNewList"
+            />
             </b-col>
                  </b-row>
         </b-container>
@@ -74,7 +76,7 @@ export default {
           this.getLists()
         })
     },
-    createList() {
+    addNewList() {
       console.log(this.text)
     //   Api.post(...)
     }

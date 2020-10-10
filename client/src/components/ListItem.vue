@@ -1,14 +1,16 @@
 <template>
   <b-card no-body class="mt-4" style="max-width: 20rem;">
     <template v-slot:header>
-      <h4 class="mb-0">{{list.name}}</h4>
-      <b-button-close type="delete"  v-on:click="$emit('delete-lists', list._id)"></b-button-close>
+      <h4 class="mb-0">{{list.name}}
+         <b-button-close type="delete"  v-on:click="$emit('delete-lists', list._id)"></b-button-close>
+      </h4>
     </template>
 
   <div class= "taskName" v-for="task in tasks" v-bind:key="task._id">
     <b-list-group>
-      <b-list-group-item>{{task.name}}</b-list-group-item>
+      <b-list-group-item>{{task.name}}
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
+      </b-list-group-item>
     </b-list-group>
   </div>
 
