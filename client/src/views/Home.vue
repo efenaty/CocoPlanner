@@ -1,7 +1,6 @@
 <template>
   <b-container>
     <h1>{{message}}</h1>
-    <b-button type="submit" variant="primary" @click="signOut">Sign out</b-button>
   </b-container>
 </template>
 
@@ -26,11 +25,6 @@ export default {
       })
   },
   methods: {
-    signOut() {
-      localStorage.clear()
-      this.$router.push('/login')
-      console.log('Signed out!')
-    }
 
   }
 }
