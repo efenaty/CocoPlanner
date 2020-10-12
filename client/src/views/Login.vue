@@ -18,7 +18,9 @@
       <b-button class="submitBtn" variant="light" type="submit" >Log in</b-button>
       <b-button class="signupBtn" variant="light" type="submit" @click="openSignup" >Sign up</b-button>
     </b-form>
-    <br>
+
+    <footer class="myfooter">
+   </footer>
   </div>
   </div>
 </template>
@@ -72,6 +74,7 @@ export default {
   background-color:#150135;
   height:100%;
   overflow:hidden;
+  min-height: 100vh;
 }
 
 h1 {
@@ -85,6 +88,9 @@ font-weight: bold;
  margin-right: 90%;
 }
 
+/* .myfooter {
+  padding: 300px;
+} */
 .signupBtn {
 margin-left: 5%;
 margin-top: 5%;
@@ -100,8 +106,6 @@ color:#D65DB1;
 }
 .container {
     /* background-color:#f4ecff; */
-    overflow:auto;
-    height:100%
 }
 
 .form {
