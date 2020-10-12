@@ -90,11 +90,7 @@ export default {
   background-color:#150135;
   height:100%;
   overflow:hidden;
-}
-
-.container {
-  overflow:auto;
-  height:100%
+  min-height: 100vh;
 }
 
 p {
