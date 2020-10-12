@@ -31,7 +31,7 @@ export default {
 .navbar {
     display: flex;
     align-items: center;
-    background-color: #845EC2;
+    background-color: #150135;
     font-size: large;
 }
 
