@@ -41,14 +41,13 @@ export default {
       name: '',
       nameState: null,
       lists: [],
-      tasks: [],
       message: '',
       text: ''
     }
   },
   methods: {
     getLists() {
-      Api.get(`/${userid}/lists`)
+      Api.get(`/${userid}/lists?is_favorite_list=false`)
         .then(response => {
           console.log(response.data)
           this.lists = response.data

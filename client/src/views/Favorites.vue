@@ -3,7 +3,9 @@
     <h1>we will have our favorites here</h1>
     <b-row>
     <b-col cols="12" sm="4" md="6">
-     <b-list-group-item button>Button</b-list-group-item>
+      <div class= "lists" v-for="list in lists" v-bind:key="list._id"><br>
+     <b-list-group-item button>{{ list.name }}</b-list-group-item>
+     </div>
      </b-col>
      </b-row>
      <hr>
@@ -50,6 +52,7 @@ export default {
       review: '',
       nameState: null,
       reviewState: null,
+      lists: [],
       favoriteItems: [],
       selected: null
     }
@@ -86,7 +89,7 @@ export default {
       })
     },
     getLists() {
-      Api.get(`/${userid}/lists`)
+      Api.get(`/${userid}/lists?is_favorite_list=true`)
         .then(response => {
           console.log(response.data)
           this.lists = response.data
@@ -101,6 +104,10 @@ export default {
         //   This code is always executed at the end. After success or failure.
         })
     }
+  },
+  mounted() {
+    this.getLists()
+    // Load the real list from the server
   }
 }
 </script>

@@ -47,6 +47,30 @@ router.get('/api/lists', function(req, res){
 });
 
 
+//get all the lists of a specific user
+router.get('/api/:userid/lists', function (req, res, next){
+    var id = req.params.userid;
+    var query = {};
+    if(req.query.is_favorite_list){ 
+    query.is_favorite_list = req.query.is_favorite_list;
+    query.user = id;
+    }
+
+        List.find(query, function (err, lists) {
+            if(err){
+                return next(err); 
+            }
+                    
+            if(lists == null){
+                return res.status(404).json({"message":"Lists not found."});
+            }
+                
+                return res.status(200).json(lists);
+        });   
+});
+
+
+
 //Update a list's information
 router.put("/api/lists/:id" , function(req, res, next){
     var id = req.params.id;
@@ -450,24 +474,6 @@ router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
 });
 
 
-//get all the lists of a specific user
-router.get('/api/:userid/lists', function (req, res, next){
-    var id = req.params.userid;
-    if (!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({message: "Check the ID"});
-    }
-        List.find({user : id}, function (err, lists) {
-            if(err){
-                return next(err); 
-            }
-                    
-            if(lists == null){
-                return res.status(404).json({"message":"Lists not found."});
-            }
-                
-                return res.status(200).json(lists);
-        });   
-});
 
     
 
