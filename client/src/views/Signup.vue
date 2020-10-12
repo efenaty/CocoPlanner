@@ -1,62 +1,42 @@
 <template>
-<body>
-  <div id="background">
+<div class="main">
   <div class="container">
-    <p>Join us here!</p>
-    <b-form @submit="onSubmit" v-if="show">
+    <div>
+   <b-img id="logo" src= "https://i.imgur.com/tIpEU7K.png" fluid alt="mycocoplanner logo"></b-img>
+   </div>
+   <h1>Sign Up</h1>
+   <br>
+    <b-form class= "form" @submit="onSubmit" v-if="show">
 
-      <b-row class="my-1">
-    <b-col sm="2">
-      <label for="input-group-1">Username</label>
-    </b-col>
-    <b-col sm="10">
-         <b-form-input id="input-1" v-model="form.username" required placeholder="Enter username"></b-form-input>
-    </b-col>
-  </b-row>
-
-     <b-row class="my-1">
-    <b-col sm="2">
-      <label for="input-group-2">Password</label>
-    </b-col>
-    <b-col sm="10">
-         <b-form-input id="input-2" v-model="form.password" type="password" required placeholder="Enter password"></b-form-input>
-    </b-col>
-  </b-row>
-
-     <b-row class="my-1">
-    <b-col sm="2">
-      <label for="input-group-3">Email</label>
-    </b-col>
-    <b-col sm="10">
-        <b-form-input id="input-3" v-model="form.email" type="email" required placeholder="Enter email"></b-form-input>
-    </b-col>
-  </b-row>
-<!--
-      <b-form-group id="input-group-1" label="Username:" label-for="input-1">
+      <label id="username">Username</label>
+      <b-form-group id="input-group-1" label-for="input-1">
         <b-form-input id="input-1" v-model="form.username" required placeholder="Enter username"></b-form-input>
       </b-form-group>
 
-    <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input id="input-2" v-model="form.password" required placeholder="Enter password"></b-form-input>
+    <label id="password">Password</label>
+    <b-form-group id="input-group-2" label-for="input-2">
+        <b-form-input id="input-2" type= "password" v-model="form.password" required placeholder="Enter password"></b-form-input>
           </b-form-group>
 
-      <b-form-group id="input-group-3" label="Email address:" label-for="input-3">
+     <label id="email">Email</label>
+      <b-form-group id="input-group-3" label-for="input-3">
         <b-form-input id="input-3" v-model="form.email" type="email" required placeholder="Enter email"></b-form-input>
-      </b-form-group> -->
+      </b-form-group>
 
      <!-- <b-form-group id="input-4" label="Birthdate:" label-for="input-4">
         <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
       </b-form-group> -->
 
-      <b-button class="signupbtn" type="submit" >Sign up</b-button>
+      <b-button class="signupbtn" variant="light" type="submit" >Sign up</b-button>
+      <br>
+      <div style="float: left; margin-left: 60%; margin-top: 3%;">
+      <label id="login">or login here</label>
+      <b-button class="loginbtn" variant="light" type="submit" @click="openLogin" >Login</b-button>
+      </div>
     </b-form>
-    <!-- <b-card class="mt-3" header="Form Data Result">
-      <pre class="m-0">{{ form }}</pre>
-    </b-card> -->
-
+    <br>
   </div>
   </div>
-  </body>
 </template>
 
 <script>
@@ -97,59 +77,72 @@ export default {
         //   This code is always executed at the end. After success or failure.
         })
       e.preventDefault()
+    },
+    openLogin() {
+      this.$router.push('/login')
     }
   }
 }
 </script>
 
 <style scoped>
+.main {
+  background-color:#150135;
+  height:100%;
+  overflow:hidden;
+}
+
 .container {
-    width: 40%;
-    height: 40%;
-    background-color: #FF6F91;
-    /* position: relative;
-    margin: auto;
-    display: inline-block; */
-    box-shadow: 7px 7px 4px 0px rgba(0, 0, 0, 0.123);
-    margin-top: 2%
-}
-.signupbtn {
-    margin-left: 75%;
-    background-color: darkgray;
-    padding-bottom: 10px;
-
-}
-
-.my-1 {
-  padding-bottom: 10px;
-}
-
-div {
-  border-radius: 5px;
-  padding: 20px;
-  margin-top: 2%;
-  min-height: 100%;
-}
-
-label {
-  color: white;
-  font-weight: bold;
-  position: relative;
+  overflow:auto;
+  height:100%
 }
 
 p {
- color: white;
- font-weight: bold;
- text-align: center;
- font-size: 20px
+  color: white;
 }
 
-body {
+h1 {
+font-weight: bold;
+}
+
+.form {
+    width: 40%;
+    height: 30%;
+    margin: auto;
+}
+
+img {
+  width: 40%;
+  height: auto;
+  margin-top: 3%;
+}
+::placeholder {
+  font-style: italic;
+}
+
+div {
+  height: 100%;
+}
+
+#password, #username, #email
+{
+ font-weight: bold;
+ color: #D65DB1;
+ margin-right: 90%;
+}
+
+.signupbtn {
+ margin-left: 5%;
+margin-top: 5%;
+font-weight: bold;
+color:#D65DB1;
+}
+
+.loginbtn {
+  margin-top: 3%;
   position: relative;
-  min-height: 100%;
-  background-color:#845EC2;
-  padding: 66px;
-  margin-top: 0%;
+  font-weight: bold;
+  color:#D65DB1;
 }
 
 html { height: 100%; }
@@ -158,4 +151,9 @@ html { height: 100%; }
   font-style: italic;
 }
 
+#login {
+  color: white;
+  margin-right: 10px;
+  position: relative;
+}
 </style>

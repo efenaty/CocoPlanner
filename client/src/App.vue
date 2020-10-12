@@ -17,6 +17,7 @@
     </div> -->
     <!-- Render the content of the current page view -->
     <navigation />
+  <!-- <div style="background-color:#150135; overflow:hidden;"> -->
     <router-view/>
   </div>
 </template>
