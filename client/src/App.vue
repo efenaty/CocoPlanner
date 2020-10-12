@@ -17,6 +17,7 @@
     </div> -->
     <!-- Render the content of the current page view -->
     <navigation />
+  <!-- <div style="background-color:#150135; overflow:hidden;"> -->
     <router-view/>
   </div>
 </template>
@@ -42,6 +43,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100vh;
+  height:100%;
+  overflow:hidden;
 }
 
 </style>

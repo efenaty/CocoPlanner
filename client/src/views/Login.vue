@@ -1,17 +1,27 @@
 <template>
+<div class="main">
  <div class="container">
-   <h1>Log in</h1>
+   <div>
+   <b-img id="logo" src= "https://i.imgur.com/tIpEU7K.png" fluid alt="mycocoplanner logo"></b-img>
+   </div>
+   <h1>Log In</h1>
    <br>
-    <b-form @submit="login" v-if="show">
-      <b-form-group id="input-1" label="Username" label-for="input-1">
+    <b-form class="form" @submit="login" v-if="show">
+      <label id="username">Username</label>
+      <b-form-group id="input-1" label-for="input-1">
         <b-form-input id="input-1" v-model="form.username" required placeholder="Enter your username"></b-form-input>
       </b-form-group>
-      <b-form-group id="input-2" label="Password:" label-for="input-2">
+      <label id="password">Password</label>
+      <b-form-group id="input-2" label-for="input-2">
         <b-form-input id="input-2" v-model="form.password" type="password" required placeholder="Enter your password"></b-form-input>
       </b-form-group>
-      <b-button type="submit" variant="primary">log in</b-button>
-      <b-button variant="primary" @click="openSignup" >Sign up</b-button>
+      <b-button class="submitBtn" variant="light" type="submit" >Log in</b-button>
+      <b-button class="signupBtn" variant="light" type="submit" @click="openSignup" >Sign up</b-button>
     </b-form>
+
+    <footer class="myfooter">
+   </footer>
+  </div>
   </div>
 </template>
 
@@ -59,15 +69,63 @@ export default {
 </script>
 
 <style scoped>
-.container {
-    width: 30%;
-    height: 30%;
-    margin: auto;
-    display: inline-block;
-    margin-top: 5%;
+
+.main {
+  background-color:#150135;
+  height:100%;
+  overflow:hidden;
+  min-height: 100vh;
 }
 
+h1 {
+font-weight: bold;
+}
+
+#password, #username
+{
+ font-weight: bold;
+ color: #D65DB1;
+ margin-right: 90%;
+}
+
+/* .myfooter {
+  padding: 300px;
+} */
+.signupBtn {
+margin-left: 5%;
+margin-top: 5%;
+font-weight: bold;
+color:#D65DB1;
+}
+
+.submitBtn {
+  margin-top: 5%;
+  position: relative;
+  font-weight: bold;
+  color:#D65DB1;
+}
+.container {
+    /* background-color:#f4ecff; */
+}
+
+.form {
+    width: 40%;
+    height: 30%;
+    margin: auto;
+    margin-top: 1%;
+}
+
+img {
+  width: 40%;
+  height: auto;
+  margin-top: 5%;
+}
 ::placeholder {
   font-style: italic;
 }
+
+div {
+  height: 100%;
+}
+
 </style>
