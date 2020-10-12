@@ -1,17 +1,23 @@
 <template>
-    <div>
-  <b-card
-    no-body
-    style="max-width: 20rem;"
-  >
+  <b-card no-body class="mt-4" style="max-width: 20rem;">
     <template v-slot:header>
-      <h4 class="mb-0">{{list.name}}</h4>
+      <h4 class="mb-0">{{list.name}}
+         <b-button-close type="delete"  v-on:click="$emit('delete-lists', list._id)"></b-button-close>
+      </h4>
     </template>
-  <b-button type="delete" variant="danger" @click="onDelete(task._id)">Delete</b-button>
 
-<form id="formElement">
+  <div class= "taskName" v-for="task in tasks" v-bind:key="task._id">
+    <b-list-group>
+      <b-list-group-item>{{task.name}}
+      <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
+      </b-list-group-item>
+    </b-list-group>
+  </div>
+
+ <hr>
+<form class= "form" id="formElement">
   <label for="name">Task name:</label><br>
-  <input type="text" id="name" name="name" v-model="form.name"><br>
+  <input type="text" id="name" name="name" placeholder="task name.." v-model="form.name"><br>
   <label for='startDate'>Startdate:</label><br>
   <input type="date" id="startDate" name="startDate" data-date-format="DD MMMM YYYY" v-model="form.startDate"><br>
   <label for='endDate'>Enddate:</label><br>
@@ -19,16 +25,7 @@
   <input type="submit" value="Submit" @click="addNewTasks">
 </form>
 
-  <div v-for="task in tasks" v-bind:key="task._id">
-    <b-list-group flush>
-      <b-list-group-item>{{task.name}}</b-list-group-item>
-      <b-button type="delete" variant="danger" @click="onDelete(task._id)">Delete</b-button>
-    </b-list-group>
-  </div>
-
   </b-card>
-</div>
-
 </template>
 
 <script>
@@ -108,5 +105,29 @@ export default {
 <style scoped>
 p {
     background-color: rgb(134, 155, 226);
+}
+
+.form {
+  position: relative;
+}
+
+.listDelete {
+  position: absolute;
+  top:16px;
+  right:8px;
+}
+
+.taskName {
+  position: relative;
+}
+
+.taskDelete {
+  position: absolute;
+  top:10px;
+  right:5px;
+}
+
+::placeholder {
+  font-style: italic;
 }
 </style>

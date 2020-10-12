@@ -81,6 +81,14 @@ export default {
       Api.post('/users', this.form)
         .then((result) => {
           console.log(result)
+          // Saving the user's _id
+          const objectId = result.data._id
+          // Clear the local storage before saving the _id
+          localStorage.clear()
+          // Saving the objectId in the local storage
+          localStorage.setItem('objectId', objectId)
+          this.$router.push('/')
+          this.$router.go(0)
         }).catch(error => {
           console.error(error)
         // TODO: display error message
@@ -145,5 +153,9 @@ body {
 }
 
 html { height: 100%; }
+
+::placeholder {
+  font-style: italic;
+}
 
 </style>

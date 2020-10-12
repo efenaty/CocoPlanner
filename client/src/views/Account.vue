@@ -143,4 +143,8 @@ p {
  text-align: center;
  font-size: 20px
 }
+
+::placeholder {
+  font-style: italic;
+}
 </style>

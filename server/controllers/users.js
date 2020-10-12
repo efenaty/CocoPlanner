@@ -150,29 +150,4 @@ router.delete('api/users', function (req, res, next){
 
 
 
-
-// User.findOne({username: username}, function (err, user){
-    //     if(err){
-    //         return next(err);
-    //     }
-    //     user.comparePassword(password, function (err, isMatch){
-    //         if (err){
-    //             return next(err);
-    //         }
-    //     })
-    //     //req.session.user = user;
-    //     res.status(200).json(user);
-    
-    //      });
-    
-
-// router.get('/dashboard', function (req,res){
-//     if(!req.session.user){
-//         return res.status(401).json({"message": "Sorry, you are not logged in"});
-//     }
-
-//     return res.status(200).send("Welcome to CoCoPlanner");
-// });
-
-
 module.exports = router;

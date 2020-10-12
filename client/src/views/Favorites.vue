@@ -1,8 +1,14 @@
 <template>
   <div>
     <h1>we will have our favorites here</h1>
-    <b-button v-b-modal.modal-prevent-closing>Add a new favorite</b-button>
+    <b-row>
+    <b-col cols="12" sm="4" md="6">
+     <b-list-group-item button>Button</b-list-group-item>
+     </b-col>
+     </b-row>
+     <hr>
 
+    <b-button v-b-modal.modal-prevent-closing>Add a new favorite</b-button>
     <div class="mt-3">
       Favorite Items:
       <div v-if="favoriteItems.length === 0">--</div>
@@ -17,12 +23,12 @@
 
     <b-modal id="modal-prevent-closing" ref="modal" title="Add a new favorite" @show="resetModal" @hidden="resetModal" @ok="handleOk">
       <form ref="form" @submit.stop.prevent="handleSubmit">
-        <b-form-group :state="nameState" label="name" label-for="name-input" invalid-feedback="Name is required">
+        <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
           <b-form-input id="name-input" v-model="name" required >
           </b-form-input>
         </b-form-group>
 
-          <b-form-group :state="reviewState" label="review" label-for="review-input" invalid-feedback="Review is required">
+          <b-form-group :state="reviewState" label="Review" label-for="review-input" invalid-feedback="Review is required">
           <b-form-input id="review-input" v-model="review" :state="reviewState"></b-form-input>
         </b-form-group>
 
@@ -33,11 +39,13 @@
 
 <script>
 import FavoriteItem from '@/components/FavoriteItem.vue'
+import { Api } from '@/Api'
+const userid = localStorage.getItem('objectId')
 
 export default {
   data() {
     return {
-      name: 'favorites',
+      name: '',
       message: '',
       review: '',
       nameState: null,
@@ -76,6 +84,22 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide('modal-prevent-closing')
       })
+    },
+    getLists() {
+      Api.get(`/${userid}/lists`)
+        .then(response => {
+          console.log(response.data)
+          this.lists = response.data
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          this.lists = []
+        // TODO: display error message
+        })
+        .then(() => {
+        //   This code is always executed at the end. After success or failure.
+        })
     }
   }
 }
