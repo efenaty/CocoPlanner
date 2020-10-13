@@ -32,13 +32,13 @@ export default {
     display: flex;
     align-items: center;
     background-color: #150135;
-    font-size: large;
+    font-size: 15px;
     box-shadow: 4px 4px 4px #0000003b;
 }
 
 .navbar-links {
     margin: 0;
-    display: flex;
+
 }
 
 </style>

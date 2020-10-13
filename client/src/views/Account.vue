@@ -19,7 +19,7 @@
         <b-form-input id="input-3" v-model="form.email" type="email" placeholder="Enter your new email"></b-form-input>
       </b-form-group>
 
-      <label id="birthdate">Birth Date</label>
+      <label id="birthdate">Birthdate</label>
      <b-form-group id="input-4" label-for="input-4">
         <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
       </b-form-group>
