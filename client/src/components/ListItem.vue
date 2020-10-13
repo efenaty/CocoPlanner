@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="mt-4" style="max-width: 20rem;">
+  <b-card no-body class="mt-4" style="max-width: 25rem;">
     <template v-slot:header>
       <h4 class="mb-0">{{list.name}}
          <b-button-close type="delete"  v-on:click="$emit('delete-lists', list._id)"></b-button-close>
@@ -111,6 +111,17 @@ p {
   position: relative;
 }
 
+.card-header {
+}
+
+.mb-0 {
+  color:#D65DB1;
+}
+
+.mt-4 {
+box-shadow: 4px 4px 4px #00000017;
+}
+
 .listDelete {
   position: absolute;
   top:16px;
@@ -129,5 +140,9 @@ p {
 
 ::placeholder {
   font-style: italic;
+}
+
+.form {
+  padding-bottom: 30px;
 }
 </style>

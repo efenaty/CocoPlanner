@@ -46,6 +46,7 @@ export default {
   min-height: 100vh;
   height:100%;
   overflow:hidden;
+  background-color: #f1f0f5;
 }
 
 </style>

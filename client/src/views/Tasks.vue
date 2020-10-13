@@ -1,8 +1,13 @@
 <template>
+<div class="main">
    <div class= "mt-4 mb-5">
-        <b-container>
-      <b-button id= "deleteAll" @click="deleteAll">Delete all lists</b-button>
+        <b-container fluid class="container">
+<b-row>
+  <b-col>
       <b-button id= "addAList"  v-b-modal.modal-prevent-closing>Add a new list</b-button>
+      <b-button id= "deleteAll" @click="deleteAll">Delete all lists</b-button>
+  </b-col>
+</b-row>
 
       <b-modal id="modal-prevent-closing" ref="modal" title="Add a new list" @show="resetModal" @hidden="resetModal" @ok="handleOk">
       <form ref="form" @submit.stop.prevent="handleSubmit">
@@ -19,6 +24,7 @@
             </b-col>
                  </b-row>
         </b-container>
+    </div>
     </div>
 </template>
 
@@ -137,12 +143,26 @@ export default {
 
 <style scoped>
 
+.main {
+  /* background-color: #f1f0f5; */
+  min-height: 100vh;
+  height:100%;
+  overflow:hidden;
+}
+
+.container {
+  align-content: center;
+  align-items: center;
+}
 #deleteAll {
-  margin-left: 80%;
+  float: right;
+  background-color: #D65DB1;
 
 }
-#addAList {
-  margin-right: 80%;
 
+#addAList {
+float: left;
+
+background-color: #D65DB1;
 }
 </style>

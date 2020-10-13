@@ -31,13 +31,14 @@ export default {
 .navbar {
     display: flex;
     align-items: center;
-    background-color: #845EC2;
-    font-size: large;
+    background-color: #150135;
+    font-size: 15px;
+    box-shadow: 4px 4px 4px #0000003b;
 }
 
 .navbar-links {
     margin: 0;
-    display: flex;
+
 }
 
 </style>
