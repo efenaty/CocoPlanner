@@ -33,6 +33,7 @@ export default {
     align-items: center;
     background-color: #150135;
     font-size: large;
+    box-shadow: 4px 4px 4px #0000003b;
 }
 
 .navbar-links {

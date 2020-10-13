@@ -1,46 +1,36 @@
 <template>
+  <div class="main">
   <div class="container">
-    <p>Update your profile here!</p>
-    <b-form  @delete="onDelete" v-if="show">
-      <b-row class="my-1">
-    <b-col sm="2">
-      <label for="input-group-1">Username</label>
-    </b-col>
-    <b-col sm="10">
-         <b-form-input id="input-1" v-model="form.username" required placeholder="Enter password"></b-form-input>
-    </b-col>
-  </b-row>
+    <p id="updatetext">Update your profile here!</p>
+    <b-form class="form" @delete="onDelete" v-if="show">
 
-     <b-row class="my-1">
-    <b-col sm="2">
-      <label for="input-group-2">Password</label>
-    </b-col>
-    <b-col sm="10">
-         <b-form-input id="input-2" v-model="form.password" required placeholder="Enter password"></b-form-input>
-    </b-col>
-  </b-row>
+      <label id="username">Username</label>
+      <b-form-group id="input-group-1" label-for="input-1">
+        <b-form-input id="input-1" v-model="form.username" placeholder="Enter your new username"></b-form-input>
+      </b-form-group>
 
-     <b-row class="my-1">
-    <b-col sm="2">
-      <label for="input-group-3">Email</label>
-    </b-col>
-    <b-col sm="10">
-        <b-form-input id="input-3" v-model="form.email" type="email" required placeholder="Enter email"></b-form-input>
-    </b-col>
-  </b-row>
+    <label id="password">Password</label>
+    <b-form-group id="input-group-2" label-for="input-2">
+        <b-form-input id="input-2" type= "password" v-model="form.password" placeholder="Enter your new password"></b-form-input>
+          </b-form-group>
 
-  <b-row class="my-1">
-    <b-col sm="2">
-      <label for="input-group-4">Birth date</label>
-    </b-col>
-    <b-col sm="10">
-        <b-form-input id="input-4" v-model="form.birthDate" type="date" required placeholder="Enter your new birthdate"></b-form-input>
-    </b-col>
-  </b-row>
+     <label id="email">Email</label>
+      <b-form-group id="input-group-3" label-for="input-3">
+        <b-form-input id="input-3" v-model="form.email" type="email" placeholder="Enter your new email"></b-form-input>
+      </b-form-group>
+
+      <label id="birthdate">Birth Date</label>
+     <b-form-group id="input-4" label-for="input-4">
+        <b-form-input id="input-4" v-model="form.birthDate" type="date" placeholder="Enter your new birthdate"></b-form-input>
+      </b-form-group>
 
       <b-button class="savebtn" type="submit" @click="updateUser" v-if="show">Save</b-button>
+        <div class= "deletediv">
+        <p id="deletetext">Delete your account here</p>
       <b-button class="deletebtn" type="delete" @click="onDelete">Delete account</b-button>
+   </div>
     </b-form>
+  </div>
   </div>
 </template>
 
@@ -72,7 +62,6 @@ export default {
         // TODO: display error message
         })
         .then(() => {
-        //   This code is always executed at the end. After success or failure.
         })
     },
 
@@ -95,51 +84,52 @@ export default {
 </script>
 
 <style scoped>
+
+.main {
+  min-height: 100vh;
+  height: 100%;
+  overflow: hidden;
+  background-color: #D65DB1;
+}
 .container {
     width: 50%;
     height: 50%;
-    background-color: #FF6F91;
     /* position: relative;
     margin: auto;
     display: inline-block; */
-    margin-top: 7%
-}
-.my-1 {
-  padding-bottom: 10px;
-}
-
-div {
-  border-radius: 5px;
-  padding: 10px;
-  min-height: 100%;
+    margin-top: 3%;
 }
 
 label {
-  color: white;
+  color: #150135;
   font-weight: bold;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
+  margin-right: 85%;
 }
 
 .savebtn {
-margin-left: 75%;
-    background-color: darkgray;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-bottom: 5px;
+    margin-left: 75%;
+    background-color: #150135;
 }
 
 .deletebtn {
-  margin-left: 75%;
-    background-color: darkgray;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 1%;
-    padding-bottom: 5px;
+  background-color: #150135;
+
+}
+.deletediv {
+  margin-right: 75%;
+  margin-top: 5%;
 }
 
-p {
- color: white;
+#deletetext {
+  font-weight: bold;
+  font-size: 15px;
+  color: #150135;
+}
+
+#updatetext {
+ color: #150135;
  font-weight: bold;
- font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  text-align: center;
  font-size: 20px
 }

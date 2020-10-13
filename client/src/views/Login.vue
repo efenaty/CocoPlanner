@@ -19,8 +19,6 @@
       <b-button class="signupBtn" variant="light" type="submit" @click="openSignup" >Sign up</b-button>
     </b-form>
 
-    <footer class="myfooter">
-   </footer>
   </div>
   </div>
 </template>
@@ -88,9 +86,6 @@ font-weight: bold;
  margin-right: 90%;
 }
 
-/* .myfooter {
-  padding: 300px;
-} */
 .signupBtn {
 margin-left: 5%;
 margin-top: 5%;
