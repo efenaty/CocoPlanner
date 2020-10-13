@@ -27,7 +27,7 @@
       <b-button class="savebtn" type="submit" @click="updateUser" v-if="show">Save</b-button>
         <div class= "deletediv">
         <p id="deletetext">Delete your account here</p>
-      <b-button class="deletebtn" type="delete" @click="onDelete">Delete account</b-button>
+    <b-button class="deletebtn" type="delete" @click="onDelete">Delete account</b-button>
    </div>
     </b-form>
   </div>
@@ -93,7 +93,6 @@ export default {
 }
 .container {
     width: 50%;
-    height: 50%;
     /* position: relative;
     margin: auto;
     display: inline-block; */

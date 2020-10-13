@@ -99,9 +99,6 @@ color:#D65DB1;
   font-weight: bold;
   color:#D65DB1;
 }
-.container {
-    /* background-color:#f4ecff; */
-}
 
 .form {
     width: 40%;
