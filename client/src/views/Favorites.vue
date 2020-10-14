@@ -2,22 +2,20 @@
   <div>
     <h1>we will have our favorites here</h1>
     <b-row>
-    <b-col cols="12" sm="4" md="6">
-      <div class= "lists" v-for="list in lists" v-bind:key="list._id"><br>
-     <b-list-group-item button>{{ list.name }}</b-list-group-item>
-     </div>
+    <b-col cols="12" sm="4" md="6" v-for="list in lists" v-bind:key="list._id"><br>
+      <favorite-item v-bind:list="list"></favorite-item>
+      <!-- <b-list-group-item button>{{ list.name }}</b-list-group-item> -->
      </b-col>
      </b-row>
-     <hr>
 
     <b-button v-b-modal.modal-prevent-closing>Add a new favorite</b-button>
     <div class="mt-3">
       Favorite Items:
-      <div v-if="favoriteItems.length === 0">--</div>
+      <div v-if="favoriteItems.length === 0">You don't have any items yet.</div>
       <ul v-else class="mb-0 pl-3">
         <b-row>
         <b-col cols="12" md="6">
-        <favorite-item v-for="name in favoriteItems" v-bind:key="name">{{ name }}</favorite-item>
+        <favorite-item></favorite-item>
         </b-col>
         </b-row>
       </ul>
@@ -36,15 +34,18 @@
 
       </form>
     </b-modal>
+    <item-review></item-review>
   </div>
 </template>
 
 <script>
 import FavoriteItem from '@/components/FavoriteItem.vue'
+import ItemReview from '@/components/ItemReview.vue'
 import { Api } from '@/Api'
 const userid = localStorage.getItem('objectId')
 
 export default {
+  name: 'lists',
   data() {
     return {
       name: '',
@@ -58,7 +59,8 @@ export default {
     }
   },
   components: {
-    FavoriteItem
+    FavoriteItem,
+    ItemReview
   },
   methods: {
     checkFormValidity() {
@@ -82,7 +84,7 @@ export default {
         return
       }
       // Push the name to submitted names
-      this.favoriteItems.push(this.name)
+      // this.favoriteItems.push(this.name)
       // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide('modal-prevent-closing')

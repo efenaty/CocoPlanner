@@ -2,7 +2,7 @@
   <b-card no-body class="mt-4" style="max-width: 20rem;">
     <template v-slot:header>
       <h4 class="mb-0">{{list.name}}
-         <b-button-close type="delete"  v-on:click="$emit('delete-lists', list._id)"></b-button-close>
+         <b-button-close type="delete" variant='danger' v-on:click="$emit('delete-lists', list._id)"></b-button-close>
       </h4>
     </template>
 
