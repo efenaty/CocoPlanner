@@ -1,7 +1,7 @@
 <template>
         <b-row>
         <b-col cols="12" sm="4" md="6" v-for="item in items" :key="item.id">
-        <b-list-group horizontal class="favorite">
+        <b-list-group horizontal class="mb-5">
         <b-list-group-item id="fave-name">{{item.name}}</b-list-group-item>
         <b-list-group-item id= "review">{{item.review}}</b-list-group-item>
         <b-list-group-item>
@@ -33,4 +33,6 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

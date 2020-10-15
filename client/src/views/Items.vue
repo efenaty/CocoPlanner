@@ -1,9 +1,13 @@
 <template>
+<div class="mt-5">
+    <b-container>
        <b-row>
        <b-col>
-    <item-review></item-review>
+    <item-review class="item"></item-review>
        </b-col>
      </b-row>
+     </b-container>
+       </div>
 </template>
 
 <script>
@@ -15,3 +19,6 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+</style>
