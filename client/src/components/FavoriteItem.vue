@@ -1,6 +1,6 @@
 <template>
     <b-container>
-     <b-list-group-item button v-on:click="showItems(list._id)"> {{ list.name }}" </b-list-group-item>
+     <b-list-group-item button v-on:click="showItems(list._id)"> {{ list.name }} </b-list-group-item>
       <!-- <b-list-group-item button>{{ favoriteList.name}}</b-list-group-item> -->
     </b-container>
 </template>

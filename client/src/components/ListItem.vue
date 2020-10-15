@@ -141,9 +141,6 @@ p {
   position: relative;
 }
 
-.card-header {
-}
-
 .mb-0 {
   color:#D65DB1;
 }
