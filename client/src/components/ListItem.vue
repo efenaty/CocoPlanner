@@ -8,12 +8,11 @@
 
     <div class= "taskName" v-for="task in tasks" v-bind:key="task._id">
     <b-list-group>
-      <b-list-group-item><b-button v-b-modal.change-task-name>edit</b-button>
-        {{task.name}}
+      <b-list-group-item>{{task.name}}
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
+      <b-button v-b-modal.change-task-name>edit</b-button>
       </b-list-group-item>
-    </b-list-group>
-    <b-modal id="change-task-name" ref="modal" title="Edit the task's name" @show="resetModal" @hidden="resetModal" @ok="editTaskName(task._id)">
+          <b-modal id="change-task-name" ref="modal" title="Edit the task's name" @show="resetModal" @hidden="resetModal" @ok="editTaskName(task._id)">
       <form ref="form">
         <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
           <b-form-input id="task-name" v-model="form2.name" required >
@@ -21,6 +20,8 @@
         </b-form-group>
       </form>
     </b-modal>
+    </b-list-group>
+
   </div>
 
  <hr>
@@ -56,6 +57,9 @@ export default {
         name: ''
       }
     }
+  },
+  mounted() {
+    this.getTasks()
   },
   methods: {
     getTasks(e) {
@@ -104,9 +108,6 @@ export default {
           this.getTasks()
         //   This code is always executed at the end. After success or failure.
         })
-    },
-    mounted() {
-      this.getTasks()
     },
     editTaskName(id) {
       var listid = this.list._id
