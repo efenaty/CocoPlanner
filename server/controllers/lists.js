@@ -472,6 +472,35 @@ router.patch('/api/lists/:id/items/:item_id', function (req, res, next){
         res.status(200).json(array[0]);
     });
 });
+//Update a task name 
+router.put('/api/lists/:id/tasks/:task_id', function (req, res, next){
+    var id = req.params.id;
+    var task_id = req.params.task_id;
+
+    if( !mongoose.Types.ObjectId.isValid(id) ){
+        return res.status(404).json({message: "Check the ID"});
+    }else if( !mongoose.Types.ObjectId.isValid(task_id) ){
+        return res.status(404).json({message: "Check the ID"});}
+
+    List.findById({ _id : id }).populate('tasks').exec(function(err,list){
+        if(err){ 
+            return next(err);
+        }
+        if(list == null){
+         return res.status(404).json({"message":"Unfortunately the list was not found"});
+        }
+        var array = [];
+        for ( i=0 ; i<list.tasks.length ; i++){
+            if(list.tasks[i]._id == req.params.task_id)
+            array.push(list.tasks[i]);
+        }
+        array[0].name=(req.body.name);
+        array[0].startDate=(req.body.startDate);
+        array[0].endDate=(req.body.endDate);
+        array[0].save();
+        res.status(200).json(array[0]);
+    });
+});
 
 
 
