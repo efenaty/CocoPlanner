@@ -118,6 +118,9 @@ export default {
         })
         .then(() => {
           this.getTasks()
+          this.$nextTick(() => {
+            this.$bvModal.hide('change-task-name')
+          })
         })
     },
     resetModal() {
