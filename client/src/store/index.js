@@ -1,7 +1,7 @@
 // store/index.js
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import router from '@/router'
 import { Api } from '@/Api'
 Vue.use(Vuex)
 
@@ -30,7 +30,7 @@ export default new Vuex.Store({
         })
         .then(() => {
         //   This code is always executed at the end. After success or failure.
-          this.$router.push('/favorites/items')
+          router.push('/favorites/items')
         })
     }
 
