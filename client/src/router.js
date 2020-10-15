@@ -7,6 +7,7 @@ import Favorites from './views/Favorites.vue'
 import Signup from './views/Signup.vue'
 import Account from './views/Account.vue'
 import Login from './views/Login.vue'
+import Items from './views/Items.vue'
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/favorites/items',
+      name: 'items',
+      component: Items
     }
   ]
 })

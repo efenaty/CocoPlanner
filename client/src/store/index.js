@@ -30,6 +30,7 @@ export default new Vuex.Store({
         })
         .then(() => {
         //   This code is always executed at the end. After success or failure.
+          this.$router.push('/favorites/items')
         })
     }
 
