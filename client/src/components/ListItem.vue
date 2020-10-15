@@ -104,9 +104,11 @@ export default {
           this.getTasks()
         //   This code is always executed at the end. After success or failure.
         })
-    }
-  },
-      editTaskName(id) {
+    },
+    mounted() {
+      this.getTasks()
+    },
+    editTaskName(id) {
       var listid = this.list._id
       Api.put(`/lists/${listid}/tasks/${id}`, this.form2)
         .then((result) => {
@@ -121,10 +123,7 @@ export default {
     resetModal() {
       this.name = ''
       this.nameState = null
-    },
-
-  mounted() {
-    this.getTasks()
+    }
   }
 }
 
