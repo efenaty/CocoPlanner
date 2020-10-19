@@ -12,7 +12,7 @@
       <b-list-group-item>{{task.name.toUpperCase()}}
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
       <form class= "form" id="formElement">
-      <input type="text" id="name" name="name" placeholder="change task name.." v-model="form2.name">
+      <input type="text" id="name" name="name" placeholder="change task name.." v-model="form2.name" required>
       <input type="submit" value="Submit" @click="editTaskName(task._id)">
       </form>
 
