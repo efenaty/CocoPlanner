@@ -1,17 +1,17 @@
 <template>
 <span>
   <div class="mt-3">
-        <b-row>
+        <!-- <b-row>
         <b-col cols="12" sm="4" md="6" v-for="itm in itms" :key="itm.id">
-        <b-list-group horizontal class="favorite">
-        <b-list-group-item id="fave-name">{{itm.name}}</b-list-group-item>
-        <b-list-group-item id= "review">{{itm.review}}</b-list-group-item>
+        <b-list-group horizontal class="favorite"> -->
+        <b-list-group-item id="fave-name">{{item.name}}</b-list-group-item>
+        <b-list-group-item id= "review">{{item.review}}</b-list-group-item>
         <b-list-group-item>
-         <b-form-rating v-model="itm.rating" disabled></b-form-rating>
+         <b-form-rating v-model="item.rating" disabled></b-form-rating>
        </b-list-group-item>
-      </b-list-group>
+     <!-- </b-list-group>
         </b-col>
-        </b-row>
+        </b-row> -->
   </div>
 
 </span>
@@ -21,6 +21,7 @@
 // import { Api } from '@/Api'
 export default {
   name: 'ItemReview',
+  props: ['item'],
   // computed: {
   //   items() {
   //     return this.$store.state.items
@@ -38,7 +39,7 @@ export default {
 
   },
   mounted() {
-    this.itms = this.$store.state.items
+    // this.itms = this.$store.state.items
     // this.id = localStorage.getItem('id')
     // var id = this.id
     // if (this.itms.length === 0) {

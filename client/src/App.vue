@@ -19,6 +19,7 @@
     <navigation />
   <!-- <div style="background-color:#150135; overflow:hidden;"> -->
     <router-view/>
+    <app-modal/>
   </div>
 </template>
 

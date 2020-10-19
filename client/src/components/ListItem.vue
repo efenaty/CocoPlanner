@@ -1,26 +1,18 @@
 <template>
   <b-card no-body class="mt-4" style="max-width: 25rem;">
     <template v-slot:header>
-      <h4 class="mb-0">{{list.name}}
+      <h4 class="mb-0">{{list.name.toUpperCase()}}
          <b-button-close type="delete" variant='danger' v-on:click="$emit('delete-lists', list._id)"></b-button-close>
       </h4>
     </template>
 
     <div class= "taskName" v-for="task in tasks" v-bind:key="task._id">
     <b-list-group>
-      <b-list-group-item>{{task.name}}
+      <b-list-group-item>{{task.name.toUpperCase()}}
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
-      <b-button v-b-modal.change-task-name>edit</b-button>
+      <b-button type='primary' @click="showModal">edit</b-button>
       </b-list-group-item>
     </b-list-group>
-          <b-modal id="change-task-name" ref="modal" title="Edit the task's name" @show="resetModal" @hidden="resetModal" @ok="editTaskName(task._id)">
-      <form ref="form">
-        <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
-          <b-form-input id="task-name" v-model="form2.name" required >
-          </b-form-input>
-        </b-form-group>
-      </form>
-    </b-modal>
   </div>
 
  <hr>
@@ -108,24 +100,37 @@ export default {
         //   This code is always executed at the end. After success or failure.
         })
     },
-    editTaskName(id) {
-      var listid = this.list._id
-      Api.put(`/lists/${listid}/tasks/${id}`, this.form2)
-        .then((result) => {
-          console.log(result)
-        }).catch(error => {
-          console.error(error)
-        })
-        .then(() => {
-          this.getTasks()
-          this.$nextTick(() => {
-            this.$bvModal.hide('change-task-name')
-          })
-        })
+    // editTaskName(id) {
+    //   var listid = this.list._id
+    //   Api.put(`/lists/${listid}/tasks/${id}`, this.form2)
+    //     .then((result) => {
+    //       console.log(result)
+    //     }).catch(error => {
+    //       console.error(error)
+    //     })
+    //     .then(() => {
+    //       this.getTasks()
+    //       this.$nextTick(() => {
+    //         this.$bvModal.hide('change-task-name')
+    //       })
+    //     })
+    // },
+    showModal() {
+    // we must pass object params with all the information
+      const params = {
+        title: 'Test!',
+        text: 'test test test',
+        // we are passing callback method for our confirm button
+        onConfirm: () => {
+          return this.alertFunc()
+        }
+      }
+      // now we can call function that will reveal our modal
+      this.$modal.show(params)
     },
-    resetModal() {
-      this.name = ''
-      this.nameState = null
+    // we pass this method as example
+    alertFunc() {
+      alert('Hello!')
     }
   }
 }
