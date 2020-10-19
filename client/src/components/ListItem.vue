@@ -1,4 +1,5 @@
 <template>
+<div>
   <b-card no-body class="mt-4" style="max-width: 25rem;">
     <template v-slot:header>
       <h4 class="mb-0">{{list.name.toUpperCase()}}
@@ -10,7 +11,11 @@
     <b-list-group>
       <b-list-group-item>{{task.name.toUpperCase()}}
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
-      <b-button type='primary' @click="showModal">edit</b-button>
+      <form class= "form" id="formElement">
+      <input type="text" id="name" name="name" placeholder="change task name.." v-model="form2.name">
+      <input type="submit" value="Submit" @click="editTaskName(task._id)">
+      </form>
+
       </b-list-group-item>
     </b-list-group>
   </div>
@@ -25,8 +30,8 @@
   <input type="date" id="endDate" name="endDate" v-model="form.endDate"><br>
   <input type="submit" value="Submit" @click="addNewTasks">
 </form>
-
   </b-card>
+</div>
 </template>
 
 <script>
@@ -100,38 +105,19 @@ export default {
         //   This code is always executed at the end. After success or failure.
         })
     },
-    // editTaskName(id) {
-    //   var listid = this.list._id
-    //   Api.put(`/lists/${listid}/tasks/${id}`, this.form2)
-    //     .then((result) => {
-    //       console.log(result)
-    //     }).catch(error => {
-    //       console.error(error)
-    //     })
-    //     .then(() => {
-    //       this.getTasks()
-    //       this.$nextTick(() => {
-    //         this.$bvModal.hide('change-task-name')
-    //       })
-    //     })
-    // },
-    showModal() {
-    // we must pass object params with all the information
-      const params = {
-        title: 'Test!',
-        text: 'test test test',
-        // we are passing callback method for our confirm button
-        onConfirm: () => {
-          return this.alertFunc()
-        }
-      }
-      // now we can call function that will reveal our modal
-      this.$modal.show(params)
-    },
-    // we pass this method as example
-    alertFunc() {
-      alert('Hello!')
+    editTaskName(id) {
+      var listid = this.list._id
+      Api.put(`/lists/${listid}/tasks/${id}`, this.form2)
+        .then((result) => {
+          console.log(result)
+        }).catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          this.getTasks()
+        })
     }
+
   }
 }
 
