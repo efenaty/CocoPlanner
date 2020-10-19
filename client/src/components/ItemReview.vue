@@ -1,36 +1,63 @@
 <template>
+<span>
+  <div class="mt-3">
         <b-row>
-        <b-col cols="12" sm="4" md="6" v-for="item in items" :key="item.id">
+        <b-col cols="12" sm="4" md="6" v-for="itm in itms" :key="itm.id">
         <b-list-group horizontal class="favorite">
-        <b-list-group-item id="fave-name">{{item.name}}</b-list-group-item>
-        <b-list-group-item id= "review">{{item.review}}</b-list-group-item>
+        <b-list-group-item id="fave-name">{{itm.name}}</b-list-group-item>
+        <b-list-group-item id= "review">{{itm.review}}</b-list-group-item>
         <b-list-group-item>
-         <b-form-rating v-model="item.rating" disabled></b-form-rating>
+         <b-form-rating v-model="itm.rating" disabled></b-form-rating>
        </b-list-group-item>
       </b-list-group>
         </b-col>
         </b-row>
+  </div>
+
+</span>
 </template>
 
 <script>
+// import { Api } from '@/Api'
 export default {
   name: 'ItemReview',
-  computed: {
-    items() {
-      return this.$store.state.items
-    }
-  },
+  // computed: {
+  //   items() {
+  //     return this.$store.state.items
+  //   }
+  // },
   data() {
     return {
-      message: ''
-      // items: []
+      message: '',
+      itms: [],
+      id: ''
 
     }
   },
   methods: {
 
+  },
+  mounted() {
+    this.itms = this.$store.state.items
+    // this.id = localStorage.getItem('id')
+    // var id = this.id
+    // if (this.itms.length === 0) {
+    //   Api.get(`/lists/${id}/items`)
+    //     .then(response => {
+    //       console.log(response.data)
+    //       this.itms = response.data
+    //     })
+    //     .catch(error => {
+    //       this.message = error.message
+    //       console.error(error)
+    //     // TODO: display error message
+    //     })
+    //     .then(() => {
+    //     //   This code is always executed at the end. After success or failure.
+    //     })
   }
 }
+
 </script>
 
 <style scoped></style>
