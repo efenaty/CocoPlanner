@@ -81,6 +81,7 @@ export default {
         return
       }
       // Push the name to submitted names
+      this.addNewFavItem()
       // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide('modal-prevent-closing')

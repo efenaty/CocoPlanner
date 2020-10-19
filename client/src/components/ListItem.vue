@@ -12,6 +12,7 @@
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
       <b-button v-b-modal.change-task-name>edit</b-button>
       </b-list-group-item>
+    </b-list-group>
           <b-modal id="change-task-name" ref="modal" title="Edit the task's name" @show="resetModal" @hidden="resetModal" @ok="editTaskName(task._id)">
       <form ref="form">
         <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
@@ -20,8 +21,6 @@
         </b-form-group>
       </form>
     </b-modal>
-    </b-list-group>
-
   </div>
 
  <hr>
