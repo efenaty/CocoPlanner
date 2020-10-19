@@ -7,7 +7,7 @@
         <b-list-group-item id="fave-name">{{item.name}}</b-list-group-item>
         <b-list-group-item id= "review">{{item.review}}</b-list-group-item>
         <b-list-group-item>
-         <b-form-rating v-model="item.rating" disabled></b-form-rating>
+         <b-form-rating id="rating" v-model="item.rating" disabled ></b-form-rating>
        </b-list-group-item>
      <!-- </b-list-group>
         </b-col>
@@ -62,5 +62,8 @@ export default {
 </script>
 
 <style scoped>
-
+#rating {
+    color:#150135;
+    background-color:   #D65DB1;
+}
 </style>
