@@ -1,6 +1,6 @@
 <template>
     <b-container>
-     <b-list-group-item button v-on:click="showItems(list._id)"> {{ list.name }} </b-list-group-item>
+     <b-list-group-item id="favList" button v-on:click="showItems(list._id)"> {{ list.name }} </b-list-group-item>
       <!-- <b-list-group-item button>{{ favoriteList.name}}</b-list-group-item> -->
     </b-container>
 </template>
@@ -27,5 +27,8 @@ export default {
 </script>
 
 <style scoped>
-
+#favList {
+  font-weight: bold;
+  color: #D65DB1;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5">
-    <b-button v-b-modal.modal-prevent-closing>Add a new favorite list</b-button>
+    <b-button id="addFavListBtn" v-b-modal.add-favorite-list>Add a new favorite list</b-button>
     <b-row>
     <b-col cols="12" sm="4" md="6" v-for="list in lists" v-bind:key="list._id"><br>
       <favorite-item v-bind:list="list"></favorite-item>
@@ -8,7 +8,7 @@
      </b-col>
      </b-row>
        <br>
-    <b-modal id="modal-prevent-closing" ref="modal" title="Add a new favorite" @show="resetModal" @hidden="resetModal" @ok="handleOk">
+    <b-modal id="add-favorite-list" ref="modal" title="Add a new favorite" @show="resetModal" @hidden="resetModal" @ok="handleOk">
       <form ref="form" @submit.stop.prevent="handleSubmit">
         <b-form-group :state="nameState" label="Name" label-for="name-input" invalid-feedback="Name is required">
           <b-form-input id="name-input" v-model="name" required >
@@ -82,7 +82,7 @@ export default {
       this.addNewFavList()
       // Hide the modal manually
       this.$nextTick(() => {
-        this.$bvModal.hide('modal-prevent-closing')
+        this.$bvModal.hide('add-favorite-list')
       })
     },
     getLists() {
@@ -110,8 +110,9 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  color: pink;
+#addFavListBtn {
+  background-color: #D65DB1;
+  margin-bottom: 15px;
 }
 .favoriteItems {
   position: relative;
