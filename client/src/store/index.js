@@ -41,6 +41,7 @@ export default new Vuex.Store({
         // TODO: display error message
         })
         .then(() => {
+          commit('setId', id)
         //   This code is always executed at the end. After success or failure.
         })
     }

@@ -34,6 +34,7 @@ export default {
   name: 'items',
   data() {
     return {
+      id: '',
       nameState: null,
       reviewState: null,
       items: [],
@@ -57,11 +58,12 @@ export default {
   },
   mounted() {
     this.items = this.$store.state.items
+    this.id = this.store.state.id
   },
 
   methods: {
     addNewFavItem(e) {
-      var id = this.list._id
+      var id = this.id
       Api.post(`/lists/${id}/items`, this.form)
         .then((result) => {
           console.log(result)
