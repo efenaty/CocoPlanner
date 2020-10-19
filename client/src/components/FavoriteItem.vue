@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     showItems(id) {
-      this.$store.dispatch('getItems', id)
+      this.$store.dispatch('getid', id)
     }
   }
 }

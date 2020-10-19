@@ -57,13 +57,42 @@ export default {
     ItemReview
   },
   mounted() {
-    this.items = this.$store.state.items
-    this.id = this.store.state.id
+    this.getItems()
+    console.log(this.id)
   },
 
   methods: {
+    getItems() {
+      // this.items = this.$store.state.items
+      this.id = this.$store.state.id
+      Api.get(`/lists/${this.id}/items`)
+        .then(response => {
+          console.log(response.data)
+          this.items = response.data
+          // commit('setItems', response.data)
+          // commit('setId', id)
+          // router.push('/favorites/items')
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+          this.items = []
+          // commit('setItems', [])
+        // TODO: display error message
+        })
+        .then(() => {
+          // commit('setId', id)
+        //   This code is always executed at the end. After success or failure.
+        })
+    },
     addNewFavItem(e) {
       var id = this.id
+      // console.log(this.id)
+      // var form2 = this.form
+      // this.$store.dispatch('addItems', id, form2)
+      // console.log(this.id)
+      // },
+      // var id = this.id
       Api.post(`/lists/${id}/items`, this.form)
         .then((result) => {
           console.log(result)
@@ -73,9 +102,10 @@ export default {
         // TODO: display error message
         })
         .then(() => {
+          this.getItems()
         //   This code is always executed at the end. After success or failure.
         })
-      e.preventDefault()
+      // e.preventDefault()
     },
 
     checkFormValidity() {
