@@ -48,7 +48,7 @@ export default {
           localStorage.clear()
           // Saving the objectId in the local storage
           localStorage.setItem('objectId', objectId)
-          this.$router.push('/')
+          this.$router.push('/home')
           this.$router.go(0)
         }).catch(error => {
           console.error(error)
