@@ -25,8 +25,6 @@ export default new Vuex.Store({
   },
   actions: {
     getItems({ state, commit }, id) {
-      // localStorage.removeItem('id')
-      // localStorage.setItem('id', id)
       console.log(id)
       Api.get(`/lists/${id}/items`)
         .then(response => {
