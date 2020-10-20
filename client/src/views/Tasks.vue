@@ -32,6 +32,7 @@
 import { Api } from '@/Api'
 import ListItem from '@/components/ListItem.vue'
 const userid = localStorage.getItem('objectId')
+// var taskname = localStorage.getItem('name')
 
 export default {
   name: 'lists',
@@ -76,6 +77,18 @@ export default {
         })
         .then(() => {
           this.getLists()
+        })
+    },
+    editList(id) {
+      var listid = this.list._id
+      Api.put(`/lists/${listid}/tasks/${id}`, name)
+        .then((result) => {
+          console.log(result)
+        }).catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          this.getTasks()
         })
     },
 
@@ -138,6 +151,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style scoped>

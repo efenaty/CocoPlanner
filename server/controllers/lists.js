@@ -86,8 +86,6 @@ router.put("/api/lists/:id" , function(req, res, next){
             return res.status(404).json({"message" : "List not found."});
         }
     list.name = req.body.name;
-    list.is_favorite_list = req.body.is_favorite_list;
-    list.user = req.body.user;
     list.save();
     res.status(200).json(list);
     })
