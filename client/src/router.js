@@ -8,6 +8,7 @@ import Signup from './views/Signup.vue'
 import Account from './views/Account.vue'
 import Login from './views/Login.vue'
 import Items from './views/Items.vue'
+import NotFound from './views/NotFound.vue'
 
 Vue.use(Router)
 
@@ -16,7 +17,7 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: Home
     },
@@ -46,7 +47,7 @@ export default new Router({
       component: Account
     },
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: Login
     },
@@ -54,6 +55,12 @@ export default new Router({
       path: '/favorites/items',
       name: 'items',
       component: Items
+    },
+    {
+      // Source : https://techformist.com/create-404-pages-vue-app/
+      path: '*',
+      name: 'notFound',
+      component: NotFound
     }
   ]
 })
