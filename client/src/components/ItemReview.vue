@@ -2,7 +2,7 @@
   <div class="mt-3">
         <b-list-group class="favorite">
         <b-list-group-item id="name">Name: {{item.name}}
-         <b-button-close type="delete" v-on:click="$emit('onDelete', item._id)"></b-button-close>
+         <b-button-close type="delete" v-on:click="$emit('on-delete', item._id)"></b-button-close>
         </b-list-group-item>
         <b-list-group-item id= "review">Review: {{item.review}}</b-list-group-item>
         <b-list-group-item>

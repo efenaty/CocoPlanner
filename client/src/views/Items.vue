@@ -10,7 +10,7 @@
       </div>
        <b-row>
     <b-col cols="12" sm="4" md="6" v-for="item in items" v-bind:key="item._id"><br>
-      <item-review v-bind:item="item" v-on:onDelete="deleteItem"></item-review>
+      <item-review v-bind:item="item" v-on:on-delete="deleteItem"></item-review>
       <!-- <b-list-group-item button>{{ list.name }}</b-list-group-item> -->
      </b-col>
      </b-row>
