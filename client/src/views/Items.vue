@@ -10,7 +10,7 @@
       </div>
        <b-row>
     <b-col cols="12" sm="4" md="6" v-for="item in items" v-bind:key="item._id"><br>
-      <item-review v-bind:item="item"></item-review>
+      <item-review v-bind:item="item" v-on:onDelete="deleteItem"></item-review>
       <!-- <b-list-group-item button>{{ list.name }}</b-list-group-item> -->
      </b-col>
      </b-row>
@@ -78,30 +78,17 @@ export default {
         .then(response => {
           console.log(response.data)
           this.items = response.data
-          // commit('setItems', response.data)
-          // commit('setId', id)
-          // router.push('/favorites/items')
         })
         .catch(error => {
           this.message = error.message
           console.error(error)
           this.items = []
-          // commit('setItems', [])
-        // TODO: display error message
         })
         .then(() => {
-          // commit('setId', id)
-        //   This code is always executed at the end. After success or failure.
         })
     },
     addNewFavItem(e) {
       var id = this.id
-      // console.log(this.id)
-      // var form2 = this.form
-      // this.$store.dispatch('addItems', id, form2)
-      // console.log(this.id)
-      // },
-      // var id = this.id
       Api.post(`/lists/${id}/items`, this.form)
         .then((result) => {
           console.log(result)
@@ -114,9 +101,17 @@ export default {
           this.getItems()
         //   This code is always executed at the end. After success or failure.
         })
-      // e.preventDefault()
     },
-
+    deleteItem(id) {
+      var listid = this.id
+      Api.request({ url: `/lists/${listid}/items/${id}`, method: 'delete' })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          this.getItems()
+        })
+    },
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity()
       this.nameState = valid
