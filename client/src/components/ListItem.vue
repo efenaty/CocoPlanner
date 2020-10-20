@@ -2,14 +2,14 @@
 <div>
   <b-card no-body class="mt-4" style="max-width: 25rem;">
     <template v-slot:header>
-      <h4 class="mb-0">{{list.name.toUpperCase()}}
+      <h4 class="mb-0">{{list.name}}
          <b-button-close type="delete" variant='danger' v-on:click="$emit('delete-lists', list._id)"></b-button-close>
       </h4>
     </template>
 
     <div class= "taskName" v-for="task in tasks" v-bind:key="task._id">
     <b-list-group>
-      <b-list-group-item>{{task.name.toUpperCase()}}
+      <b-list-group-item>{{task.name}}
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
       <form class= "form" id="formElement">
       <input type="text" id="name" name="name" placeholder="change task name.." v-model="form2.name" required>
