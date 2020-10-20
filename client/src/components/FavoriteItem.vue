@@ -1,7 +1,9 @@
 <template>
     <b-container>
-     <b-list-group-item id="favList" button v-on:click="showItems(list._id)"> {{ list.name }}
-       <b-button-close type="delete" @click="onDelete()"></b-button-close></b-list-group-item>
+          <div class="flex">
+      <b-list-group-item id="favList" button v-on:click="showItems(list._id)"> {{ list.name }}</b-list-group-item>
+         <b-button id="delbtn" type="delete" @click="onDelete()">X</b-button>
+         </div>
       <!-- <b-list-group-item button>{{ favoriteList.name}}</b-list-group-item> -->
     </b-container>
 </template>
@@ -31,5 +33,13 @@ export default {
 #favList {
   font-weight: bold;
   color: #D65DB1;
+}
+
+.flex {
+    display: flex;
+}
+
+#delbtn {
+  background-color: #150135;
 }
 </style>
