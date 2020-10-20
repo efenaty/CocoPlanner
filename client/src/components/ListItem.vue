@@ -11,24 +11,20 @@
     <b-list-group>
       <b-list-group-item>{{task.name}}
       <b-button-close type="delete" @click="onDelete(task._id)"></b-button-close>
-      <form class= "form" id="formElement">
+      <form class= "form" id="formElementedit">
       <input type="text" id="name" name="name" placeholder="change task name.." v-model="form2.name" required>
-      <input type="submit" value="Submit" @click="editTaskName(task._id)">
+      <input id="taskSubmit2" type="submit" value="Change" @click="editTaskName(task._id)">
       </form>
 
       </b-list-group-item>
     </b-list-group>
   </div>
 
- <hr>
-<form class= "form" id="formElement">
-  <label for="name">Task name:</label><br>
+ <br>
+<form class= "form" id="formElementadd">
+  <label id="task" for="name">Add a Task</label><br>
   <input type="text" id="name" name="name" placeholder="task name.." v-model="form.name"><br>
-  <label for='startDate'>Startdate:</label><br>
-  <input type="date" id="startDate" name="startDate" data-date-format="DD MMMM YYYY" v-model="form.startDate"><br>
-  <label for='endDate'>Enddate:</label><br>
-  <input type="date" id="endDate" name="endDate" v-model="form.endDate"><br>
-  <input type="submit" value="Submit" @click="addNewTasks">
+  <input id="taskSubmit" type="submit" value="Add" @click="addNewTasks">
 </form>
   </b-card>
 </div>
@@ -128,12 +124,13 @@ p {
     background-color: rgb(134, 155, 226);
 }
 
-.form {
+#formElementadd {
   position: relative;
+  background-color: #eeeeee;
 }
 
 .mb-0 {
-  color:#D65DB1;
+  color: #150135;
 }
 
 .mt-4 {
@@ -148,6 +145,21 @@ box-shadow: 4px 4px 4px #00000017;
 
 .taskName {
   position: relative;
+  color: #D65DB1;;
+  font-weight: 500;
+}
+
+#taskSubmit, #taskSubmit2 {
+  color: #150135;
+  font-weight: bold;
+  background-color:#ffffff;
+  margin-top: 15px;
+}
+
+#task {
+  color: #150135;
+  font-weight: bold;
+  margin-top: 15px;
 }
 
 .taskDelete {

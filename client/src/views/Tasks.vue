@@ -166,10 +166,12 @@ export default {
 .container {
   align-content: center;
   align-items: center;
+  margin-top: 3%;
 }
 #deleteAll {
   float: right;
   background-color: #D65DB1;
+  margin-bottom: 3%;
 
 }
 

@@ -1,6 +1,13 @@
 <template>
     <b-container class="mt-5">
+      <div>
+        <b-row>
+          <b-col>
+       <h2>{{favoritelistname}}</h2>
        <b-button id="addFavItemBtn" v-b-modal.modal-prevent-closing>Add a new favorite</b-button>
+        </b-col>
+       </b-row>
+      </div>
        <b-row>
     <b-col cols="12" sm="4" md="6" v-for="item in items" v-bind:key="item._id"><br>
       <item-review v-bind:item="item"></item-review>
@@ -35,6 +42,7 @@ export default {
   data() {
     return {
       id: '',
+      favoritelistname: '',
       nameState: null,
       reviewState: null,
       items: [],
@@ -59,6 +67,7 @@ export default {
   mounted() {
     this.getItems()
     console.log(this.id)
+    this.getFavoriteListName()
   },
 
   methods: {
@@ -134,15 +143,34 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide('modal-prevent-closing')
       })
+    },
+    getFavoriteListName() {
+      Api.get(`/lists/${this.id}`)
+        .then(response => {
+          console.log(response.data)
+          this.favoritelistname = response.data.name
+        })
+        .catch(error => {
+          this.message = error.message
+          console.error(error)
+        // TODO: display error message
+        })
+        .then(() => {
+        //   This code is always executed at the end. After success or failure.
+        })
     }
   }
-
 }
 </script>
 
 <style scoped>
 #addFavItemBtn {
   background-color: #D65DB1;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  float: left;
+}
+
+h2 {
+  color: #150135;
 }
 </style>

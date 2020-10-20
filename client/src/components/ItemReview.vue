@@ -1,20 +1,15 @@
 <template>
-<span>
   <div class="mt-3">
-        <!-- <b-row>
-        <b-col cols="12" sm="4" md="6" v-for="itm in itms" :key="itm.id">
-        <b-list-group horizontal class="favorite"> -->
-        <b-list-group-item id="fave-name">{{item.name}}</b-list-group-item>
-        <b-list-group-item id= "review">{{item.review}}</b-list-group-item>
+        <b-list-group class="favorite">
+        <b-list-group-item id="name">Name: {{item.name}}
+         <b-button-close type="delete" @click="onDelete()"></b-button-close>
+        </b-list-group-item>
+        <b-list-group-item id= "review">Review: {{item.review}}</b-list-group-item>
         <b-list-group-item>
          <b-form-rating id="rating" v-model="item.rating" disabled ></b-form-rating>
        </b-list-group-item>
-     <!-- </b-list-group>
-        </b-col>
-        </b-row> -->
+        </b-list-group>
   </div>
-
-</span>
 </template>
 
 <script>
@@ -65,5 +60,10 @@ export default {
 #rating {
     color:#150135;
     background-color:   #D65DB1;
+}
+
+#name, #review {
+  color:#150135;
+  font-weight: 500;
 }
 </style>
