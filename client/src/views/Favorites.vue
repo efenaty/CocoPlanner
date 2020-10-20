@@ -3,7 +3,7 @@
     <b-button id="addFavListBtn" v-b-modal.add-favorite-list>Add a new favorite list</b-button>
     <b-row>
     <b-col cols="12" sm="4" md="6" v-for="list in lists" v-bind:key="list._id"><br>
-      <favorite-item v-bind:list="list"></favorite-item>
+      <favorite-item v-bind:list="list" v-on:delete-list="deleteList"></favorite-item>
       <!-- <b-list-group-item button>{{ list.name }}</b-list-group-item> -->
      </b-col>
      </b-row>
@@ -99,6 +99,15 @@ export default {
         })
         .then(() => {
         //   This code is always executed at the end. After success or failure.
+        })
+    },
+    deleteList(id) {
+      Api.request({ url: `/lists/${id}`, method: 'delete' })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          this.getLists()
         })
     }
   },

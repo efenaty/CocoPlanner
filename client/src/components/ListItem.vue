@@ -69,10 +69,6 @@ export default {
         })
     },
 
-    // showForm(e) {
-    //   document.getElementById('formElement').style.display = 'block'
-    // },
-
     addNewTasks(e) {
       var id = this.list._id
       Api.post(`/lists/${id}/tasks`, this.form)

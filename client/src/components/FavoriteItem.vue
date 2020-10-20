@@ -2,7 +2,7 @@
     <b-container>
           <div class="flex">
       <b-list-group-item id="favList" button v-on:click="showItems(list._id)"> {{ list.name }}</b-list-group-item>
-         <b-button id="delbtn" type="delete" @click="onDelete()">X</b-button>
+         <b-button id="delbtn" type="delete" v-on:click="$emit('delete-list', list._id)">X</b-button>
          </div>
       <!-- <b-list-group-item button>{{ favoriteList.name}}</b-list-group-item> -->
     </b-container>
