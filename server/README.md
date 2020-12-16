@@ -4,9 +4,9 @@ This [ExpressJS](https://expressjs.com/) template provides the basic infrastruct
 
 ## Server Structure
 
-| File        | Purpose           | What you do?  |
+| File        | Purpose           | What does it do? |
 | ------------- | ------------- | ----- |
-| [README.md](./README.md) | Everything about the server | **READ ME** carefully! |
+| [README.md](./README.md) | Everything about the server |  |
 | [app.js](./app.js) | JavaScript entry point for Express application | Import new routes/controllers |
 | `controllers/` | Implementation of Express endpoints | Define new route handlers |
 | `models/` | [Mongoose](https://mongoosejs.com/) models | Define data schema |
@@ -15,7 +15,6 @@ This [ExpressJS](https://expressjs.com/) template provides the basic infrastruct
 | [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | List of problems and solutions | Find solutions for common error messages |
 | [package.json](package.json) | Project meta-information | — |
 
-> NOTE: The (mandatory) exercises are essential for understanding this template and will *save* you time!
 
 Optional: Learn how to create such a project template in this [tutorial](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/skeleton_website).
 
