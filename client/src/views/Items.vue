@@ -10,7 +10,7 @@
       </div>
        <b-row>
     <b-col cols="12" sm="4" md="6" v-for="item in items" v-bind:key="item._id"><br>
-      <item-review v-bind:item="item" v-on:onDelete="deleteItem"></item-review>
+      <item-review v-bind:item="item" v-on:on-delete="deleteItem"></item-review>
       <!-- <b-list-group-item button>{{ list.name }}</b-list-group-item> -->
      </b-col>
      </b-row>
@@ -55,8 +55,8 @@ export default {
         { value: null, text: 'Please select a rating number' },
         { value: 1, text: '1' },
         { value: 2, text: '2' },
-        { value: 2, text: '3' },
-        { value: 2, text: '4' },
+        { value: 3, text: '3' },
+        { value: 4, text: '4' },
         { value: 5, text: '5' }
       ]
     }

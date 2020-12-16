@@ -43,10 +43,9 @@ export default {
         .then((result) => {
           console.log('Logged in!')
           // Saving the user's _id
+          // Source : https://medium.com/@deryatanriverdii/how-to-user-localstorage-to-keep-user-logged-in-and-out
           const objectId = result.data._id
-          // Clear the local storage before saving the _id
           localStorage.clear()
-          // Saving the objectId in the local storage
           localStorage.setItem('objectId', objectId)
           this.$router.push('/home')
           this.$router.go(0)
