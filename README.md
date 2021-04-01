@@ -31,7 +31,7 @@ The version numbers in brackets indicate the tested versions
 
 ```bash
 # Clone repository
-git clone git@git.ita.chalmers.se:courses/dit341/group-00-web.git
+git clone git@github.com:efenaty/CocoPlanner.git
 
 # Change into the directory
 cd CocoPlanner
